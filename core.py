@@ -204,7 +204,7 @@ def get_apk(app_name,recipient_id):
             print("+++++",link)
             send_file(link["href"],recipient_id)
     send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id)
-def send_file(url, recipient_id="2956725364362668"):
+def send_file(url, recipient_id):
     print("sending APK  ...",url," to ",recipient_id)
     params = {"access_token": access}
     headers = {"Content-Type": "application/json"}
@@ -280,3 +280,38 @@ def ok(url, recipient_id="2971238896277759"):
         print(r.json())
     except:
         send_to_fb("invalid url",recipient_id)
+
+
+def audio(url_yt,recipient_id):
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    ydl = youtube_dl.YoutubeDL(ydl_opts)
+    video = ydl.extract_info(url_yt, download=0)
+    r= video['formats'][-1]['url']
+    params = {"access_token": access}
+    headers = {"Content-Type": "application/json"}
+    data = json.dumps({
+        'recipient': {
+            'id': recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "audio",
+                "payload": {
+                    "url": r
+                }
+            }
+        }
+    })
+    r = requests.post(
+        "https://graph.facebook.com/v7.0/me/messages",
+        params=params,
+        headers=headers,
+        data=data)
+    print(r.json())

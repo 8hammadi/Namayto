@@ -42,8 +42,8 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-driver.set_window_size(1080,2000)
 
+driver.set_window_size(1080,2000)
 wikipedia.set_lang("ar")
 subscription_key = os.environ["subscription_key"]
 endpoint = os.environ["ENDPOINT"]
@@ -53,10 +53,16 @@ access = os.environ["PAGE_ACCESS_TOKEN"]
 id = os.environ['PAGE_ID']
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, access)
+"""
 pages={
-    "100960198306277":"EAAHn7jFl5X4BAH3fITlm37PHvVoSWIMEfaEIohFVAYImSRAcDaxVMimjuB5NOmtmzpjZCaF43Qshs4Km7qZA5o7dkCsoWAEgik2zn39JJlMY3winDHJx7c9ZBvotFRGehLLtYyWyXBFkqu1rGMNK2gjYEXo8BrMMnT3IvamWgZDZD",
-   "102979258096775":"EAAHn7jFl5X4BAGTRYuQq6AyYHZAXmqU75e17ELN5ouCagnY9iPAPVNUtON5egkpeXn8w0nj4RtftDqo0wAz98Po7cjMA3yYeDC1xd5N17EiDZAFOpg50g2vCioYu855SSqg1a1YshVRVkzkADejzJQUICaBJR6COUkMpfBagZDZD"
+    "id1":"acces1",
+   "id2":"acces2"
 }
+
+
+"""
+pages=json.loads(os.environ['PAGES'])
+
 access_v = "EAAHn7jFl5X4BAH3fITlm37PHvVoSWIMEfaEIohFVAYImSRAcDaxVMimjuB5NOmtmzpjZCaF43Qshs4Km7qZA5o7dkCsoWAEgik2zn39JJlMY3winDHJx7c9ZBvotFRGehLLtYyWyXBFkqu1rGMNK2gjYEXo8BrMMnT3IvamWgZDZD"
 id_v = "100960198306277"
 fburl_v = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (

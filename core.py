@@ -203,7 +203,7 @@ def get_apk(app_name,recipient_id):
         for link in parse2.find_all("a", id="download_link"):
             print("+++++",link)
             send_apk_to_fb(link["href"],recipient_id)
-
+    send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id)
 def send_apk_to_fb(url, recipient_id="2956725364362668"):
     print("sending APK  ...",url," to ",recipient_id)
     params = {"access_token": access}

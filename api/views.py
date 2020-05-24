@@ -70,7 +70,8 @@ class Service(threading.Thread):
                 ok(z,id2)
             elif z[0]=="/":
                 download_google(z[1:],id2)
-                #download_baidu(z[1:],id2)
+            elif z[0]==",":
+                download_baidu(z[1:],id2)
             else:
                 send_to_fb("""
  ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ

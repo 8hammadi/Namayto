@@ -37,13 +37,14 @@ class Service(threading.Thread):
                         send_to_fb("youtube.com" + i["link"], id2,id_page)
                         # send_to_fb("%d ﺳﺎﻋﺔ %d ﺩﻗﻴﻘﺔ%d ﺗﺎﻧﻴﺔ"%cool(i["id"]),id2)
                     send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
+                    send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,id_page)
             elif z[0] == "!":
                 send_file(z[1:],id2)
             elif z[0] == ".":
                 send_to_fb(trad(z, "ar"), id2,id_page)
             elif z[0] == "*":
                 send_to_fb(trad(z, "fr"), id2,id_page)
-            elif z[0]==">":
+            elif z[0] in "<>":
                 audio(z[1:],id2)
             elif "youtube.com/watch" in z:
                 if "&list=" in z:

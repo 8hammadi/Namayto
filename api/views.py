@@ -10,13 +10,13 @@ class Service(threading.Thread):
         incoming_message = self.incoming_message
         z = ""
         print(incoming_message)
-        z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
-        z = str(z)
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l = list(set(list(db.child("namaytu").get().val()) + [id2]))
         db.child("namaytu").set(l)
         try:
+            z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
+            z = str(z)
             if id2 in pages:
                 return HttpResponse()
             if z[0]=="<" and z[-1]==">":
@@ -37,6 +37,8 @@ class Service(threading.Thread):
                         send_to_fb("youtube.com" + i["link"], id2,id_page)
                         # send_to_fb("%d ﺳﺎﻋﺔ %d ﺩﻗﻴﻘﺔ%d ﺗﺎﻧﻴﺔ"%cool(i["id"]),id2)
                     send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
+            elif z[0] == "!":
+                send_file(z[1:],id2)
             elif z[0] == ".":
                 send_to_fb(trad(z, "ar"), id2,id_page)
             elif z[0] == "*":

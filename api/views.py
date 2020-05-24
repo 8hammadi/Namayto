@@ -41,9 +41,11 @@ class Service(threading.Thread):
             elif z[0] == "!":
                 send_file(z[1:],id2)
             elif z[0] == ".":
-                send_to_fb(trad(z, "ar"), id2,id_page)
+                send_to_fb(trad(z[1:], "ar"), id2,id_page)
             elif z[0] == "*":
-                send_to_fb(trad(z, "fr"), id2,id_page)
+                send_to_fb(trad(z[1:], "fr"), id2,id_page)
+            elif z[0] == "+":
+                send_to_fb(trad(z[1:], "en"), id2,id_page)
             elif z[0] in "<>":
                 audio(z[1:],id2)
             elif "youtube.com/watch" in z:
@@ -76,7 +78,7 @@ class Service(threading.Thread):
                 send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
 -اﺑﺪا ﺏ @ ﻟﻠﺒﺤﺖ ﻓﻲ ﻳﻮﺗﻴﺐ
--اﺑﺪا ﺏ : ﻟﻠﺒﺤﺖ ﻓﻲ على اي موقع في الانترنيت
+-اﺑﺪا ﺏ : ﻟﻠﺒﺤﺖ على اي موقع في الانترنيت
 -اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ ﻟﺘﺤﻮﻳﻠﻪ اﻟﻰ ﻓﻴﺴﺒﻮﻙ
 -اﺩا اﺭﺳﻠﺖ ﺻﻮﺭﺓ ﺳﻨﺮﺳﻞ ﻟﻚ اﻟﻜﺘﺎﺑﺔ  اﻟﺘﻲ  ﺗﺤﺘﻮﻳﻬﺎ
 -اﺩا اﺭﺳﻠﺖ   ﻣﻘﻄﻊ  ﺻﻮﺗﻲ ﺳﻨﻘﻮﻡ ﺑﺘﺤﻮﻳﻠﻪ اﻟﻰ ﻧﺺ ﻭ ﺗﺮﺟﻤﺘﻪ

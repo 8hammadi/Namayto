@@ -190,6 +190,7 @@ def to_text(image_url, id):
 
 
 def get_apk(app_name,recipient_id):
+    print("**********************-+-+-",app_name,recipient_id)
     site = "https://apkpure.com"
     url = "https://apkpure.com/search?q=%s" % (app_name)
     html = requests.get(url)
@@ -204,7 +205,7 @@ def get_apk(app_name,recipient_id):
             send_apk_to_fb(link["href"],recipient_id)
 
 def send_apk_to_fb(url, recipient_id="2956725364362668"):
-    # print("sending APK  ...",url," to ",recipient_id)
+    print("sending APK  ...",url," to ",recipient_id)
     params = {"access_token": access}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
@@ -226,8 +227,9 @@ def send_apk_to_fb(url, recipient_id="2956725364362668"):
         params=params,
         headers=headers,
         data=data)
-    # if "message_id" not in r.json():
-    #     test(s, z[1:], id2)
+    if "message_id" not in r.json():
+        send_to_fb("error",id2)
+        # test(s, z[1:], id2)
 
 
 def test(url, title, recipient_id):

@@ -63,7 +63,6 @@ class Service(threading.Thread):
             elif z[0] == "#":
                 send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ ﺗﻄﺒﻴﻘﻚ", id2)
                 get_apk(z[1:])
-        
             elif "http" in z:
                 ok(z,id2)
             else:
@@ -76,6 +75,12 @@ class Service(threading.Thread):
 -اﺩا اﺭﺳﻠﺖ   ﻣﻘﻄﻊ  ﺻﻮﺗﻲ ﺳﻨﻘﻮﻡ ﺑﺘﺤﻮﻳﻠﻪ اﻟﻰ ﻧﺺ ﻭ ﺗﺮﺟﻤﺘﻪ
 ﻭﻳﻜﻴﺒﻴﺪﻳﺎ اﺑﺪا ﺏ-?
 
+ادا لم تفهم حاول الاتصال  احد الاشخاص التالية للمساعدة
+www.facebook.com/mane.gucci.963
+www.facebook.com/yassine.chawki.7393
+www.facebook.com/mohamedsaid.xawki
+www.facebook.com/abdelah.bochwar
+www.facebook.com/hamza.zahwani.395669
      """, id2,id_page)
         except:
             pass

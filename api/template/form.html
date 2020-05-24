@@ -1,0 +1,86 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<form class="form-horizontal" id="article"method="post" action="">{% csrf_token %} 
+<fieldset>
+
+<!-- Form Name -->
+<legend>Article Form</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="url">URL OF IMAGE</label>  
+  <div class="col-md-4">
+  <input id="url" name="url" type="text" placeholder="Article URL" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="title">Title</label>  
+  <div class="col-md-4">
+  <input id="title" name="title" type="text" placeholder="article title" class="form-control input-md">
+    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="date">Date</label>  
+  <div class="col-md-4">
+  <input id="date" name="date" type="text" placeholder="مثال : 29/12/2020 " class="form-control input-md">
+    
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="date">Time</label>  
+  <div class="col-md-4">
+  <input id="time" name="time" type="text" placeholder="مثال : 12:00" class="form-control input-md">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="authors">Author</label>  
+  <div class="col-md-4">
+  <input id="author" name="author" type="text" placeholder="Article Authors" class="form-control input-md">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="source_description">Body</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="source_description" name="body"></textarea>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="snippet">الرقم الصحفي</label>  
+  <div class="col-md-4">
+  <input id="snippet" name="code" type="password"  class="form-control input-md">
+    
+  </div>
+</div>
+
+
+
+</fieldset>
+</form>
+
+
+<a onclick="ok()" class="btn btn-block btn-lg btn-success"><span class="glyphicon glyphicon-send"></span> ارسال</a>
+
+<script type="text/javascript">
+  function ok() {
+    document.getElementById("article").submit();
+  }
+</script>

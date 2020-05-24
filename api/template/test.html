@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>حرس ﻧﻴﻮﺯ Horusnews</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+    .b-0 {
+    bottom: 0;
+}
+
+.bg-shadow {
+    background: rgba(76, 76, 76, 0);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(179, 171, 171, 0)), color-stop(49%, rgba(48, 48, 48, 0.37)), color-stop(100%, rgba(19, 19, 19, 0.8)));
+    background: linear-gradient(to bottom, rgba(179, 171, 171, 0) 0%, rgba(48, 48, 48, 0.71) 49%, rgba(19, 19, 19, 0.8) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=0 );
+}
+.top-indicator {
+    right: 0;
+    top: 1rem;
+    bottom: inherit;
+    left: inherit;
+    margin-right: 1rem;
+}
+.overflow {
+    position: relative;
+    overflow: hidden;
+}
+.zoom img {
+    transition: all 0.2s linear;
+}
+.zoom:hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+
+}   
+
+
+ </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.alert = function(){};
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css){
+            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
+            else $('head > link').filter(':first').replaceWith(defaultCSS); 
+        }
+        $( document ).ready(function() {
+          var iframe_height = parseInt($('html').height()); 
+          window.parent.postMessage( iframe_height, 'https://bootsnipp.com');
+        });
+    </script>
+</head>
+<body style="background-color: rgb(0, 0, 0)">
+    <!--Container-->
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-12 text-center pt-3">
+             <h1 style="color:white;">ﻫﻴﺮﻭ ﻧﻴﻮﺯ Horusnews</h1>
+          <!--   <h1>Bootstrap 4 News Magazine Carousel</h1>
+            <p>This is a basic bootstrap sorce code for make responsive magazine big grid cover with carousel</p>
+            <h4>You like this snippet ? click like button</h4> -->
+        </div>
+    </div>
+    
+    <!--Start code-->
+    <div class="row">
+        <div class="col-12 pb-5">
+            <!--SECTION START-->
+            <section class="row">
+                <!--Start slider news-->
+                <div class="col-12 col-md-6 pb-0 pb-md-3 pt-2 pr-md-1">
+                    <div id="featured" class="carousel slide carousel" data-ride="carousel">
+                        <!--dots navigate-->
+                        <ol class="carousel-indicators top-indicator">
+                            <li data-target="#featured" data-slide-to="0" class="active"></li>
+                            <li data-target="#featured" data-slide-to="1"></li>
+                            <li data-target="#featured" data-slide-to="2"></li>
+                            <li data-target="#featured" data-slide-to="3"></li>
+                            <li data-target="#featured" data-slide-to="4"></li>
+                            <li data-target="#featured" data-slide-to="5"></li>
+                            <li data-target="#featured" data-slide-to="6"></li>
+                        </ol>
+                        
+                        <!--carousel inner-->
+                        <div class="carousel-inner">
+                            <!--Item slider-->
+                            <div class="carousel-item active">
+                                <div class="card border-0 rounded-0 text-light overflow zoom">
+                                    <div class="position-relative">
+                                        <!--thumbnail img-->
+                                        <div class="ratio_left-cover-1 image-wrapper"  style="height: 400px;">
+                                            <a href="{{a1.id}}">
+                                                <img class="img-fluid w-100" height="380px" 
+                                                     src="{{a1.image}}"
+                                                     alt="Bootstrap news template">
+                                            </a>
+                                        </div>
+                                        <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                            <!--title-->
+                                            <a href="{{a1.id}}">
+                                                <h2 class="h3 post-title text-white my-1">{{a1.title}}</h2>
+                                            </a>
+                                            <!-- meta title -->
+                                            <div class="news-meta">
+                                                <span class="news-author"><a class="text-white font-weight-bold" href="../category/author.html">{{a1.author}}</a></span>
+                                                <span class="news-date">{{a1.date}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--Item slider-->
+                            {%for a in latest%}
+                            <div class="carousel-item">
+                                <div class="card border-0 rounded-0 text-light overflow zoom">
+                                    <div class="position-relative">
+                                        <!--thumbnail img-->
+                                        <div class="ratio_left-cover-1 image-wrapper" style="height: 400px;">
+                                            <a href="{{a.id}}">
+                                                <img class="img-fluid w-100"
+                                                     src="{{a.image}}" 
+                                                     alt="Bootstrap news theme" >
+                                            </a>
+                                        </div>
+                                        <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                            <!--title-->
+                                            <a href="{{a.id}}">
+                                                <h2 class="h3 post-title text-white my-1">{{a.title}}</h2>
+                                            </a>
+                                            <!-- meta title -->
+                                            <div class="news-meta">
+                                                <span class="news-author"><a class="text-white font-weight-bold" href="../category/author.html">{{a.author}}</a></span>
+                                                <span class="news-date">{{a.date}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            <!--Item slider-->
+
+                           
+                            <!--end item slider-->
+                        </div>
+                        <!--end carousel inner-->
+                    </div>
+                    
+                    <!--navigation-->
+                    <a class="carousel-control-prev" href="#featured" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#featured" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <!--End slider news-->
+                
+                <!--Start box news-->
+                <div class="col-12 col-md-6 pt-2 pl-md-1 mb-3 mb-lg-4">
+                    <div class="row">
+                        <!--news box-->
+                        <div class="col-6 pb-1 pt-0 pr-1">
+                            <div class="card border-0 rounded-0 text-white overflow zoom">
+                                <div class="position-relative">
+                                    <!--thumbnail img-->
+                                    <div class="ratio_right-cover-2 image-wrapper" style="height: 200px;">
+                                        <a href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                            <img class="img-fluid"
+                                                 src="{{a1.image}}"
+                                                 alt="simple blog template bootstrap" height="100px">
+                                        </a>
+                                    </div>
+                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                        <!-- category -->
+                                    <!--     <a class="p-1 badge badge-primary rounded-0" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Lifestyle</a> -->
+
+                                        <!--title-->
+                                        <a href="{{a1.id}}">
+                                            <h2 class="h5 text-white my-1">{{a1.title}}</h2>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--news box-->
+                        <div class="col-6 pb-1 pl-1 pt-0">
+                            <div class="card border-0 rounded-0 text-white overflow zoom">
+                                <div class="position-relative">
+                                    <!--thumbnail img-->
+                                    <div class="ratio_right-cover-2 image-wrapper" style="height: 200px;">
+                                        <a href="{{a2.id}}">
+                                            <img class="img-fluid"
+                                                 src="{{a2.image}}"
+                                                 alt="bootstrap templates for blog">
+                                        </a>
+                                    </div>
+                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                        <!-- category -->
+                                      <!--   <a class="p-1 badge badge-primary rounded-0" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Motocross</a> -->
+                                        <!--title-->
+                                        <a href="{a2.id}}">
+                                            <h2 class="h5 text-white my-1">{{a2.title}}</h2>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--news box-->
+                        <div class="col-6 pb-1 pr-1 pt-1">
+                            <div class="card border-0 rounded-0 text-white overflow zoom">
+                                <div class="position-relative">
+                                    <!--thumbnail img-->
+                                    <div class="ratio_right-cover-2 image-wrapper" style="height: 200px;">
+                                        <a href="{{a3.id}}">
+                                            <img class="img-fluid"
+                                                 src="{{a3.image}}" 
+                                                 alt="bootstrap blog wordpress theme">
+                                        </a>
+                                    </div>
+                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                        <!-- category -->
+                                      <!--   <a class="p-1 badge badge-primary rounded-0" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Fitness</a> -->
+                                        <!--title-->
+                                        <a href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                            <h2 class="h5 text-white my-1">{{a3.title}}</h2>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--news box-->
+                        <div class="col-6 pb-1 pl-1 pt-1">
+                            <div class="card border-0 rounded-0 text-white overflow zoom">
+                                <div class="position-relative">
+                                    <!--thumbnail img-->
+                                    <div class="ratio_right-cover-2 image-wrapper" style="height: 200px;"  >
+                                        <a href="{{a4.id}}">
+                                            <img class="img-fluid"
+                                                 src="{{a4.image}}"
+                                                 alt="blog website templates bootstrap">
+                                        </a>
+                                    </div>
+                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                        <!-- category -->
+                                       <!--  <a class="p-1 badge badge-primary rounded-0" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Adventure</a> -->
+                                        <!--title-->
+                                        <a href="{{a4.id}}">
+                                            <h2 class="h5 text-white my-1">{{a4.title}}</h2>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end news box-->
+                    </div>
+                </div>
+                <!--End box news-->
+            </section>
+            <!--END SECTION-->
+        </div>
+    </div>
+    <!--end code-->
+    
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <!-- <p>Design by Ari Budin <a target="_blank" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Bootstrap.News</a> | images by pixabay and pexels</p> -->
+            <p style="color:white;" >جميع الحقوق محفوظة © 2020</p>   
+            <p style="color:white;"> حرس ﻧﻴﻮﺯ</p>
+        </div>
+    </div>
+</div>  <script type="text/javascript">
+        </script>
+</body>
+</html>

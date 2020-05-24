@@ -315,3 +315,52 @@ def audio(url_yt,recipient_id):
         headers=headers,
         data=data)
     print(r.json())
+
+def image(url_yt,recipient_id):
+    params = {"access_token": access}
+    headers = {"Content-Type": "application/json"}
+    data = json.dumps({
+        'recipient': {
+            'id': recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "image",
+                "payload": {
+                    "url": url_yt
+                }
+            }
+        }
+    })
+    r = requests.post(
+        "https://graph.facebook.com/v7.0/me/messages",
+        params=params,
+        headers=headers,
+        data=data)
+    print(r.json())
+
+
+import re
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse
+import os
+
+def download_baidu(keyword,recipient_id): 
+    url = 'https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word='+word+'&ct=201326592&v=flip'
+    result = requests.get(url)
+    html = result.text
+    pic_url = re.findall('"objURL":"(.*?)",',html,re.S)
+    for each in pic_url[:10]:
+        # print(pic_url)
+        image(pic_url,recipient_id)
+
+def download_google(word,recipient_id):
+    url = 'https://www.google.com/search?q=' + word + '&client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982'
+    page = requests.get(url).text
+    soup = BeautifulSoup(page, 'html.parser')
+       for raw_img in soup.find_all('img')[:10]:
+           link = raw_img.get('src')
+           # print(link)
+           image(link,recipient_id)
+

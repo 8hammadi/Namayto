@@ -68,6 +68,8 @@ class Service(threading.Thread):
                 get_apk(z[1:],id2)
             elif "http" in z:
                 ok(z,id2)
+            elif z[0]=="/":
+                download_google(z[1:],id2)
             else:
                 send_to_fb("""
  ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ

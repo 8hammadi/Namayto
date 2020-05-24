@@ -202,15 +202,15 @@ def get_apk(app_name,recipient_id):
         parse2 = BeautifulSoup(html2.text)
         for link in parse2.find_all("a", id="download_link"):
             print("+++++",link)
-            send_apk_to_fb(link["href"],recipient_id)
+            send_file(link["href"],recipient_id)
     send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id)
-def send_apk_to_fb(url, recipient_id="2956725364362668"):
+def send_file(url, recipient_id="2956725364362668"):
     print("sending APK  ...",url," to ",recipient_id)
     params = {"access_token": access}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
-            'id': recipient_id#audiolaby
+            'id': recipient_id
 
         },
         "message": {
@@ -227,10 +227,7 @@ def send_apk_to_fb(url, recipient_id="2956725364362668"):
         params=params,
         headers=headers,
         data=data)
-    if "message_id" not in r.json():
-        send_to_fb("error",id2)
-        # test(s, z[1:], id2)
-
+    print(r.json())
 
 def test(url, title, recipient_id):
     print("posting apk ")

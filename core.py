@@ -255,6 +255,7 @@ def ok(url, recipient_id="2971238896277759"):
         driver.get(url)
         png=driver.get_screenshot_as_png()
         im = Image.open(BytesIO(png))  # uses PIL library to open image in memory
+        time.sleep(2)
         im.save('screenshot.png')  # saves new cropped image
         params = {"access_token": access}
         headers = {"Content-Type": "application/json"}

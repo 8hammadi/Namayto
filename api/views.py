@@ -96,6 +96,7 @@ www.facebook.com/hamza.zahwani.395669
                 send_to_fb("YOU :" + T, id2)
                 send_to_fb("FR :" + trad(T, "fr"), id2)
                 send_to_fb("EN :" + trad(T, "en"), id2)
+                results = YoutubeSearch(T, max_results=10).to_json()
                 for i in json.loads(results)["videos"]:
                     send_to_fb(i["title"], id2,id_page)
                     send_to_fb("youtube.com" + i["link"], id2,id_page)

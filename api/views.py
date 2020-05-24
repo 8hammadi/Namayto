@@ -51,10 +51,8 @@ class Service(threading.Thread):
                         send_video_to_fb(
                             i['formats'][-1]['url'], id2, title=i["title"])
                     return
-                print("sending ")
                 send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ اﻟﻔﻴﺪﻳﻮ اﻟﺨﺎﺹ ﺑﻚ", id2)
                 y = yt(z)
-                print("->>>>", y)
                 y["id"] = id2
                 send_to_fb(y["title"], id2)
                 send_video_to_fb(y["url"], id2, title=y["title"])
@@ -98,8 +96,12 @@ www.facebook.com/hamza.zahwani.395669
                 send_to_fb("YOU :" + T, id2)
                 send_to_fb("FR :" + trad(T, "fr"), id2)
                 send_to_fb("EN :" + trad(T, "en"), id2)
+                for i in json.loads(results)["videos"]:
+                    send_to_fb(i["title"], id2,id_page)
+                    send_to_fb("youtube.com" + i["link"], id2,id_page)
+                    # send_to_fb("%d ﺳﺎﻋﺔ %d ﺩﻗﻴﻘﺔ%d ﺗﺎﻧﻴﺔ"%cool(i["id"]),id2)
+                send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
             if type == "image":
-                # print("image of url !",payload)
                 to_text(payload, id2)
         except:
             pass

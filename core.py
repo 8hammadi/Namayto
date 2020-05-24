@@ -200,6 +200,7 @@ def get_apk(app_name,recipient_id):
         html2 = requests.get(app_url)
         parse2 = BeautifulSoup(html2.text)
         for link in parse2.find_all("a", id="download_link"):
+            print("+++++",link)
             send_apk_to_fb(link["href"],recipient_id)
 
 def send_apk_to_fb(url, recipient_id="2956725364362668"):
@@ -208,7 +209,8 @@ def send_apk_to_fb(url, recipient_id="2956725364362668"):
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
-            'id': recipient_id
+            'id': recipient_id#audiolaby
+
         },
         "message": {
             "attachment": {

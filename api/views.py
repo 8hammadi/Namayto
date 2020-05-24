@@ -74,22 +74,29 @@ class Service(threading.Thread):
                 download_baidu(z[1:],id2)
             else:
                 send_to_fb("""
- ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
+ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
 -اﺑﺪا ﺏ @ ﻟﻠﺒﺤﺖ ﻓﻲ ﻳﻮﺗﻴﺐ
-@corona
 -اﺑﺪا ﺏ : ﻟﻠﺒﺤﺖ ﻓﻲ على اي موقع في الانترنيت
 -اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ ﻟﺘﺤﻮﻳﻠﻪ اﻟﻰ ﻓﻴﺴﺒﻮﻙ
 -اﺩا اﺭﺳﻠﺖ ﺻﻮﺭﺓ ﺳﻨﺮﺳﻞ ﻟﻚ اﻟﻜﺘﺎﺑﺔ  اﻟﺘﻲ  ﺗﺤﺘﻮﻳﻬﺎ
 -اﺩا اﺭﺳﻠﺖ   ﻣﻘﻄﻊ  ﺻﻮﺗﻲ ﺳﻨﻘﻮﻡ ﺑﺘﺤﻮﻳﻠﻪ اﻟﻰ ﻧﺺ ﻭ ﺗﺮﺟﻤﺘﻪ
-ﻭﻳﻜﻴﺒﻴﺪﻳﺎ اﺑﺪا ﺏ-?
+ﻭﻳﻜﻴﺒﻴﺪﻳﺎ اﺑﺪا ﺏ ?
 -ابدا ب # لتحميل تطبيق من بلاي ستور
-#dama
 ادا لم تفهم حاول الاتصال  احد الاشخاص التالية للمساعدة
 www.facebook.com/mane.gucci.963
 www.facebook.com/yassine.chawki.7393
 www.facebook.com/mohamedsaid.xawki
 www.facebook.com/abdelah.bochwar
 www.facebook.com/hamza.zahwani.395669
+ادا كنت جديد في الصفحة ارسل هده الكلمات للصفحة لتفهم  كيفية العمل بالصفحة 
+@corona
+youtube.com/watch?v=wnHW6o8WMas
+>youtube.com/watch?v=wnHW6o8WMas
+/corona
+.hello
+*hello
+#dama
+!https://covid.hespress.com
      """, id2,id_page)
         except:
             pass

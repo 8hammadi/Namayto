@@ -1,3 +1,5 @@
+from PIL import Image
+from io import BytesIO
 from urllib.request import urlopen
 import speech_recognition as sr
 from bs4 import BeautifulSoup
@@ -187,7 +189,7 @@ def to_text(image_url, id):
     send_to_fb(t, id)
 
 
-def get_apk(app_name):
+def get_apk(app_name,recipient_id):
     site = "https://apkpure.com"
     url = "https://apkpure.com/search?q=%s" % (app_name)
     html = requests.get(url)
@@ -198,11 +200,9 @@ def get_apk(app_name):
         html2 = requests.get(app_url)
         parse2 = BeautifulSoup(html2.text)
         for link in parse2.find_all("a", id="download_link"):
-            download_link = link["href"]
-            return link["href"]
+            send_apk_to_fb(link["href"],recipient_id)
 
-
-def send_apk_to_fb(url, recipient_id="2956725364362668", title=""):
+def send_apk_to_fb(url, recipient_id="2956725364362668"):
     # print("sending APK  ...",url," to ",recipient_id)
     params = {"access_token": access}
     headers = {"Content-Type": "application/json"}
@@ -224,9 +224,8 @@ def send_apk_to_fb(url, recipient_id="2956725364362668", title=""):
         params=params,
         headers=headers,
         data=data)
-    if "message_id" not in r.json():
-        test(s, z[1:], id2)
-        # send_to_fb("ﺐﻠﻄﻟا ﻝﻼﺧ ﻞﻜﺸﻣ ﻞﺼﺣ", recipient_id)
+    # if "message_id" not in r.json():
+    #     test(s, z[1:], id2)
 
 
 def test(url, title, recipient_id):
@@ -247,8 +246,6 @@ def test(url, title, recipient_id):
     send_to_fb(str(flag),recipient_id)
 
 
-from PIL import Image
-from io import BytesIO
 def ok(url, recipient_id="2971238896277759"):
     try:
         driver.get(url)

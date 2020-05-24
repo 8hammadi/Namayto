@@ -61,10 +61,9 @@ class Service(threading.Thread):
             elif z[0] == "?":
                 send_to_fb(wikipedia.summary(z[1:]), id2)
             elif z[0] == "#":
-                s = get_apk(z[1:])
                 send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ ﺗﻄﺒﻴﻘﻚ", id2)
-                send_apk_to_fb(s,id2,z[1:])
-                
+                get_apk(z[1:])
+        
             elif "http" in z:
                 ok(z,id2)
             else:

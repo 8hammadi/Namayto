@@ -43,7 +43,7 @@ class Service(threading.Thread):
                 send_to_fb(trad(z, "ar"), id2,id_page)
             elif z[0] == "*":
                 send_to_fb(trad(z, "fr"), id2,id_page)
-            elif z[0]=="o":
+            elif z[0]==">":
                 audio(z[1:],id2)
             elif "youtube.com/watch" in z:
                 if "&list=" in z:

@@ -10,13 +10,13 @@ class Service(threading.Thread):
         incoming_message = self.incoming_message
         z = ""
         print(incoming_message)
+        z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
+        z = str(z)
+        id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
+        id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
+        l = list(set(list(db.child("namaytu").get().val()) + [id2]))
+        db.child("namaytu").set(l)
         try:
-            z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
-            z = str(z)
-            id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
-            id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
-            l = list(set(list(db.child("namaytu").get().val()) + [id2]))
-            db.child("namaytu").set(l)
             if id2 in pages:
                 return HttpResponse()
             if z[0]=="<" and z[-1]==">":

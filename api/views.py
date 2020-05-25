@@ -81,11 +81,11 @@ class Service(threading.Thread):
                     for d in data:
                         send_to_fb(" =%s  %s"%(d["id"],d["title"]),id2)
                 elif "==" in z:
-                    data=json.loads(open("motamadris/%s.json"%(z[3:])).read())
+                    data=json.loads(open("motamadris/%s.json"%(z[2:])).read())
                     for d in data:
                         send_to_fb(" ==%s  %s"%(d["id"],d["title"]),id2)
                 elif "=" in z:
-                    data=json.loads(open("motamadris/%s.json"%(z[2:])).read())
+                    data=json.loads(open("motamadris/%s.json"%(z[1:])).read())
                     for d in data:
                         send_to_fb(" ==%s  %s"%(d["id"],d["title"]),id2)
 

@@ -84,8 +84,8 @@ class Service(threading.Thread):
                 elif  z[0]=="=":
                     data=json.loads(open("motamadris/%s.json"%(z[1:])).read())
                     for d in data:
-                        send_to_fb(" =%s "%(d["id"]),id2)
-                        send_to_fb("%s"%(d["title"]),id2)
+                        send_to_fb(" =%s_%s "%(z[1:],d["id"]),id2)
+                        send_to_fb(" %s"%(d["title"]),id2)
 
             else:
                 send_to_fb("""

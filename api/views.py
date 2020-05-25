@@ -95,9 +95,10 @@ corona@
 youtube.com/watch?v=wnHW6o8WMas
 youtube.com/watch?v=wnHW6o8WMas<
 corona/
-hello.
+hello. 
 hello*
 dama#
+bonjeur+
 https://covid.hespress.com!
      """, id2,id_page)
         except:

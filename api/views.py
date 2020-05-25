@@ -104,15 +104,6 @@ www.facebook.com/mohamedsaid.xawki
 www.facebook.com/abdelah.bochwar
 www.facebook.com/hamza.zahwani.395669
 ادا كنت جديد في الصفحة ارسل هده الكلمات للصفحة لتفهم  كيفية العمل بالصفحة 
-corona@
-youtube.com/watch?v=wnHW6o8WMas
-youtube.com/watch?v=wnHW6o8WMas<
-corona/
-hello. 
-hello*
-dama#
-bonjeur+
-https://covid.hespress.com!
      """, id2,id_page)
         except:
             pass

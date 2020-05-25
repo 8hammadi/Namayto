@@ -1,6 +1,7 @@
 from core import *
 
 
+
 class Service(threading.Thread):
     def __init__(self, incoming_message):
         threading.Thread.__init__(self)
@@ -74,6 +75,11 @@ class Service(threading.Thread):
                 download_google(z[1:],id2)
             elif z[0]==",":
                 download_baidu(z[1:],id2)
+            elif z[0]=="=":
+                if z=="=":
+                    data=json.loads(open("motamadris/0.json").read())
+                    for d in data:
+                        send_to_fb(" =%s  %s"%(d["id"],d["title"]))
             else:
                 send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ

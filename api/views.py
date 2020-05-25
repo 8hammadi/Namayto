@@ -76,10 +76,15 @@ class Service(threading.Thread):
             elif z[0]==",":
                 download_baidu(z[1:],id2)
             elif z[0]=="=":
+                if "==" in z:
+                    data=json.loads(open("motamadris/%s.json"%(z[2:])).read())
+                    for d in data:
+                        send_to_fb(" ==%s  %s"%(d["id"],d["title"]),id2)
                 if z=="=":
                     data=json.loads(open("motamadris/0.json").read())
                     for d in data:
-                        send_to_fb(" =%s  %s"%(d["id"],d["title"]))
+                        send_to_fb(" ==%s  %s"%(d["id"],d["title"]),id2)
+
             else:
                 send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ

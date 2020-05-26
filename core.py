@@ -111,7 +111,7 @@ def send_to_fb(message_text, recipient_id="2956725364362668",sender=id):
         params=params,
         headers=headers,
         data=data)
-    print("RRR:",r.json())
+    # print("RRR:",r.json())
 
 
 def speech_to_text(url):
@@ -155,7 +155,7 @@ def send_video_to_fb(url, recipient_id, title,id_page):
         params=params,
         headers=headers,
         data=data)
-    # print(r.json())
+    print(r.json())
     if "message_id" not in r.json():
         if recipient_id in db.child("namayto2/users").get().val() or 1:
             url_to_fb(url, title, recipient_id)
@@ -194,11 +194,11 @@ def get_apk(app_name,recipient_id,id_page):
         html2 = requests.get(app_url)
         parse2 = BeautifulSoup(html2.text)
         for link in parse2.find_all("a", id="download_link"):
-            print("+++++",link)
+            # print("+++++",link)
             send_file(link["href"],recipient_id,id_page)
     send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id,id_page)
 def send_file(url, recipient_id,id_page):
-    print("sending APK  ...",url," to ",recipient_id)
+    # print("sending APK  ...",url," to ",recipient_id)
     params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
@@ -220,10 +220,10 @@ def send_file(url, recipient_id,id_page):
         params=params,
         headers=headers,
         data=data)
-    print(r.json())
+    # print(r.json())
 
 # def test(url, title, recipient_id):
-#     print("posting apk ")
+    print("posting apk ")
 #     videoName = title
 #     videoDescription = title
 #     videoUrl = url
@@ -236,7 +236,7 @@ def send_file(url, recipient_id,id_page):
 #         'https://graph.facebook.com/v6.0/%s/files?access_token=%s' % (id,
 #                                                                       access),
 #         data=payload).json()
-#     print(flag)
+    print(flag)
 #     send_to_fb(str(flag),recipient_id)
 
 
@@ -270,7 +270,7 @@ def ok(url, recipient_id,id_page):
             params=params,
             headers=headers,
             data=data)
-        print(r.json())
+        # print(r.json())
     except:
         send_to_fb("invalid url",recipient_id,id_page)
 
@@ -285,6 +285,13 @@ def audio(url_yt,recipient_id,id_page):
         }],
     }
     ydl = youtube_dl.YoutubeDL(ydl_opts)
+    if "&list=" in url_yt:
+        video = ydl.extract_info(z, download=0)
+        for i in video["entries"]:
+            time.sleep(10)
+            send_video_to_fb(
+                i['formats'][-1]['url'], recipient_id, "",id_page)
+        return
     video = ydl.extract_info(url_yt, download=0)
     r= video['formats'][-1]['url']
     params = {"access_token": PAGES[id_page]}
@@ -330,7 +337,7 @@ def image(url_yt,recipient_id,id_page):
         params=params,
         headers=headers,
         data=data)
-    print(r.json())
+    # print(r.json())
 
 
 import re
@@ -345,7 +352,7 @@ def download_baidu(word,recipient_id,id_page):
     html = result.text
     pic_url = re.findall('"objURL":"(.*?)",',html,re.S)
     for each in pic_url[:10]:
-        # print(each)
+        print(each)
         image(each,recipient_id,id_page)
 
 def download_google(word,recipient_id,id_page):
@@ -354,7 +361,7 @@ def download_google(word,recipient_id,id_page):
     soup = BeautifulSoup(page, 'html.parser')
     for raw_img in soup.find_all('img')[:10]:
        link = raw_img.get('src')
-       # print(link)
+       print(link)
        image(link,recipient_id,id_page)
 
 # def MM(URL)

@@ -49,7 +49,7 @@ class Service(threading.Thread):
                 send_to_fb(trad(z[1:], "en"), id2,id_page)
             elif z[0] in "<>":
                 audio(z[1:],id2)
-            elif "youtube.com/watch" in z:
+            elif "youtu" in z:
                 if "&list=" in z:
                     ydl = youtube_dl.YoutubeDL()
                     video = ydl.extract_info(z, download=0)
@@ -87,7 +87,14 @@ class Service(threading.Thread):
                     # =1_1_1_1 -> pdf
                     a,b,c,d=z[1:].split("_")
                     data=json.loads(open("motamadris/P%s_%s_%s.json"%(a,b,c)).read())
-                    send_to_fb("Test:"+data[int(d)]["title"],id2)
+                    send_to_fb(data[int(d)]["title"],id2)
+                    href=data[int(d)]["href"]
+                    if "pdf" in href:
+                        send_file(url,id2)
+                    elif "youtu" in href:
+                        y = yt(href)
+                        send_to_fb(y["title"], id2)
+                        send_video_to_fb(y["url"], id2, title=y["title"])
                 elif z.count("_")==2:
                     data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
                     i=0

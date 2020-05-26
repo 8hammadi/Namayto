@@ -55,7 +55,7 @@ config = json.loads(os.environ["FIREBASE_CONFIG"])
 access = os.environ["PAGE_ACCESS_TOKEN"]
 id = os.environ['PAGE_ID']
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
-    id, PAGES[id_page])
+    id, access)
 
 PAGES=json.loads(os.environ['PAGES'])
 

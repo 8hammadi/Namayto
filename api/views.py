@@ -87,10 +87,10 @@ class Service(threading.Thread):
                     # =1_1_1_1 -> pdf
                     a,b,c,d=z[1:].split("_")
                     data=json.loads(open("motamadris/P%s_%s_%s.json"%(a,b,c)).read())
-                    send_to_fb(data[int(d)]["title"],id2)
-                    href=data[int(d)]["href"]
+                    send_to_fb(data[int(d)-1]["title"],id2)
+                    href=data[int(d)-1]["href"]
                     if "pdf" in href:
-                        send_file(url,id2)
+                        send_file(href,id2)
                     elif "youtu" in href:
                         y = yt(href)
                         send_to_fb(y["title"], id2)

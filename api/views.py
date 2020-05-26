@@ -88,8 +88,10 @@ class Service(threading.Thread):
                     send_to_fb("your choise is:"+z,id2)
                 elif z.count("_")==2:
                     data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
+                    i=0
                     for d in data:
-                        send_to_fb(" =%s_%s "%(z[1:],d["id"]),id2)
+                        i+=1
+                        send_to_fb(" =%s_%s "%(z[1:],str(i)),id2)
                         send_to_fb(" %s"%(d["title"]),id2)
                 else:
                     data=json.loads(open("motamadris/%s.json"%(z[1:])).read())

@@ -110,7 +110,8 @@ class Service(threading.Thread):
             else:
                 try:
                     send_to_fb(eval(z),id2,id_page)
-                except:
+                except Exception as e:
+                    print(e)
                     send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
 -اﺑﺪا ﺏ @ ﻟﻠﺒﺤﺖ ﻓﻲ ﻳﻮﺗﻴﺐ
@@ -127,8 +128,8 @@ www.facebook.com/mohamedsaid.xawki
 www.facebook.com/abdelah.bochwar
 www.facebook.com/hamza.zahwani.395669
      """, id2,id_page)
-        except:
-            pass
+        except Exception as e:
+            print(e)
         try:
             attachments = incoming_message["entry"][0]["messaging"][0][
                 "message"]["attachments"][0]
@@ -148,8 +149,8 @@ www.facebook.com/hamza.zahwani.395669
                 send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
             if type == "image":
                 to_text(payload, id2,id_page)
-        except:
-            pass
+        except Exception as e:
+            print(e)
 
 
 @csrf_exempt

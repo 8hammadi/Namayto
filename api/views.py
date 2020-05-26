@@ -15,103 +15,103 @@ class Service(threading.Thread):
         id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l = list(set(list(db.child("namaytu").get().val()) + [id2]))
         db.child("namaytu").set(l)
-        try:
-            z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
-            z = str(z)
-            if id2 in pages:
-                return HttpResponse()
-            if z[0]=="<" and z[-1]==">":
-                l = db.child("namaytu").get().val()
-                test =z[1:-1]
-                for i in l:
-                    print(i)
-                    send_to_fb(test, i)
-            elif z[0] == ":":
-                for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
-                    send_to_fb(j, id2,id_page)
-                send_to_fb("ارسل لنا الرابط الدي تريد",id2,id_page)
-            elif z[0] == "@":
-                results = YoutubeSearch(z[1:], max_results=10).to_json()
-                if "videos" in results:
-                    for i in json.loads(results)["videos"]:
-                        send_to_fb(i["title"], id2,id_page)
-                        send_to_fb("youtube.com" + i["link"], id2,id_page)
-                        # send_to_fb("%d ﺳﺎﻋﺔ %d ﺩﻗﻴﻘﺔ%d ﺗﺎﻧﻴﺔ"%cool(i["id"]),id2)
-                    send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
-                    send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,id_page)
-            elif z[0] == "!":
-                send_file(z[1:],id2,id_page)
-            elif z[0] == ".":
-                send_to_fb(trad(z[1:], "ar"), id2,id_page)
-            elif z[0] == "*":
-                send_to_fb(trad(z[1:], "fr"), id2,id_page)
-            elif z[0] == "+":
-                send_to_fb(trad(z[1:], "en"), id2,id_page)
-            elif z[0] in "<>":
-                audio(z[1:],id2,id_page)
-            elif "youtu" in z:
-                if "&list=" in z:
-                    ydl = youtube_dl.YoutubeDL()
-                    video = ydl.extract_info(z, download=0)
-                    for i in video["entries"]:
-                        time.sleep(10)
-                        send_to_fb(i["title"], id2,id_page)
-                        send_video_to_fb(
-                            i['formats'][-1]['url'], id2, i["title"],id_page)
-                    return
-                send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ اﻟﻔﻴﺪﻳﻮ اﻟﺨﺎﺹ ﺑﻚ", id2,id_page)
-                y = yt(z)
-                y["id"] = id2
-                send_to_fb(y["title"], id2,id_page)
-                send_video_to_fb(y["url"], id2, y["title"],id_page)
-            elif z[0] == "?":
-                send_to_fb(wikipedia.summary(z[1:]), id2,id_page)
-            elif z[0] == "#":
-                send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ ﺗﻄﺒﻴﻘﻚ", id2,id_page)
-                get_apk(z[1:],id2,id_page)
-            elif "http" in z:
-                ok(z,id2,id_page)
-            elif z[0]=="/":
-                download_google(z[1:],id2,id_page)
-            elif z[0]==",":
-                download_baidu(z[1:],id2,id_page)
-            elif z[0]=="=":
 
-                if z=="=":
-                    # for i in M
-                    data=json.loads(open("motamadris/0.json").read())
-                    for d in data:
-                        send_to_fb(" =%s "%(d["id"]),id2,id_page)
-                        send_to_fb("%s"%(d["title"]),id2,id_page)
-                elif z.count("_")==3:
-                    a,b,c,d=z[1:].split("_")
-                    data=json.loads(open("motamadris/P%s_%s_%s.json"%(a,b,c)).read())
-                    send_to_fb(data[int(d)-1]["title"],id2,id_page)
-                    href=data[int(d)-1]["href"]
-                    if "pdf" in href:
-                        send_file(href,id2,id_page)
-                    elif "youtu" in href:
-                        y = yt(href)
-                        send_to_fb(y["title"], id2,id_page)
-                        send_video_to_fb(y["url"], id2, y["title"],id_page)
-                elif z.count("_")==2:
-                    data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
-                    i=0
-                    for d in data:
-                        i+=1
-                        send_to_fb(" =%s_%s "%(z[1:],str(i)),id2,id_page)
-                        send_to_fb(" %s"%(d["title"]),id2,id_page)
-                else:
-                    data=json.loads(open("motamadris/%s.json"%(z[1:])).read())
-                    for d in data:
-                        send_to_fb(" =%s_%s "%(z[1:],d["id"]),id2,id_page)
-                        send_to_fb(" %s"%(d["title"]),id2,id_page)
+        z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
+        z = str(z)
+        if id2 in pages:
+            return HttpResponse()
+        if z[0]=="<" and z[-1]==">":
+            l = db.child("namaytu").get().val()
+            test =z[1:-1]
+            for i in l:
+                print(i)
+                send_to_fb(test, i)
+        elif z[0] == ":":
+            for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
+                send_to_fb(j, id2,id_page)
+            send_to_fb("ارسل لنا الرابط الدي تريد",id2,id_page)
+        elif z[0] == "@":
+            results = YoutubeSearch(z[1:], max_results=10).to_json()
+            if "videos" in results:
+                for i in json.loads(results)["videos"]:
+                    send_to_fb(i["title"], id2,id_page)
+                    send_to_fb("youtube.com" + i["link"], id2,id_page)
+                    # send_to_fb("%d ﺳﺎﻋﺔ %d ﺩﻗﻴﻘﺔ%d ﺗﺎﻧﻴﺔ"%cool(i["id"]),id2)
+                send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
+                send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,id_page)
+        elif z[0] == "!":
+            send_file(z[1:],id2,id_page)
+        elif z[0] == ".":
+            send_to_fb(trad(z[1:], "ar"), id2,id_page)
+        elif z[0] == "*":
+            send_to_fb(trad(z[1:], "fr"), id2,id_page)
+        elif z[0] == "+":
+            send_to_fb(trad(z[1:], "en"), id2,id_page)
+        elif z[0] in "<>":
+            audio(z[1:],id2,id_page)
+        elif "youtu" in z:
+            if "&list=" in z:
+                ydl = youtube_dl.YoutubeDL()
+                video = ydl.extract_info(z, download=0)
+                for i in video["entries"]:
+                    time.sleep(10)
+                    send_to_fb(i["title"], id2,id_page)
+                    send_video_to_fb(
+                        i['formats'][-1]['url'], id2, i["title"],id_page)
+                return
+            send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ اﻟﻔﻴﺪﻳﻮ اﻟﺨﺎﺹ ﺑﻚ", id2,id_page)
+            y = yt(z)
+            y["id"] = id2
+            send_to_fb(y["title"], id2,id_page)
+            send_video_to_fb(y["url"], id2, y["title"],id_page)
+        elif z[0] == "?":
+            send_to_fb(wikipedia.summary(z[1:]), id2,id_page)
+        elif z[0] == "#":
+            send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ ﺗﻄﺒﻴﻘﻚ", id2,id_page)
+            get_apk(z[1:],id2,id_page)
+        elif "http" in z:
+            ok(z,id2,id_page)
+        elif z[0]=="/":
+            download_google(z[1:],id2,id_page)
+        elif z[0]==",":
+            download_baidu(z[1:],id2,id_page)
+        elif z[0]=="=":
 
+            if z=="=":
+                # for i in M
+                data=json.loads(open("motamadris/0.json").read())
+                for d in data:
+                    send_to_fb(" =%s "%(d["id"]),id2,id_page)
+                    send_to_fb("%s"%(d["title"]),id2,id_page)
+            elif z.count("_")==3:
+                a,b,c,d=z[1:].split("_")
+                data=json.loads(open("motamadris/P%s_%s_%s.json"%(a,b,c)).read())
+                send_to_fb(data[int(d)-1]["title"],id2,id_page)
+                href=data[int(d)-1]["href"]
+                if "pdf" in href:
+                    send_file(href,id2,id_page)
+                elif "youtu" in href:
+                    y = yt(href)
+                    send_to_fb(y["title"], id2,id_page)
+                    send_video_to_fb(y["url"], id2, y["title"],id_page)
+            elif z.count("_")==2:
+                data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
+                i=0
+                for d in data:
+                    i+=1
+                    send_to_fb(" =%s_%s "%(z[1:],str(i)),id2,id_page)
+                    send_to_fb(" %s"%(d["title"]),id2,id_page)
             else:
-                try:
-                    send_to_fb(eval(z),id2,id_page)
-                except:
-                    send_to_fb("""
+                data=json.loads(open("motamadris/%s.json"%(z[1:])).read())
+                for d in data:
+                    send_to_fb(" =%s_%s "%(z[1:],d["id"]),id2,id_page)
+                    send_to_fb(" %s"%(d["title"]),id2,id_page)
+
+        else:
+            try:
+                send_to_fb(eval(z),id2,id_page)
+            except:
+                send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
 -اﺑﺪا ﺏ @ ﻟﻠﺒﺤﺖ ﻓﻲ ﻳﻮﺗﻴﺐ
 -اﺑﺪا ﺏ : ﻟﻠﺒﺤﺖ على اي موقع في الانترنيت
@@ -126,9 +126,8 @@ www.facebook.com/yassine.chawki.7393
 www.facebook.com/mohamedsaid.xawki
 www.facebook.com/abdelah.bochwar
 www.facebook.com/hamza.zahwani.395669
-     """, id2,id_page)
-        except:
-            pass
+ """, id2,id_page)
+
         try:
             attachments = incoming_message["entry"][0]["messaging"][0][
                 "message"]["attachments"][0]
@@ -211,7 +210,6 @@ class YoMamaBotView(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        # print(incoming_message)
         thread1 = Service(incoming_message)
         thread1.start()
         return HttpResponse()
@@ -232,5 +230,4 @@ class Github(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        # print(incoming_message)
         return HttpResponse()

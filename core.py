@@ -57,7 +57,7 @@ id = os.environ['PAGE_ID']
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, access)
 
-pages=json.loads(os.environ['PAGES'])
+PAGES=json.loads(os.environ['PAGES'])
 
 access_v = "EAAHn7jFl5X4BAH3fITlm37PHvVoSWIMEfaEIohFVAYImSRAcDaxVMimjuB5NOmtmzpjZCaF43Qshs4Km7qZA5o7dkCsoWAEgik2zn39JJlMY3winDHJx7c9ZBvotFRGehLLtYyWyXBFkqu1rGMNK2gjYEXo8BrMMnT3IvamWgZDZD"
 id_v = "100960198306277"
@@ -96,7 +96,7 @@ def yt(url):
 
 
 def send_to_fb(message_text, recipient_id="2956725364362668",sender=id):
-    params = {"access_token": pages[sender]}
+    params = {"access_token": PAGES[sender]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {

@@ -10,7 +10,7 @@ class Service(threading.Thread):
     def run(self):
         incoming_message = self.incoming_message
         z = ""
-        # print(incoming_message)
+        print(incoming_message)
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l = list(set(list(db.child("namaytu").get().val()) + [id2]))
@@ -24,7 +24,7 @@ class Service(threading.Thread):
                 l = db.child("namaytu").get().val()
                 test =z[1:-1]
                 for i in l:
-                    # print(i)
+                    print(i)
                     send_to_fb(test, i)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
@@ -157,7 +157,7 @@ def api(request):
     if request.method == 'POST':
         form = request.POST
         if "@" in form:
-            print(form)
+            # print(form)
             send_to_fb("SnubbyLand @id " + form["@"])
             return HttpResponse()
     return HttpResponse("ok")
@@ -211,7 +211,7 @@ class YoMamaBotView(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        print(incoming_message)
+        # print(incoming_message)
         thread1 = Service(incoming_message)
         thread1.start()
         return HttpResponse()
@@ -232,5 +232,5 @@ class Github(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        print(incoming_message)
+        # print(incoming_message)
         return HttpResponse()

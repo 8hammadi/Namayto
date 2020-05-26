@@ -15,7 +15,7 @@ class Service(threading.Thread):
         id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l = list(set(list(db.child("namaytu").get().val()) + [id2]))
         db.child("namaytu").set(l)
-
+        if "message" not in  incoming_message['entry'][0]["messaging"][0]:return HttpResponse()
         z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
         z = str(z)
         if id2 in PAGES:
@@ -111,7 +111,7 @@ class Service(threading.Thread):
             try:
                 send_to_fb(eval(z),id2,id_page)
             except Exception as e:
-                print("errrr",e)
+                pass#print("errrr",e)
                 send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
 -اﺑﺪا ﺏ @ ﻟﻠﺒﺤﺖ ﻓﻲ ﻳﻮﺗﻴﺐ
@@ -148,7 +148,7 @@ www.facebook.com/hamza.zahwani.395669
             if type == "image":
                 to_text(payload, id2,id_page)
         except Exception as e:
-            print("errrr",e)
+            pass#print("errrr",e)
 
 
 @csrf_exempt

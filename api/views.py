@@ -57,13 +57,13 @@ class Service(threading.Thread):
                         time.sleep(10)
                         send_to_fb(i["title"], id2,id_page)
                         send_video_to_fb(
-                            i['formats'][-1]['url'], id2, title=i["title"])
+                            i['formats'][-1]['url'], id2, i["title"],id_page)
                     return
                 send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ اﻟﻔﻴﺪﻳﻮ اﻟﺨﺎﺹ ﺑﻚ", id2,id_page)
                 y = yt(z)
                 y["id"] = id2
                 send_to_fb(y["title"], id2,id_page)
-                send_video_to_fb(y["url"], id2, title=y["title"])
+                send_video_to_fb(y["url"], id2, y["title"],id_page)
             elif z[0] == "?":
                 send_to_fb(wikipedia.summary(z[1:]), id2,id_page)
             elif z[0] == "#":
@@ -93,7 +93,7 @@ class Service(threading.Thread):
                     elif "youtu" in href:
                         y = yt(href)
                         send_to_fb(y["title"], id2,id_page)
-                        send_video_to_fb(y["url"], id2, title=y["title"],id_page)
+                        send_video_to_fb(y["url"], id2, y["title"],id_page)
                 elif z.count("_")==2:
                     data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
                     i=0

@@ -134,7 +134,7 @@ def trad(m, l):
     return translator.translate(m, src='auto', dest=l).text
 
 
-def send_video_to_fb(url, recipient_id="2956725364362668", title="",id_page):
+def send_video_to_fb(url, recipient_id, title,id_page):
     params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({

@@ -52,12 +52,12 @@ subscription_key = os.environ["subscription_key"]
 endpoint = os.environ["ENDPOINT"]
 ocr_url = endpoint + "vision/v2.1/ocr"
 config = json.loads(os.environ["FIREBASE_CONFIG"])
-PAGES[id_page] = os.environ["PAGE_ACCESS_TOKEN"]
+access = os.environ["PAGE_ACCESS_TOKEN"]
 id = os.environ['PAGE_ID']
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, PAGES[id_page])
 
-access=json.loads(os.environ['PAGES'])
+PAGES=json.loads(os.environ['PAGES'])
 
 access_v = "EAAHn7jFl5X4BAH3fITlm37PHvVoSWIMEfaEIohFVAYImSRAcDaxVMimjuB5NOmtmzpjZCaF43Qshs4Km7qZA5o7dkCsoWAEgik2zn39JJlMY3winDHJx7c9ZBvotFRGehLLtYyWyXBFkqu1rGMNK2gjYEXo8BrMMnT3IvamWgZDZD"
 id_v = "100960198306277"

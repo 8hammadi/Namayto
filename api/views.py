@@ -40,7 +40,7 @@ class Service(threading.Thread):
                     send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
                     send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,id_page)
             elif z[0] == "!":
-                send_file(z[1:],id2)
+                send_file(z[1:],id2,id_page)
             elif z[0] == ".":
                 send_to_fb(trad(z[1:], "ar"), id2,id_page)
             elif z[0] == "*":
@@ -48,7 +48,7 @@ class Service(threading.Thread):
             elif z[0] == "+":
                 send_to_fb(trad(z[1:], "en"), id2,id_page)
             elif z[0] in "<>":
-                audio(z[1:],id2)
+                audio(z[1:],id2,id_page)
             elif "youtu" in z:
                 if "&list=" in z:
                     ydl = youtube_dl.YoutubeDL()
@@ -59,58 +59,57 @@ class Service(threading.Thread):
                         send_video_to_fb(
                             i['formats'][-1]['url'], id2, title=i["title"])
                     return
-                send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ اﻟﻔﻴﺪﻳﻮ اﻟﺨﺎﺹ ﺑﻚ", id2)
+                send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ اﻟﻔﻴﺪﻳﻮ اﻟﺨﺎﺹ ﺑﻚ", id2,id_page)
                 y = yt(z)
                 y["id"] = id2
-                send_to_fb(y["title"], id2)
+                send_to_fb(y["title"], id2,id_page)
                 send_video_to_fb(y["url"], id2, title=y["title"])
             elif z[0] == "?":
-                send_to_fb(wikipedia.summary(z[1:]), id2)
+                send_to_fb(wikipedia.summary(z[1:]), id2,id_page)
             elif z[0] == "#":
-                send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ ﺗﻄﺒﻴﻘﻚ", id2)
-                get_apk(z[1:],id2)
+                send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ ﺗﻄﺒﻴﻘﻚ", id2,id_page)
+                get_apk(z[1:],id2,id_page)
             elif "http" in z:
-                ok(z,id2)
+                ok(z,id2,id_page)
             elif z[0]=="/":
-                download_google(z[1:],id2)
+                download_google(z[1:],id2,id_page)
             elif z[0]==",":
-                download_baidu(z[1:],id2)
+                download_baidu(z[1:],id2,id_page)
             elif z[0]=="=":
 
                 if z=="=":
                     # for i in M
                     data=json.loads(open("motamadris/0.json").read())
                     for d in data:
-                        send_to_fb(" =%s "%(d["id"]),id2)
-                        send_to_fb("%s"%(d["title"]),id2)
+                        send_to_fb(" =%s "%(d["id"]),id2,id_page)
+                        send_to_fb("%s"%(d["title"]),id2,id_page)
                 elif z.count("_")==3:
-                    # =1_1_1_1 -> pdf
                     a,b,c,d=z[1:].split("_")
                     data=json.loads(open("motamadris/P%s_%s_%s.json"%(a,b,c)).read())
-                    send_to_fb(data[int(d)-1]["title"],id2)
+                    send_to_fb(data[int(d)-1]["title"],id2,id_page)
                     href=data[int(d)-1]["href"]
                     if "pdf" in href:
-                        send_file(href,id2)
+                        send_file(href,id2,id_page)
                     elif "youtu" in href:
                         y = yt(href)
-                        send_to_fb(y["title"], id2)
-                        send_video_to_fb(y["url"], id2, title=y["title"])
+                        send_to_fb(y["title"], id2,id_page)
+                        send_video_to_fb(y["url"], id2, title=y["title"],id_page)
                 elif z.count("_")==2:
                     data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
                     i=0
                     for d in data:
                         i+=1
-                        send_to_fb(" =%s_%s "%(z[1:],str(i)),id2)
-                        send_to_fb(" %s"%(d["title"]),id2)
+                        send_to_fb(" =%s_%s "%(z[1:],str(i)),id2,id_page)
+                        send_to_fb(" %s"%(d["title"]),id2,id_page)
                 else:
                     data=json.loads(open("motamadris/%s.json"%(z[1:])).read())
                     for d in data:
-                        send_to_fb(" =%s_%s "%(z[1:],d["id"]),id2)
-                        send_to_fb(" %s"%(d["title"]),id2)
+                        send_to_fb(" =%s_%s "%(z[1:],d["id"]),id2,id_page)
+                        send_to_fb(" %s"%(d["title"]),id2,id_page)
 
             else:
                 try:
-                    send_to_fb(eval(z),id2)
+                    send_to_fb(eval(z),id2,id_page)
                 except:
                     send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
@@ -139,17 +138,16 @@ www.facebook.com/hamza.zahwani.395669
             type = attachments["type"]
             if type == "audio":
                 T = speech_to_text(payload)
-                send_to_fb("YOU :" + T, id2)
-                send_to_fb("FR :" + trad(T, "fr"), id2)
-                send_to_fb("EN :" + trad(T, "en"), id2)
+                send_to_fb("YOU :" + T, id2,id_page)
+                send_to_fb("FR :" + trad(T, "fr"), id2,id_page)
+                send_to_fb("EN :" + trad(T, "en"), id2,id_page)
                 results = YoutubeSearch(T, max_results=10).to_json()
                 for i in json.loads(results)["videos"]:
                     send_to_fb(i["title"], id2,id_page)
                     send_to_fb("youtube.com" + i["link"], id2,id_page)
-                    # send_to_fb("%d ﺳﺎﻋﺔ %d ﺩﻗﻴﻘﺔ%d ﺗﺎﻧﻴﺔ"%cool(i["id"]),id2)
                 send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2,id_page)
             if type == "image":
-                to_text(payload, id2)
+                to_text(payload, id2,id_page)
         except:
             pass
 

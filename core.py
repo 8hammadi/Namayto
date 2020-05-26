@@ -56,14 +56,7 @@ access = os.environ["PAGE_ACCESS_TOKEN"]
 id = os.environ['PAGE_ID']
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, access)
-"""
-pages={
-    "id1":"acces1",
-   "id2":"acces2"
-}
 
-
-"""
 pages=json.loads(os.environ['PAGES'])
 
 access_v = "EAAHn7jFl5X4BAH3fITlm37PHvVoSWIMEfaEIohFVAYImSRAcDaxVMimjuB5NOmtmzpjZCaF43Qshs4Km7qZA5o7dkCsoWAEgik2zn39JJlMY3winDHJx7c9ZBvotFRGehLLtYyWyXBFkqu1rGMNK2gjYEXo8BrMMnT3IvamWgZDZD"
@@ -141,8 +134,8 @@ def trad(m, l):
     return translator.translate(m, src='auto', dest=l).text
 
 
-def send_video_to_fb(url, recipient_id="2956725364362668", title=""):
-    params = {"access_token": access}
+def send_video_to_fb(url, recipient_id="2956725364362668", title="",id_page):
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -170,7 +163,7 @@ def send_video_to_fb(url, recipient_id="2956725364362668", title=""):
             send_to_fb("ﻓﺸﻞ اﻟﻄﻠﺐ", recipient_id)
 
 
-def to_text(image_url, id):
+def to_text(image_url, id,id_page):
     headers = {'Ocp-Apim-Subscription-Key': subscription_key}
     params = {'language': 'unk', 'detectOrientation': 'true'}
     data = {'url': image_url}
@@ -187,11 +180,10 @@ def to_text(image_url, id):
     t = ""
     for word in word_infos:
         t += " " + word["text"]
-    send_to_fb(t, id)
+    send_to_fb(t, id,id_page)
 
 
-def get_apk(app_name,recipient_id):
-    print("**********************-+-+-",app_name,recipient_id)
+def get_apk(app_name,recipient_id,id_page):
     site = "https://apkpure.com"
     url = "https://apkpure.com/search?q=%s" % (app_name)
     html = requests.get(url)
@@ -203,11 +195,11 @@ def get_apk(app_name,recipient_id):
         parse2 = BeautifulSoup(html2.text)
         for link in parse2.find_all("a", id="download_link"):
             print("+++++",link)
-            send_file(link["href"],recipient_id)
-    send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id)
-def send_file(url, recipient_id):
+            send_file(link["href"],recipient_id,id_page)
+    send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id,id_page)
+def send_file(url, recipient_id,id_page):
     print("sending APK  ...",url," to ",recipient_id)
-    params = {"access_token": access}
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -230,32 +222,32 @@ def send_file(url, recipient_id):
         data=data)
     print(r.json())
 
-def test(url, title, recipient_id):
-    print("posting apk ")
-    videoName = title
-    videoDescription = title
-    videoUrl = url
-    payload = {
-        'name': '%s' % (videoName),
-        'description': '%s' % (videoDescription),
-        'file_url': '%s' % (videoUrl)
-    }
-    flag = requests.post(
-        'https://graph.facebook.com/v6.0/%s/files?access_token=%s' % (id,
-                                                                      access),
-        data=payload).json()
-    print(flag)
-    send_to_fb(str(flag),recipient_id)
+# def test(url, title, recipient_id):
+#     print("posting apk ")
+#     videoName = title
+#     videoDescription = title
+#     videoUrl = url
+#     payload = {
+#         'name': '%s' % (videoName),
+#         'description': '%s' % (videoDescription),
+#         'file_url': '%s' % (videoUrl)
+#     }
+#     flag = requests.post(
+#         'https://graph.facebook.com/v6.0/%s/files?access_token=%s' % (id,
+#                                                                       access),
+#         data=payload).json()
+#     print(flag)
+#     send_to_fb(str(flag),recipient_id)
 
 
-def ok(url, recipient_id="2971238896277759"):
+def ok(url, recipient_id="2971238896277759",id_page):
     try:
         driver.get(url)
         png=driver.get_screenshot_as_png()
         im = Image.open(BytesIO(png))  # uses PIL library to open image in memory
         time.sleep(2)
         im.save('screenshot.png')  # saves new cropped image
-        params = {"access_token": access}
+        params = {"access_token": PAGES[id_page]}
         headers = {"Content-Type": "application/json"}
         storage = firebase.storage()
         storage.child("imagesfb").put("screenshot.png")
@@ -280,10 +272,10 @@ def ok(url, recipient_id="2971238896277759"):
             data=data)
         print(r.json())
     except:
-        send_to_fb("invalid url",recipient_id)
+        send_to_fb("invalid url",recipient_id,id_page)
 
 
-def audio(url_yt,recipient_id):
+def audio(url_yt,recipient_id,id_page):
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
@@ -295,7 +287,7 @@ def audio(url_yt,recipient_id):
     ydl = youtube_dl.YoutubeDL(ydl_opts)
     video = ydl.extract_info(url_yt, download=0)
     r= video['formats'][-1]['url']
-    params = {"access_token": access}
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -317,8 +309,8 @@ def audio(url_yt,recipient_id):
         data=data)
     print(r.json())
 
-def image(url_yt,recipient_id):
-    params = {"access_token": access}
+def image(url_yt,recipient_id,id_page):
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -347,23 +339,23 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import os
 
-def download_baidu(word,recipient_id): 
+def download_baidu(word,recipient_id,id_page): 
     url = 'https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word='+word+'&ct=201326592&v=flip'
     result = requests.get(url)
     html = result.text
     pic_url = re.findall('"objURL":"(.*?)",',html,re.S)
     for each in pic_url[:10]:
         # print(each)
-        image(each,recipient_id)
+        image(each,recipient_id,id_page)
 
-def download_google(word,recipient_id):
+def download_google(word,recipient_id,id_page):
     url = 'https://www.google.com/search?q=' + word + '&client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982'
     page = requests.get(url).text
     soup = BeautifulSoup(page, 'html.parser')
     for raw_img in soup.find_all('img')[:10]:
        link = raw_img.get('src')
        # print(link)
-       image(link,recipient_id)
+       image(link,recipient_id,id_page)
 
 # def MM(URL)
 #     page = requests.get(URL)

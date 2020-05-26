@@ -1,5 +1,6 @@
 from PIL import Image
 from io import BytesIO
+from math import *
 from urllib.request import urlopen
 import speech_recognition as sr
 from bs4 import BeautifulSoup
@@ -364,3 +365,12 @@ def download_google(word,recipient_id):
        # print(link)
        image(link,recipient_id)
 
+def MM(URL)
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    R=[]
+    for r in soup.findAll('a'):
+        h=r["href"]
+        if ".pdf" in h:
+            R.append(h)
+    return R

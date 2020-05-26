@@ -108,7 +108,6 @@ www.facebook.com/yassine.chawki.7393
 www.facebook.com/mohamedsaid.xawki
 www.facebook.com/abdelah.bochwar
 www.facebook.com/hamza.zahwani.395669
-ادا كنت جديد في الصفحة ارسل هده الكلمات للصفحة لتفهم  كيفية العمل بالصفحة 
      """, id2,id_page)
         except:
             pass

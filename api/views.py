@@ -84,8 +84,10 @@ class Service(threading.Thread):
                         send_to_fb(" =%s "%(d["id"]),id2)
                         send_to_fb("%s"%(d["title"]),id2)
                 elif z.count("_")==3:
-                    data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
-                    send_to_fb("your choise is:"+z,id2)
+                    # =1_1_1_1 -> pdf
+                    a,b,c,d=z[1:].split("_")
+                    data=json.loads(open("motamadris/P%s_%s_%s.json"%(a,b,c)).read())
+                    send_to_fb("Test:"+data[int(d)]["title"],id2)
                 elif z.count("_")==2:
                     data=json.loads(open("motamadris/P%s.json"%(z[1:])).read())
                     i=0

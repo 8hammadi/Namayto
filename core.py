@@ -52,12 +52,12 @@ subscription_key = os.environ["subscription_key"]
 endpoint = os.environ["ENDPOINT"]
 ocr_url = endpoint + "vision/v2.1/ocr"
 config = json.loads(os.environ["FIREBASE_CONFIG"])
-access = os.environ["PAGE_ACCESS_TOKEN"]
+PAGES[id_page] = os.environ["PAGE_ACCESS_TOKEN"]
 id = os.environ['PAGE_ID']
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
-    id, access)
+    id, PAGES[id_page])
 
-PAGES=json.loads(os.environ['PAGES'])
+access=json.loads(os.environ['PAGES'])
 
 access_v = "EAAHn7jFl5X4BAH3fITlm37PHvVoSWIMEfaEIohFVAYImSRAcDaxVMimjuB5NOmtmzpjZCaF43Qshs4Km7qZA5o7dkCsoWAEgik2zn39JJlMY3winDHJx7c9ZBvotFRGehLLtYyWyXBFkqu1rGMNK2gjYEXo8BrMMnT3IvamWgZDZD"
 id_v = "100960198306277"
@@ -135,7 +135,7 @@ def trad(m, l):
 
 
 def send_video_to_fb(url, recipient_id, title,id_page):
-    params = {"access_token": access}
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -199,7 +199,7 @@ def get_apk(app_name,recipient_id,id_page):
     send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id,id_page)
 def send_file(url, recipient_id,id_page):
     # print("sending APK  ...",url," to ",recipient_id)
-    params = {"access_token": access}
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -234,7 +234,7 @@ def send_file(url, recipient_id,id_page):
 #     }
 #     flag = requests.post(
 #         'https://graph.facebook.com/v6.0/%s/files?access_token=%s' % (id,
-#                                                                       access),
+#                                                                       PAGES[id_page]),
 #         data=payload).json()
     print(flag)
 #     send_to_fb(str(flag),recipient_id)
@@ -247,7 +247,7 @@ def ok(url, recipient_id,id_page):
         im = Image.open(BytesIO(png))  # uses PIL library to open image in memory
         time.sleep(2)
         im.save('screenshot.png')  # saves new cropped image
-        params = {"access_token": access}
+        params = {"access_token": PAGES[id_page]}
         headers = {"Content-Type": "application/json"}
         storage = firebase.storage()
         storage.child("imagesfb").put("screenshot.png")
@@ -294,7 +294,7 @@ def audio(url_yt,recipient_id,id_page):
         return
     video = ydl.extract_info(url_yt, download=0)
     r= video['formats'][-1]['url']
-    params = {"access_token": access}
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -317,7 +317,7 @@ def audio(url_yt,recipient_id,id_page):
     print(r.json())
 
 def image(url_yt,recipient_id,id_page):
-    params = {"access_token": access}
+    params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {

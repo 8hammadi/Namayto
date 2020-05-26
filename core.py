@@ -70,7 +70,7 @@ db = firebase.database()
 
 
 
-def url_to_fb(url, title, recipient_id):
+def url_to_fb(url, title, recipient_id,id_page):
     videoName = title
     videoDescription = title
     videoUrl = url
@@ -83,9 +83,9 @@ def url_to_fb(url, title, recipient_id):
     if "id" in flag:
         send_to_fb(
             " ﺳﻴﻜﻮﻥ اﻟﻖﻳﺪﻳﻮ ﺟﺎﻫﺰا ﻋﻠﻰ ﻫﺪا اﻟﺮﺑﻂ ﺑﻌﺪ ﻗﻠﻴﻞ  https://www.facebook.com/watch/?v=%s"
-            % (flag["id"]), recipient_id)
+            % (flag["id"]), recipient_id,id_page)
     else:
-        send_to_fb("..", recipient_id)
+        send_to_fb("..", recipient_id,id_page)
 
 
 
@@ -158,9 +158,9 @@ def send_video_to_fb(url, recipient_id, title,id_page):
     print(r.json())
     if "message_id" not in r.json():
         if recipient_id in db.child("namayto2/users").get().val() or 1:
-            url_to_fb(url, title, recipient_id)
+            url_to_fb(url, title, recipient_id,id_page)
         else:
-            send_to_fb("ﻓﺸﻞ اﻟﻄﻠﺐ", recipient_id)
+            send_to_fb("ﻓﺸﻞ اﻟﻄﻠﺐ", recipient_id,id_page)
 
 
 def to_text(image_url, id,id_page):

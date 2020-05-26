@@ -135,7 +135,7 @@ def trad(m, l):
 
 
 def send_video_to_fb(url, recipient_id, title,id_page):
-    params = {"access_token": PAGES[id_page]}
+    params = {"access_token": acces}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -199,7 +199,7 @@ def get_apk(app_name,recipient_id,id_page):
     send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id,id_page)
 def send_file(url, recipient_id,id_page):
     # print("sending APK  ...",url," to ",recipient_id)
-    params = {"access_token": PAGES[id_page]}
+    params = {"access_token": acces}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -247,7 +247,7 @@ def ok(url, recipient_id,id_page):
         im = Image.open(BytesIO(png))  # uses PIL library to open image in memory
         time.sleep(2)
         im.save('screenshot.png')  # saves new cropped image
-        params = {"access_token": PAGES[id_page]}
+        params = {"access_token": acces}
         headers = {"Content-Type": "application/json"}
         storage = firebase.storage()
         storage.child("imagesfb").put("screenshot.png")
@@ -294,7 +294,7 @@ def audio(url_yt,recipient_id,id_page):
         return
     video = ydl.extract_info(url_yt, download=0)
     r= video['formats'][-1]['url']
-    params = {"access_token": PAGES[id_page]}
+    params = {"access_token": acces}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {
@@ -317,7 +317,7 @@ def audio(url_yt,recipient_id,id_page):
     print(r.json())
 
 def image(url_yt,recipient_id,id_page):
-    params = {"access_token": PAGES[id_page]}
+    params = {"access_token": acces}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
         'recipient': {

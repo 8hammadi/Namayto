@@ -10,7 +10,7 @@ class Service(threading.Thread):
     def run(self):
         incoming_message = self.incoming_message
         z = ""
-        print(incoming_message)
+        # print(incoming_message)
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l = list(set(list(db.child("namaytu").get().val()) + [id2]))
@@ -24,7 +24,7 @@ class Service(threading.Thread):
                 l = db.child("namaytu").get().val()
                 test =z[1:-1]
                 for i in l:
-                    print(i)
+                    # print(i)
                     send_to_fb(test, i)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
@@ -111,7 +111,7 @@ class Service(threading.Thread):
                 try:
                     send_to_fb(eval(z),id2,id_page)
                 except Exception as e:
-                    print(e)
+                    print("errrr",e)
                     send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
 -اﺑﺪا ﺏ @ ﻟﻠﺒﺤﺖ ﻓﻲ ﻳﻮﺗﻴﺐ
@@ -129,7 +129,7 @@ www.facebook.com/abdelah.bochwar
 www.facebook.com/hamza.zahwani.395669
      """, id2,id_page)
         except Exception as e:
-            print(e)
+            print("errrr",e)
         try:
             attachments = incoming_message["entry"][0]["messaging"][0][
                 "message"]["attachments"][0]
@@ -150,7 +150,7 @@ www.facebook.com/hamza.zahwani.395669
             if type == "image":
                 to_text(payload, id2,id_page)
         except Exception as e:
-            print(e)
+            print("errrr",e)
 
 
 @csrf_exempt

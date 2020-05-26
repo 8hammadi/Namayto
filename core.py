@@ -240,7 +240,7 @@ def send_file(url, recipient_id,id_page):
 #     send_to_fb(str(flag),recipient_id)
 
 
-def ok(url, recipient_id="2971238896277759",id_page):
+def ok(url, recipient_id,id_page):
     try:
         driver.get(url)
         png=driver.get_screenshot_as_png()

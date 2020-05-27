@@ -118,20 +118,7 @@ class Service(threading.Thread):
                 except Exception as e:
                     pass
                     send_to_fb("""
-    ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ
-    -اﺑﺪا ﺏ @ ﻟﻠﺒﺤﺖ ﻓﻲ ﻳﻮﺗﻴﺐ
-    -اﺑﺪا ﺏ : ﻟﻠﺒﺤﺖ على اي موقع في الانترنيت
-    -اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ ﻟﺘﺤﻮﻳﻠﻪ اﻟﻰ ﻓﻴﺴﺒﻮﻙ
-    -اﺩا اﺭﺳﻠﺖ ﺻﻮﺭﺓ ﺳﻨﺮﺳﻞ ﻟﻚ اﻟﻜﺘﺎﺑﺔ  اﻟﺘﻲ  ﺗﺤﺘﻮﻳﻬﺎ
-    -اﺩا اﺭﺳﻠﺖ   ﻣﻘﻄﻊ  ﺻﻮﺗﻲ ﺳﻨﻘﻮﻡ ﺑﺘﺤﻮﻳﻠﻪ اﻟﻰ ﻧﺺ ﻭ ﺗﺮﺟﻤﺘﻪ
-    ﻭﻳﻜﻴﺒﻴﺪﻳﺎ اﺑﺪا ﺏ ?
-    -ابدا ب # لتحميل تطبيق من بلاي ستور
-    ادا لم تفهم حاول الاتصال  احد الاشخاص التالية للمساعدة
-    www.facebook.com/mane.gucci.963
-    www.facebook.com/yassine.chawki.7393
-    www.facebook.com/mohamedsaid.xawki
-    www.facebook.com/abdelah.bochwar
-    www.facebook.com/hamza.zahwani.395669
+ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة الرسمية الاسئلة web.facebook.com/108485137551605
      """, id2,id_page)
         except:
             pass

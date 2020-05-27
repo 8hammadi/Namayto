@@ -197,8 +197,8 @@ def get_apk(app_name,recipient_id,id_page):
             # print("+++++",link)
             send_file(link["href"],recipient_id,id_page)
     send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id,id_page)
+
 def send_file(url, recipient_id,id_page):
-    # print("sending APK  ...",url," to ",recipient_id)
     params = {"access_token": PAGES[id_page]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
@@ -220,24 +220,6 @@ def send_file(url, recipient_id,id_page):
         params=params,
         headers=headers,
         data=data)
-    # print(r.json())
-
-# def test(url, title, recipient_id):
-    print("posting apk ")
-#     videoName = title
-#     videoDescription = title
-#     videoUrl = url
-#     payload = {
-#         'name': '%s' % (videoName),
-#         'description': '%s' % (videoDescription),
-#         'file_url': '%s' % (videoUrl)
-#     }
-#     flag = requests.post(
-#         'https://graph.facebook.com/v6.0/%s/files?access_token=%s' % (id,
-#                                                                       PAGES[id_page]),
-#         data=payload).json()
-    print(flag)
-#     send_to_fb(str(flag),recipient_id)
 
 
 def ok(url, recipient_id,id_page):
@@ -270,7 +252,6 @@ def ok(url, recipient_id,id_page):
             params=params,
             headers=headers,
             data=data)
-        # print(r.json())
     except:
         send_to_fb("invalid url",recipient_id,id_page)
 
@@ -337,7 +318,6 @@ def image(url_yt,recipient_id,id_page):
         params=params,
         headers=headers,
         data=data)
-    # print(r.json())
 
 
 import re

@@ -184,7 +184,6 @@ def to_text(image_url, id,id_page):
 
 
 def get_apk(app_name,recipient_id,id_page):
-    app_name="dama"
     site = "https://apkpure.com"
     url = "https://apkpure.com/search?q=%s" % (app_name)
     html = requests.get(url)

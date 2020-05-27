@@ -118,8 +118,7 @@ class Service(threading.Thread):
                 except Exception as e:
                     pass
                     send_to_fb("""
-ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة الرسمية الاسئلة web.facebook.com/108485137551605
-     """, id2,id_page)
+ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة للرسمية الاسئلة web.facebook.com/108485137551605     """, id2,id_page)
         except:
             pass
         try:
@@ -132,8 +131,6 @@ class Service(threading.Thread):
             if type == "audio":
                 T = speech_to_text(payload)
                 send_to_fb(T, id2,id_page)
-                # send_to_fb("FR :" + trad(T, "fr"), id2,id_page)
-                # send_to_fb("EN :" + trad(T, "en"), id2,id_page)
                 results = YoutubeSearch(T, max_results=10).to_json()
                 for i in json.loads(results)["videos"]:
                     send_to_fb(i["title"], id2,id_page)

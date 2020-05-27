@@ -184,19 +184,23 @@ def to_text(image_url, id,id_page):
 
 
 def get_apk(app_name,recipient_id,id_page):
+    app_name="dama"
     site = "https://apkpure.com"
     url = "https://apkpure.com/search?q=%s" % (app_name)
     html = requests.get(url)
     parse = BeautifulSoup(html.text)
-    for i in parse.find("p"):
-        a_url = i["href"]
-        app_url = site + a_url + "/download?from=details"
-        html2 = requests.get(app_url)
-        parse2 = BeautifulSoup(html2.text)
-        for link in parse2.find_all("a", id="download_link"):
-            # print("+++++",link)
+    for i in parse.find_all("p",class_="search-title"):
+        try:
+            send_to_fb(i.getText(),recipient_id,id_page)
+            a_url = i.find("a")["href"]
+            app_url = site + a_url + "/download?from=details"
+            html2 = requests.get(app_url)
+            parse2 = BeautifulSoup(html2.text)
+            link=parse2.find("a", id="download_link")
             send_file(link["href"],recipient_id,id_page)
-    send_to_fb("ادا لم تتوصل بالتطبيق فغالبا التطبيق دو حجم كبير  ",recipient_id,id_page)
+        except:
+            pass
+    send_to_fb(".",recipient_id,id_page)
 
 def send_file(url, recipient_id,id_page):
     params = {"access_token": PAGES[id_page]}

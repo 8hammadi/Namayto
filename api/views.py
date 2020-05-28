@@ -34,7 +34,7 @@ class Service(threading.Thread):
                                id_page)
             elif "www.hespress.com" in z:
                 html3 = requests.get(z)
-                parse3 = BeautifulSoup(html3.text)
+                parse3 = BeautifulSoup(html3.text,features="html5lib")
                 r = parse3.find(id="article_body").findAll("p")
                 send_to_fb(" ".join([i.getText() for i in r]),id2,id_page)
             elif z[0] == ":":

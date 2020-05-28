@@ -1,13 +1,14 @@
-import requests
-from bs4 import BeautifulSoup
-import json
+import nexmo
 
-URL = "https://moutamadris.ma/%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%88%d9%84%d9%89-%d8%a8%d8%a7%d9%83/"
-page = requests.get(URL)
-soup = BeautifulSoup(page.content, 'html.parser')
-soup=soup.findAll("div",class_="table-responsive")
-R=[]
-for s in soup:
-	for r in s.findAll('tr'):
-		try:R.append({"href":r.find("a")["href"] ,"title":r.find("td").getText()})
-		except:pass
+client = nexmo.Client(key='950d1ba0', secret='9Qz3Eclw0CRGy8Cx')
+
+
+response = client.start_verification(
+  number="+212610781949",
+  brand="Vonage",
+  code_length="4")
+
+if response["status"] == "0":
+  print("Started verification request_id is %s" % (response["request_id"]))
+else:
+  print("Error: %s" % response["error_text"])

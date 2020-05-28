@@ -60,8 +60,8 @@ fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
 
 PAGES=json.loads(os.environ['PAGES'])
 
-access_v = "EAAHn7jFl5X4BAH3fITlm37PHvVoSWIMEfaEIohFVAYImSRAcDaxVMimjuB5NOmtmzpjZCaF43Qshs4Km7qZA5o7dkCsoWAEgik2zn39JJlMY3winDHJx7c9ZBvotFRGehLLtYyWyXBFkqu1rGMNK2gjYEXo8BrMMnT3IvamWgZDZD"
-id_v = "100960198306277"
+access_v = access
+id_v = id
 fburl_v = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id_v, access_v)
 

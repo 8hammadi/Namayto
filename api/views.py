@@ -23,7 +23,6 @@ class Service(threading.Thread):
                 l = db.child("namaytu").get().val()
                 test =z[1:-1]
                 for i in l:
-                    # print(i)
                     send_to_fb(test, i)
             elif z=="maroc":
                 url="https://www.hespress.com"
@@ -32,7 +31,13 @@ class Service(threading.Thread):
                 for i in parse.findAll("div",class_="latest_news_box"):
                     send_to_fb(i.find("h3").getText(),id2,id_page)
                     send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)
-
+            elif "www.hespress.com" in z:
+                html = requests.get(z)
+                parse = BeautifulSoup(html.text)
+                r=parse.find(id="article_body").findAll("p")
+                s=""
+                for i in r:
+                  s+=i.getText()
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2,id_page)

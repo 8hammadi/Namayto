@@ -34,10 +34,13 @@ class Service(threading.Thread):
             elif "www.hespress.com" in z:
                 html2 = requests.get(z)
                 parse2 = BeautifulSoup(html2.text)
-                r=parse2.find(id="article_body").findAll("p")
-                s=""
+                r = parse2.find(id="article_body").findAll("p")
+                s = ""
                 for i in r:
-                    s+=i.getText()
+                    s+= i.getText()
+
+
+
                 send_to_fb(s,id2,id_page)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):

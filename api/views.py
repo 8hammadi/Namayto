@@ -14,7 +14,7 @@ class Service(threading.Thread):
         id_page=incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l = list(set(list(db.child("namaytu").get().val()) + [id2]))
         db.child("namaytu").set(l)
-        try:
+        if 1:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
             if id2 in PAGES:
@@ -38,9 +38,6 @@ class Service(threading.Thread):
                 s = ""
                 for i in r:
                     s+= i.getText()
-
-
-
                 send_to_fb(s,id2,id_page)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
@@ -136,8 +133,8 @@ class Service(threading.Thread):
                     pass
                     send_to_fb("""
 ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة الرسمية للاسئلة web.facebook.com/108485137551605 """, id2,id_page)
-        except:
-            pass
+        # except:
+        #     pass
         try:
             attachments = incoming_message["entry"][0]["messaging"][0][
                 "message"]["attachments"][0]

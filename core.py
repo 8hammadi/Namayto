@@ -354,7 +354,7 @@ def Hess():
     for i in parse.findAll("div",class_="latest_news_box"):
         send_to_fb(i.find("h3").getText(),id2,id_page)
         send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)
-def book(title,id2,id_page)
+def book(title,id2,id_page):
     url = "https://www.kutub-pdf.net"
     driver.get(url)
     r=driver.find_element_by_name("q")

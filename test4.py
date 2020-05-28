@@ -5,7 +5,7 @@ from time import sleep
 driver = webdriver.Chrome()
 
 
-def book(title)
+def book(title):
 	url = "https://www.kutub-pdf.net"
 	driver.get(url)
 	r=driver.find_element_by_name("q")

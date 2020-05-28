@@ -24,7 +24,7 @@ class Service(threading.Thread):
                 test =z[1:-1]
                 for i in l:
                     send_to_fb(test, i)
-            elif z=="maroc":
+            elif z=="hespress":
                 url="https://www.hespress.com"
                 html = requests.get(url)
                 parse = BeautifulSoup(html.text)

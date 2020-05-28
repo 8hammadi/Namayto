@@ -348,9 +348,9 @@ def download_google(word,recipient_id,id_page):
        image(link,recipient_id,id_page)
 
 def Hess():
-url="https://www.hespress.com"
-html = requests.get(url)
-parse = BeautifulSoup(html.text)
-for i in parse.findAll("div",class_="latest_news_box"):
-    send_to_fb(i.find("h3").getText(),id2,id_page)
-    send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)
+    url="https://www.hespress.com"
+    html = requests.get(url)
+    parse = BeautifulSoup(html.text)
+    for i in parse.findAll("div",class_="latest_news_box"):
+        send_to_fb(i.find("h3").getText(),id2,id_page)
+        send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)

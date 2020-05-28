@@ -224,7 +224,7 @@ def send_file(url, recipient_id,id_page):
         params=params,
         headers=headers,
         data=data)
-
+    print(r)
 
 def ok(url, recipient_id,id_page):
     try:
@@ -363,21 +363,24 @@ def book(title,id2,id_page):
     r=driver.find_element_by_name("q")
     r.send_keys(title)
     driver.find_element_by_class_name("menu-button").click()
-    sleep(5)
+    sleep(3)
     parse = BeautifulSoup(driver.page_source)
     Results=parse.findAll("a",class_="gs-title")
-    # i=Results[0]
-    for i in Results[:3]:
-        send_to_fb(i.getText(),id2,id_page)
-        driver.get(i["href"])
-        html=driver.page_source
-        parse = BeautifulSoup(driver.page_source)
-        T=parse.findAll("a",class_="button-radius")
-        for t in T:
-            if "downloading" in str(t):
-                driver.get(url+t["href"])
-                driver.get(url+t["href"])
-                html=driver.page_source
-                parse = BeautifulSoup(driver.page_source)
-                pdf=parse.find(id="download")["href"]
-                send_file(pdf,id2,id_page)
+    i=Results[0]
+    print(i.getText())
+    send_to_fb(i.getText(),id2,id_page)
+    driver.get(i["href"])
+    html=driver.page_source
+    parse = BeautifulSoup(driver.page_source)
+    T=parse.findAll("a",class_="button-radius")
+    for t in T:
+        try:
+            driver.get(url+t["href"])
+            driver.get(url+t["href"])
+            html=driver.page_source
+            parse = BeautifulSoup(driver.page_source)
+            pdf=parse.find(id="download")["href"]
+            print(pdf)
+            send_file(str(pdf),id2,id_page)
+            break
+        except:pass

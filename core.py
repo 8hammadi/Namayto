@@ -1,6 +1,7 @@
 from PIL import Image
 from io import BytesIO
 from math import *
+from time import sleep
 from urllib.request import urlopen
 import speech_recognition as sr
 from bs4 import BeautifulSoup

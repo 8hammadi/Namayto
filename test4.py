@@ -26,3 +26,4 @@ def book(title):
 	parse = BeautifulSoup(driver.page_source,features="lxml")
 	pdf=parse.find(id="download")["href"]
 	print(pdf)
+book("مرحبا")

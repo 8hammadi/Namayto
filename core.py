@@ -46,7 +46,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-driver.set_window_size(1080,2000)
+driver.set_window_size(800,600)
 wikipedia.set_lang("ar")
 subscription_key = os.environ["subscription_key"]
 endpoint = os.environ["ENDPOINT"]
@@ -347,12 +347,10 @@ def download_google(word,recipient_id,id_page):
        print(link)
        image(link,recipient_id,id_page)
 
-# def MM(URL)
-#     page = requests.get(URL)
-#     soup = BeautifulSoup(page.content, 'html.parser')
-#     R=[]
-#     for r in soup.findAll('a'):
-#         h=r["href"]
-#         if ".pdf" in h:
-#             R.append(h)
-#     return R
+def Hess():
+url="https://www.hespress.com"
+html = requests.get(url)
+parse = BeautifulSoup(html.text)
+for i in parse.findAll("div",class_="latest_news_box"):
+    send_to_fb(i.find("h3").getText(),id2,id_page)
+    send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)

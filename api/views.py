@@ -25,6 +25,14 @@ class Service(threading.Thread):
                 for i in l:
                     # print(i)
                     send_to_fb(test, i)
+            elif z=="maroc":
+                url="https://www.hespress.com"
+                html = requests.get(url)
+                parse = BeautifulSoup(html.text)
+                for i in parse.findAll("div",class_="latest_news_box"):
+                    send_to_fb(i.find("h3").getText(),id2,id_page)
+                    send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)
+
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2,id_page)
@@ -118,7 +126,7 @@ class Service(threading.Thread):
                 except Exception as e:
                     pass
                     send_to_fb("""
-ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة للرسمية الاسئلة web.facebook.com/108485137551605     """, id2,id_page)
+ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة الرسمية للاسئلة web.facebook.com/108485137551605 """, id2,id_page)
         except:
             pass
         try:

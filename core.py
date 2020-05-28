@@ -355,6 +355,8 @@ def Hess():
     for i in parse.findAll("div",class_="latest_news_box"):
         send_to_fb(i.find("h3").getText(),id2,id_page)
         send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)
+
+
 def book(title,id2,id_page):
     url = "https://www.kutub-pdf.net"
     driver.get(url)
@@ -364,15 +366,18 @@ def book(title,id2,id_page):
     sleep(5)
     parse = BeautifulSoup(driver.page_source)
     Results=parse.findAll("a",class_="gs-title")
-    i=Results[0]
-    send_to_fb(i.getText(),id2,id_page)
-    driver.get(i["href"])
-    html=driver.page_source
-    parse = BeautifulSoup(driver.page_source,features="lxml")
-    t=parse.findAll("a",class_="button-radius")
-    driver.get(url+t[2]["href"])
-    driver.get(url+t[2]["href"])
-    html=driver.page_source
-    parse = BeautifulSoup(driver.page_source,features="lxml")
-    pdf=parse.find(id="download")["href"]
-    send_file(pdf,id2,id_page)
+    # i=Results[0]
+    for i in Results[:3]:
+        send_to_fb(i.getText(),id2,id_page)
+        driver.get(i["href"])
+        html=driver.page_source
+        parse = BeautifulSoup(driver.page_source)
+        T=parse.findAll("a",class_="button-radius")
+        for t in T:
+            if "downloading" in str(t):
+                driver.get(url+t["href"])
+                driver.get(url+t["href"])
+                html=driver.page_source
+                parse = BeautifulSoup(driver.page_source)
+                pdf=parse.find(id="download")["href"]
+                send_file(pdf,id2,id_page)

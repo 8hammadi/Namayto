@@ -32,12 +32,12 @@ class Service(threading.Thread):
                     send_to_fb(i.find("h3").getText(),id2,id_page)
                     send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)
             elif "www.hespress.com" in z:
-                html = requests.get(z)
-                parse = BeautifulSoup(html.text)
-                r=parse.find(id="article_body").findAll("p")
+                html2 = requests.get(z)
+                parse2 = BeautifulSoup(html2.text)
+                r=parse2.find(id="article_body").findAll("p")
                 s=""
                 for i in r:
-                  s+=i.getText()
+                    s+=i.getText()
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2,id_page)

@@ -36,7 +36,7 @@ class Service(threading.Thread):
                 html3 = requests.get(z)
                 parse3 = BeautifulSoup(html3.text,features="html5lib")
                 r = parse3.find(id="article_body").findAll("p")
-                send_to_fb(" ".join([i.getText() for i in r]),id2,id_page)
+                send_to_fb(str(" ".join([i.getText() for i in r])),id2,id_page)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2, id_page)

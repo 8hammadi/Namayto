@@ -382,5 +382,4 @@ def book(title,id2,id_page):
             pdf=parse.find(id="download")["href"]
             print(pdf)
             send_file(str(pdf),id2,id_page)
-            break
         except:pass

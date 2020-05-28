@@ -1,23 +1,28 @@
-# https://www.kutub-pdf.net/
-# title="hello world"
-# site = "https://www.kutub-pdf.net/"
-# url = "https://www.kutub-pdf.net/search?q=%s" % (title)
-# html = requests.get(url)
-# parse = BeautifulSoup(html.text)
-# for i in parse.find("p"):
-#   a_url = i["href"]
-#   app_url = site + a_url + "/download?from=details"
-#   html2 = requests.get(app_url)
-#   parse2 = BeautifulSoup(html2.text)
-#   for link in parse2.find_all("a", id="download_link"):
-#     print("+++++",link)
-#     # send_file(link["href"],recipient_id,id_page)
+from selenium import webdriver
 import requests
 from bs4 import BeautifulSoup
-z = "https://www.hespress.com/faits-divers/472824.html"
-html3 = requests.get(z)
-parse3 = BeautifulSoup(html3.text)
-r = parse3.find(id="article_body").findAll("p")
-s = ""
-print(r)
-print(s)
+from time import sleep
+driver = webdriver.Chrome()
+
+
+def book(title)
+	url = "https://www.kutub-pdf.net"
+	driver.get(url)
+	r=driver.find_element_by_name("q")
+	r.send_keys(title)
+	driver.find_element_by_class_name("menu-button").click()
+	sleep(10)
+	parse = BeautifulSoup(driver.page_source)
+	Results=parse.findAll("a",class_="gs-title")
+	i=Results[0]
+	print(i.getText())
+	driver.get(i["href"])
+	html=driver.page_source
+	parse = BeautifulSoup(driver.page_source,features="lxml")
+	t=parse.findAll("a",class_="button-radius")
+	driver.get(url+t[2]["href"])
+	driver.get(url+t[2]["href"])
+	html=driver.page_source
+	parse = BeautifulSoup(driver.page_source,features="lxml")
+	pdf=parse.find(id="download")["href"]
+	print(pdf)

@@ -61,6 +61,8 @@ class Service(threading.Thread):
                 send_to_fb(trad(z[1:], "en"), id2, id_page)
             elif z[0] in "<>":
                 audio(z[1:], id2, id_page)
+            elif z[0]=="&":
+                book(z[1:],id2,id_page)
             elif "youtu" in z:
                 if "&list=" in z:
                     ydl = youtube_dl.YoutubeDL()

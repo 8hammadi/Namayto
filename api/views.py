@@ -38,6 +38,7 @@ class Service(threading.Thread):
                 s=""
                 for i in r:
                     s+=i.getText()
+                send_to_fb(s,id2,id_page)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2,id_page)

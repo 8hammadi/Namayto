@@ -363,23 +363,25 @@ def book(title,id2,id_page):
     r=driver.find_element_by_name("q")
     r.send_keys(title)
     driver.find_element_by_class_name("menu-button").click()
-    sleep(3)
+    sleep(1)
     parse = BeautifulSoup(driver.page_source)
     Results=parse.findAll("a",class_="gs-title")
-    i=Results[0]
-    print(i.getText())
-    send_to_fb(i.getText(),id2,id_page)
-    driver.get(i["href"])
-    html=driver.page_source
-    parse = BeautifulSoup(driver.page_source)
-    T=parse.findAll("a",class_="button-radius")
-    for t in T:
-        try:
-            driver.get(url+t["href"])
-            driver.get(url+t["href"])
-            html=driver.page_source
-            parse = BeautifulSoup(driver.page_source)
-            pdf=parse.find(id="download")["href"]
-            print(pdf)
-            send_file(str(pdf),id2,id_page)
-        except:pass
+    # i=Results[0]
+    for i in Results:
+        print(i.getText())
+        send_to_fb(i.getText(),id2,id_page)
+        driver.get(i["href"])
+        html=driver.page_source
+        parse = BeautifulSoup(driver.page_source)
+        T=parse.findAll("a",class_="button-radius")
+        for t in T:
+            try:
+                driver.get(url+t["href"])
+                driver.get(url+t["href"])
+                html=driver.page_source
+                parse = BeautifulSoup(driver.page_source)
+                pdf=parse.find(id="download")["href"]
+                print(pdf)
+                send_file(str(pdf),id2,id_page)
+                break
+            except:pass

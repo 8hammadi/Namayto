@@ -1,6 +1,11 @@
 from PIL import Image
 from io import BytesIO
 from math import *
+import re
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse
+import os
 from time import sleep
 from urllib.request import urlopen
 import speech_recognition as sr
@@ -60,10 +65,6 @@ fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
 
 PAGES=json.loads(os.environ['PAGES'])
 
-access_v = access
-id_v = id
-fburl_v = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
-    id_v, access_v)
 
 VERIFY_TOKEN = "123456789"
 firebase = pyrebase.initialize_app(config)
@@ -80,7 +81,7 @@ def url_to_fb(url, title, recipient_id,id_page):
         'description': '%s' % (videoDescription),
         'file_url': '%s' % (videoUrl)
     }
-    flag = requests.post(fburl_v, data=payload).json()
+    flag = requests.post(fburl, data=payload).json()
     if "id" in flag:
         send_to_fb(
             " ﺳﻴﻜﻮﻥ اﻟﻖﻳﺪﻳﻮ ﺟﺎﻫﺰا ﻋﻠﻰ ﻫﺪا اﻟﺮﺑﻂ ﺑﻌﺪ ﻗﻠﻴﻞ  https://www.facebook.com/watch/?v=%s"
@@ -324,11 +325,7 @@ def image(url_yt,recipient_id,id_page):
         data=data)
 
 
-import re
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urlparse
-import os
+
 
 def download_baidu(word,recipient_id,id_page): 
     url = 'https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word='+word+'&ct=201326592&v=flip'
@@ -347,16 +344,6 @@ def download_google(word,recipient_id,id_page):
        link = raw_img.get('src')
        print(link)
        image(link,recipient_id,id_page)
-
-def Hess():
-    url="https://www.hespress.com"
-    html = requests.get(url)
-    parse = BeautifulSoup(html.text)
-    for i in parse.findAll("div",class_="latest_news_box"):
-        send_to_fb(i.find("h3").getText(),id2,id_page)
-        send_to_fb(url+i.find("h3").find("a")["href"],id2,id_page)
-
-
 def book(title,id2,id_page):
     url = "https://www.kutub-pdf.net"
     driver.get(url)
@@ -366,22 +353,23 @@ def book(title,id2,id_page):
     sleep(1)
     parse = BeautifulSoup(driver.page_source)
     Results=parse.findAll("a",class_="gs-title")
-    # i=Results[0]
     for i in Results:
-        print(i.getText())
-        send_to_fb(i.getText(),id2,id_page)
-        driver.get(i["href"])
-        html=driver.page_source
-        parse = BeautifulSoup(driver.page_source)
-        T=parse.findAll("a",class_="button-radius")
-        for t in T:
-            try:
-                driver.get(url+t["href"])
-                driver.get(url+t["href"])
-                html=driver.page_source
-                parse = BeautifulSoup(driver.page_source)
-                pdf=parse.find(id="download")["href"]
-                print(pdf)
-                send_file(str(pdf),id2,id_page)
-                break
-            except:pass
+        try:
+            print(i.getText())
+            send_to_fb(i.getText(),id2,id_page)
+            driver.get(i["href"])
+            html=driver.page_source
+            parse = BeautifulSoup(driver.page_source)
+            T=parse.findAll("a",class_="button-radius")
+            for t in T:
+                try:
+                    driver.get(url+t["href"])
+                    driver.get(url+t["href"])
+                    html=driver.page_source
+                    parse = BeautifulSoup(driver.page_source)
+                    pdf=parse.find(id="download")["href"]
+                    print(pdf)
+                    send_file(str(pdf),id2,id_page)
+                    break
+                except:pass
+        except:pass

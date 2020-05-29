@@ -51,8 +51,9 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
-driver.set_window_size(800,600)
+X=os.environ["X"]
+Y=os.environ["Y"]
+driver.set_window_size(int(X),int(Y))
 wikipedia.set_lang("ar")
 subscription_key = os.environ["subscription_key"]
 endpoint = os.environ["ENDPOINT"]

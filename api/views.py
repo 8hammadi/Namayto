@@ -23,7 +23,7 @@ class Service(threading.Thread):
                 test = z[1:-1]
                 for i in l:
                     for j in PAGES:
-                    send_to_fb(test, i,j)
+                        send_to_fb(test, i,j)
             elif z == "hespress":
                 url = "https://www.hespress.com"
                 html = requests.get(url)
@@ -47,7 +47,6 @@ class Service(threading.Thread):
                     for i in json.loads(results)["videos"]:
                         send_to_fb(i["title"], id2, id_page)
                         send_to_fb("youtube.com" + i["link"], id2, id_page)
-                        # send_to_fb("%d ﺳﺎﻋﺔ %d ﺩﻗﻴﻘﺔ%d ﺗﺎﻧﻴﺔ"%cool(i["id"]),id2)
                     send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
                     send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,
                                id_page)

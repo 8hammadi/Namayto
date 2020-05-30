@@ -242,3 +242,6 @@ class Github(generic.View):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
         print(incoming_message)
         return HttpResponse()
+
+def home(request):
+    return render(request,"home.html")

@@ -8,7 +8,7 @@ from api.views import *
 
 
 urlpatterns = [
-  path('',get_image),
+  path('',home),
   path("github",Github.as_view()),
   path("api",api),
   path("fb/api",YoMamaBotView.as_view()),

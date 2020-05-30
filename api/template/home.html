@@ -69,9 +69,9 @@
         access_token : pageAccessToken
     },
     function (response) {
-       console.log('Successful login for: ' + response.name);
+       console.log('Successful login for: ' + response);
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+        'Thanks for logging in';
     } 
 );
   }
@@ -79,7 +79,7 @@
 </script>
 
 
-<fb:login-button scope="public_profile,email,pages_messaging" onlogin="checkLoginState();">
+<fb:login-button scope="public_profile,email,messages" onlogin="checkLoginState();">
 </fb:login-button>
 
 <div id="status">

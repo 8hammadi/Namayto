@@ -21,8 +21,8 @@ class Service(threading.Thread):
                 l = db.child("namaytu").get().val()
                 test = z[1:-1]
                 for i in l:
-                    for j in PAGES:
-                        send_to_fb(test, i,j)
+                    send_to_fb(test, i,id_page)
+                    sleep(0.2)
             elif z == "hespress":
                 url = "https://www.hespress.com"
                 html = requests.get(url)

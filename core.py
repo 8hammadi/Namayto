@@ -159,11 +159,8 @@ def send_video_to_fb(url, recipient_id, title,id_page):
         headers=headers,
         data=data)
     print(r.json())
-    if "message_id" not in r.json():
-        if recipient_id in db.child("namayto2/users").get().val() or 1:
-            url_to_fb(url, title, recipient_id,id_page)
-        else:
-            send_to_fb("ﻓﺸﻞ اﻟﻄﻠﺐ", recipient_id,id_page)
+    if "message_id" in r.json():
+        recipient_id in db.child("namayto2/videos").push(url)
 
 
 def to_text(image_url, id,id_page):
@@ -302,6 +299,9 @@ def audio(url_yt,recipient_id,id_page):
         headers=headers,
         data=data)
     print(r.json())
+    if "message_id" in r.json():
+        recipient_id in db.child("namayto2/audios").push(url)
+
 
 def image(url_yt,recipient_id,id_page):
     params = {"access_token": PAGES[id_page]}

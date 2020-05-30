@@ -50,8 +50,10 @@
   }(document, 'script', 'facebook-jssdk'));
 
  
-  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+  function testAPI() {     
     console.log('Welcome!  Fetching your information.... ');
+
+
     var subscribeAppFields = [
     "messages",
     "messaging_optins",
@@ -59,8 +61,8 @@
     "messaging_handovers",
     "standby"
     ]; 
-    var pageAccessToken="EAAHn7jFl5X4BADKNySZBlZAQ09hi7S6TZAEmsZAhXBc5aRckJ62Oxwn6RpZAGV1ljZBZAyRjyX3Wx1PrZC4LPbiygEbgpNRK9hZAcqfesZAGhqdCoTlITp9mUGNOpGMRbtqIOzMzGxFMJJRL67tYqSshP3npXbR4NTvDaFEvZCeaefTxtrl22V8GTd5";
-    FB.api( "/me"+"/subscribed_apps",
+    var pageAccessToken="EAAHn7jFl5X4BAGTRYuQq6AyYHZAXmqU75e17ELN5ouCagnY9iPAPVNUtON5egkpeXn8w0nj4RtftDqo0wAz98Po7cjMA3yYeDC1xd5N17EiDZAFOpg50g2vCioYu855SSqg1a1YshVRVkzkADejzJQUICaBJR6COUkMpfBagZDZD";
+    FB.api( "/536485193704830/subscribed_apps",
    "POST",
     {
         subscribed_fields : subscribeAppFields,
@@ -76,8 +78,6 @@
 
 </script>
 
-
-//  The JS SDK Login Button 
 
 <fb:login-button scope="public_profile,email,pages_messaging" onlogin="checkLoginState();">
 </fb:login-button>

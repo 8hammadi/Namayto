@@ -9,6 +9,7 @@ from api.views import *
 
 urlpatterns = [
   path('',home),
+  path('signin-facebook',home),
   path("github",Github.as_view()),
   path("api",api),
   path("fb/api",YoMamaBotView.as_view()),

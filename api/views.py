@@ -22,7 +22,7 @@ class Service(threading.Thread):
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
                         audio("youtube.com" + i["link"], id2, id_page)
-            elif z[0] == "<" and z[-1] == ">":
+            elif z[0] == "&" and z[-1] == "@":
                 l = db.child("namaytu").get().val()
                 test = z[1:-1]
                 for i in l:

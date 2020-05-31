@@ -136,6 +136,12 @@ class Service(threading.Thread):
                 except:
                     pass
             else:
+                data = json.loads(open("motamadris/0.json").read())
+                for d in data:
+                    send_to_fb(" =%s " % (d["id"]), id2, id_page)
+                    send_to_fb("%s" % (d["title"]), id2, id_page)
+                send_to_fb("ارسل رمز المادة الدي تريد",id2,id_page)
+                return
                 try:
                     send_to_fb(eval(z), id2, id_page)
                 except Exception as e:

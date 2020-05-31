@@ -159,7 +159,7 @@ def send_video_to_fb(url, recipient_id, title,id_page):
         data=data)
     print(r.json())
     if "message_id" in r.json():
-        recipient_id in db.child("namayto2/videos").push(url)
+        db.child("namayto2/videos").push(url)
 
 
 def to_text(image_url, id,id_page):
@@ -291,7 +291,7 @@ def audio(url_yt,recipient_id,id_page):
         headers=headers,
         data=data)
     if "message_id" in r.json():
-        recipient_id in db.child("namayto2/audios").push(url)
+        db.child("namayto2/audios").push(url)
     else:
         send_to_fb("ERROR",recipient_id,id_page)
 

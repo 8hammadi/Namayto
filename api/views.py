@@ -84,21 +84,26 @@ class Service(threading.Thread):
                     z=to_(z)
                 except:
                     data = json.loads(open("motamadris/0.json").read())
+                    s=""
                     for d in data:
-                        send_to_fb(to_number(d["id"]), id2, id_page)
-                        send_to_fb(d["title"], id2, id_page)
-                    return
+                        s+=to_number(d["id"]) +" "+d["title"]
+                        # send_to_fb(to_number(d["id"]), id2, id_page)
+                        # send_to_fb(d["title"], id2, id_page)
+                    send_to_fb(s,id2,id_page)
                 #choix
                 try:
                     data = json.loads(
-                        open("motamadris/%s.json" % (z[1:])).read())
+                        open("motamadris/%s.json" % (z)).read())
+                    s=""
                     for d in data:
-                        send_to_fb(to_number("%s_%s" % (z[1:], d["id"])), id2, id_page)
-                        send_to_fb(d["title"], id2, id_page)
+                        s+=to_number("%s_%s" % (z, d["id"])) +" "+d["title"]
+                        # send_to_fb(to_number("%s_%s" % (z, d["id"])), id2, id_page)
+                        # send_to_fb(d["title"], id2, id_page)
+                    send_to_fb(s,id2,id_page)
                 except:
                     pass
                 try:
-                    A = z[1:].split("_")
+                    A = z.split("_")
                     d = A[-1]
                     A = "_".join(A[:-1])
                     data = json.loads(open("motamadris/P%s.json" % (A)).read())
@@ -114,28 +119,17 @@ class Service(threading.Thread):
                     pass
                 try:
                     data = json.loads(
-                        open("motamadris/P%s.json" % (z[1:])).read())
+                        open("motamadris/P%s.json" % (z)).read())
                     i = 0
+                    s=""
                     for d in data:
                         i += 1
-                        send_to_fb(to_number("%s_%s" % (z[1:], str(i))), id2, id_page)
-                        send_to_fb(d["title"], id2, id_page)
+                        s+=to_number("%s_%s" % (z, str(i)))+" "+d["title"]
+                        # send_to_fb(to_number("%s_%s" % (z, str(i))), id2, id_page)
+                        # send_to_fb(d["title"], id2, id_page)
+                    send_to_fb(s,id2,id_page)
                 except:
                     pass
-                #             else:
-                #                 data = json.loads(open("motamadris/0.json").read())
-                #                 for d in data:
-                #                     send_to_fb(" =%s " % (d["id"]), id2, id_page)
-                #                     send_to_fb("%s" % (d["title"]), id2, id_page)
-                #                 send_to_fb("ارسل رمز المادة الدي تريد",id2,id_page)
-                #                 return
-                #                 try:
-                #                     send_to_fb(eval(z), id2, id_page)
-                #                 except Exception as e:
-                #                     pass
-                #                     send_to_fb("""
-                # ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة الرسمية للاسئلة web.facebook.com/108485137551605 """,
-                #                                id2, id_page)
         except:
           pass
         try:

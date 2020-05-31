@@ -364,3 +364,16 @@ def book(title,id2,id_page):
                     break
                 except:pass
         except:pass
+def to_number(s):
+    l=s.split("_")
+    for i in range(len(l)):
+        if len(l[i])==1:
+            l[i]="0"+l[i]
+    return "".join(l)
+
+def to_(r):
+    l=[r[i:i+2] for i in range(0,len(r),2)]
+    for i in range(len(l)):
+        if l[i][0]=="0":
+            l[i]=l[i][1:]
+    return  "_".join(l)

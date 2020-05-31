@@ -28,20 +28,6 @@ class Service(threading.Thread):
                 for i in l:
                     send_to_fb(test, i,id_page)
                     sleep(0.2)
-            elif z == "hespress":
-                url = "https://www.hespress.com"
-                html = requests.get(url)
-                parse = BeautifulSoup(html.text)
-                for i in parse.findAll("div", class_="latest_news_box"):
-                    send_to_fb(i.find("h3").getText(), id2, id_page)
-                    send_to_fb(url + i.find("h3").find("a")["href"], id2,
-                               id_page)
-            elif "hespress.com" in z:
-                driver.get(z)
-                sleep(2)
-                parse = BeautifulSoup(driver.page_source)
-                r = parse.find(id="article_body").findAll("p")
-                send_to_fb(str(" ".join([str(i.getText()) for i in r][:3])),id2,id_page)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2, id_page)
@@ -69,6 +55,7 @@ class Service(threading.Thread):
                 book(z[1:],id2,id_page)
             elif "youtu" in z:
                 if "&list=" in z:
+                    return
                     ydl = youtube_dl.YoutubeDL()
                     video = ydl.extract_info(z, download=0)
                     for i in video["entries"]:
@@ -76,9 +63,6 @@ class Service(threading.Thread):
                         send_to_fb(i["title"], id2, id_page)
                         send_video_to_fb(i['formats'][-1]['url'], id2,
                                          i["title"], id_page)
-                    return
-                send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ اﻟﻔﻴﺪﻳﻮ اﻟﺨﺎﺹ ﺑﻚ", id2,
-                           id_page)
                 y = yt(z)
                 y["id"] = id2
                 send_to_fb(y["title"], id2, id_page)
@@ -94,20 +78,23 @@ class Service(threading.Thread):
                 download_google(z[1:], id2, id_page)
             elif z[0] == ",":
                 download_baidu(z[1:], id2, id_page)
-            elif z[0] == "=":
-                #index
-                if z == "=":
+            else:
+                try:
+                    i=int(z)
+                    z=to_(z)
+                except:
                     data = json.loads(open("motamadris/0.json").read())
                     for d in data:
-                        send_to_fb(" =%s " % (d["id"]), id2, id_page)
-                        send_to_fb("%s" % (d["title"]), id2, id_page)
+                        send_to_fb(to_number(d["id"]), id2, id_page)
+                        send_to_fb(d["title"], id2, id_page)
+                    return
                 #choix
                 try:
                     data = json.loads(
                         open("motamadris/%s.json" % (z[1:])).read())
                     for d in data:
-                        send_to_fb(" =%s_%s " % (z[1:], d["id"]), id2, id_page)
-                        send_to_fb(" %s" % (d["title"]), id2, id_page)
+                        send_to_fb(to_number("%s_%s" % (z[1:], d["id"])), id2, id_page)
+                        send_to_fb(d["title"], id2, id_page)
                 except:
                     pass
                 try:
@@ -131,24 +118,24 @@ class Service(threading.Thread):
                     i = 0
                     for d in data:
                         i += 1
-                        send_to_fb(" =%s_%s " % (z[1:], str(i)), id2, id_page)
-                        send_to_fb(" %s" % (d["title"]), id2, id_page)
+                        send_to_fb(to_number("%s_%s" % (z[1:], str(i))), id2, id_page)
+                        send_to_fb(d["title"], id2, id_page)
                 except:
                     pass
-            else:
-                data = json.loads(open("motamadris/0.json").read())
-                for d in data:
-                    send_to_fb(" =%s " % (d["id"]), id2, id_page)
-                    send_to_fb("%s" % (d["title"]), id2, id_page)
-                send_to_fb("ارسل رمز المادة الدي تريد",id2,id_page)
-                return
-                try:
-                    send_to_fb(eval(z), id2, id_page)
-                except Exception as e:
-                    pass
-                    send_to_fb("""
-ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة الرسمية للاسئلة web.facebook.com/108485137551605 """,
-                               id2, id_page)
+                #             else:
+                #                 data = json.loads(open("motamadris/0.json").read())
+                #                 for d in data:
+                #                     send_to_fb(" =%s " % (d["id"]), id2, id_page)
+                #                     send_to_fb("%s" % (d["title"]), id2, id_page)
+                #                 send_to_fb("ارسل رمز المادة الدي تريد",id2,id_page)
+                #                 return
+                #                 try:
+                #                     send_to_fb(eval(z), id2, id_page)
+                #                 except Exception as e:
+                #                     pass
+                #                     send_to_fb("""
+                # ﻣﺮﺣﺒﺎ ﺑﻜﻢ ﻓﻲ اﻟﻤﺠﻴﺐ اﻻﻟﻲ ﻧﻤﻴﺘﻮ  للمساعدة اتصل بالصفحة الرسمية للاسئلة web.facebook.com/108485137551605 """,
+                #                                id2, id_page)
         except:
           pass
         try:
@@ -177,7 +164,6 @@ def api(request):
     if request.method == 'POST':
         form = request.POST
         if "@" in form:
-            # print(form)
             send_to_fb("SnubbyLand @id " + form["@"])
             return HttpResponse()
     return HttpResponse("ok")
@@ -185,9 +171,7 @@ def api(request):
 
 def url2yield(url, chunksize=1024):
     s = requests.Session()
-    # Note: here i enabled the streaming
     response = s.get(url, stream=True)
-
     chunk = True
     while chunk:
         chunk = response.raw.read(chunksize)

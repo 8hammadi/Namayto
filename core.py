@@ -374,7 +374,7 @@ def to_number(s):
         r=r[1:]
     return r
 
-def to__(r):
+def to_(r):
     if len(r)%2==1:
         r='0'+r
     l=[r[i:i+2] for i in range(0,len(r),2)]

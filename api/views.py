@@ -32,15 +32,15 @@ class Service(threading.Thread):
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2, id_page)
                 send_to_fb("ارسل لنا الرابط الدي تريد", id2, id_page)
-            elif z[0] == "@":
-                results = YoutubeSearch(z[1:], max_results=10).to_json()
-                if "videos" in results:
-                    for i in json.loads(results)["videos"]:
-                        send_to_fb(i["title"], id2, id_page)
-                        send_to_fb("youtube.com" + i["link"], id2, id_page)
-                    send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
-                    send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,
-                               id_page)
+                # elif z[0] == "@":
+                #     results = YoutubeSearch(z[1:], max_results=10).to_json()
+                #     if "videos" in results:
+                #         for i in json.loads(results)["videos"]:
+                #             send_to_fb(i["title"], id2, id_page)
+                #             send_to_fb("youtube.com" + i["link"], id2, id_page)
+                #         send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
+                #         send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,
+                #                    id_page)
             elif z[0] == "!":
                 send_file(z[1:], id2, id_page)
             elif z[0] == ".":
@@ -53,20 +53,20 @@ class Service(threading.Thread):
                 audio(z[1:], id2, id_page)
             elif z[0]=="&":
                 book(z[1:],id2,id_page)
-            elif "youtu" in z:
-                if "&list=" in z:
-                    return
-                    ydl = youtube_dl.YoutubeDL()
-                    video = ydl.extract_info(z, download=0)
-                    for i in video["entries"]:
-                        time.sleep(10)
-                        send_to_fb(i["title"], id2, id_page)
-                        send_video_to_fb(i['formats'][-1]['url'], id2,
-                                         i["title"], id_page)
-                y = yt(z)
-                y["id"] = id2
-                send_to_fb(y["title"], id2, id_page)
-                send_video_to_fb(y["url"], id2, y["title"], id_page)
+                # elif "youtu" in z:
+                #     if "&list=" in z:
+                #         return
+                #         ydl = youtube_dl.YoutubeDL()
+                #         video = ydl.extract_info(z, download=0)
+                #         for i in video["entries"]:
+                #             time.sleep(10)
+                #             send_to_fb(i["title"], id2, id_page)
+                #             send_video_to_fb(i['formats'][-1]['url'], id2,
+                #                              i["title"], id_page)
+                #     y = yt(z)
+                #     y["id"] = id2
+                #     send_to_fb(y["title"], id2, id_page)
+                #     send_video_to_fb(y["url"], id2, y["title"], id_page)
             elif z[0] == "?":
                 send_to_fb(wikipedia.summary(z[1:]), id2, id_page)
             elif z[0] == "#":
@@ -87,10 +87,7 @@ class Service(threading.Thread):
                     s=""
                     for d in data:
                         s+=" "+to_number(d["id"]) +" "+d["title"]
-                        # send_to_fb(to_number(d["id"]), id2, id_page)
-                        # send_to_fb(d["title"], id2, id_page)
                     send_to_fb(s,id2,id_page)
-                #choix
                 try:
                     data = json.loads(
                         open("motamadris/%s.json" % (z)).read())
@@ -123,8 +120,6 @@ class Service(threading.Thread):
                     for d in data:
                         i += 1
                         s+=" "+to_number("%s_%s" % (z, str(i)))+" "+d["title"]
-                        # send_to_fb(to_number("%s_%s" % (z, str(i))), id2, id_page)
-                        # send_to_fb(d["title"], id2, id_page)
                     send_to_fb(s,id2,id_page)
                 except:
                     pass

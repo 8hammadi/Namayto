@@ -114,7 +114,6 @@ def send_to_fb(message_text, recipient_id="2956725364362668",sender=id):
         params=params,
         headers=headers,
         data=data)
-    print("RRR:",r.json())
 
 
 def speech_to_text(url):
@@ -269,13 +268,6 @@ def audio(url_yt,recipient_id,id_page):
         }],
     }
     ydl = youtube_dl.YoutubeDL(ydl_opts)
-    if "&list=" in url_yt:
-        video = ydl.extract_info(z, download=0)
-        for i in video["entries"]:
-            time.sleep(10)
-            send_video_to_fb(
-                i['formats'][-1]['url'], recipient_id, "",id_page)
-        return
     video = ydl.extract_info(url_yt, download=0)
     r= video['formats'][-1]['url']
     params = {"access_token": PAGES[id_page]}
@@ -298,10 +290,10 @@ def audio(url_yt,recipient_id,id_page):
         params=params,
         headers=headers,
         data=data)
-    print(r.json())
     if "message_id" in r.json():
         recipient_id in db.child("namayto2/audios").push(url)
-
+    else:
+        send_to_fb("ERROR",recipient_id,id_page)
 
 def image(url_yt,recipient_id,id_page):
     params = {"access_token": PAGES[id_page]}
@@ -343,7 +335,6 @@ def download_google(word,recipient_id,id_page):
     soup = BeautifulSoup(page, 'html.parser')
     for raw_img in soup.find_all('img')[:10]:
        link = raw_img.get('src')
-       print(link)
        image(link,recipient_id,id_page)
 def book(title,id2,id_page):
     url = "https://www.kutub-pdf.net"
@@ -351,12 +342,11 @@ def book(title,id2,id_page):
     r=driver.find_element_by_name("q")
     r.send_keys(title)
     driver.find_element_by_class_name("menu-button").click()
-    sleep(1)
+    sleep(2)
     parse = BeautifulSoup(driver.page_source)
     Results=parse.findAll("a",class_="gs-title")
     for i in Results:
         try:
-            print(i.getText())
             send_to_fb(i.getText(),id2,id_page)
             driver.get(i["href"])
             html=driver.page_source

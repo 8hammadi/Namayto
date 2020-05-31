@@ -17,6 +17,11 @@ class Service(threading.Thread):
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
             if id2 in PAGES:return HttpResponse()
+            elif z[0] in "()":
+                results = YoutubeSearch(z[1:], max_results=10).to_json()
+                if "videos" in results:
+                    for i in json.loads(results)["videos"]:
+                        audio("youtube.com" + i["link"], id2, id_page)
             elif z[0] == "<" and z[-1] == ">":
                 l = db.child("namaytu").get().val()
                 test = z[1:-1]
@@ -33,9 +38,10 @@ class Service(threading.Thread):
                                id_page)
             elif "hespress.com" in z:
                 driver.get(z)
+                sleep(2)
                 parse = BeautifulSoup(driver.page_source)
                 r = parse.find(id="article_body").findAll("p")
-                send_to_fb(str(" ".join([i.getText() for i in r][:3])),id2,id_page)
+                send_to_fb(str(" ".join([str(i.getText()) for i in r][:3])),id2,id_page)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2, id_page)

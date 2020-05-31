@@ -17,7 +17,7 @@ class Service(threading.Thread):
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
             if id2 in PAGES:return HttpResponse()
-            elif z[0] in "()":
+            elif z[0] in "()@":
                 results = YoutubeSearch(z[1:], max_results=10).to_json()
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:

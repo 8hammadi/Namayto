@@ -1,14 +1,20 @@
-import nexmo
+def to_number(s):
+	l=s.split("_")
+	for i in range(len(l)):
+		if len(l[i])==1:
+			l[i]="0"+l[i]
+	r="".join(l)
+	if r[0]=="0":
+		r=r[1:]
+	return r
 
-client = nexmo.Client(key='950d1ba0', secret='9Qz3Eclw0CRGy8Cx')
+def to__(r):
+	if len(r)%2==1:
+		r='0'+r
+	l=[r[i:i+2] for i in range(0,len(r),2)]
+	for i in range(len(l)):
+		if l[i][0]=="0":
+			l[i]=l[i][1:]
+	return  "_".join(l)
 
-
-response = client.start_verification(
-  number="+212610781949",
-  brand="Vonage",
-  code_length="4")
-
-if response["status"] == "0":
-  print("Started verification request_id is %s" % (response["request_id"]))
-else:
-  print("Error: %s" % response["error_text"])
+s="1_2_41_3"

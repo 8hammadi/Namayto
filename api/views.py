@@ -86,7 +86,7 @@ class Service(threading.Thread):
                     data = json.loads(open("motamadris/0.json").read())
                     s=""
                     for d in data:
-                        s+=to_number(d["id"]) +" "+d["title"]
+                        s+=" "+to_number(d["id"]) +" "+d["title"]
                         # send_to_fb(to_number(d["id"]), id2, id_page)
                         # send_to_fb(d["title"], id2, id_page)
                     send_to_fb(s,id2,id_page)
@@ -96,9 +96,7 @@ class Service(threading.Thread):
                         open("motamadris/%s.json" % (z)).read())
                     s=""
                     for d in data:
-                        s+=to_number("%s_%s" % (z, d["id"])) +" "+d["title"]
-                        # send_to_fb(to_number("%s_%s" % (z, d["id"])), id2, id_page)
-                        # send_to_fb(d["title"], id2, id_page)
+                        s+=" "+to_number("%s_%s" % (z, d["id"])) +" "+d["title"]
                     send_to_fb(s,id2,id_page)
                 except:
                     pass
@@ -124,7 +122,7 @@ class Service(threading.Thread):
                     s=""
                     for d in data:
                         i += 1
-                        s+=to_number("%s_%s" % (z, str(i)))+" "+d["title"]
+                        s+=" "+to_number("%s_%s" % (z, str(i)))+" "+d["title"]
                         # send_to_fb(to_number("%s_%s" % (z, str(i))), id2, id_page)
                         # send_to_fb(d["title"], id2, id_page)
                     send_to_fb(s,id2,id_page)

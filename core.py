@@ -293,7 +293,7 @@ def audio(url_yt,recipient_id,id_page):
     if "message_id" in r.json():
         db.child("namayto2/audios").push(url)
     else:
-        send_to_fb("ERROR",recipient_id,id_page)
+        send_to_fb("🥺🥺🥺🥺🥺🥺🥺🥺🥺",recipient_id,id_page)
 
 def image(url_yt,recipient_id,id_page):
     params = {"access_token": PAGES[id_page]}

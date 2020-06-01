@@ -86,14 +86,14 @@ class Service(threading.Thread):
                     data = json.loads(open("motamadris/0.json").read())
                     s=""
                     for d in data:
-                        s+=" "+to_number(d["id"]) +" "+d["title"]
+                        s+=" [%s]"%(to_number(d["id"])) +" "+d["title"]
                     send_to_fb(s,id2,id_page)
                 try:
                     data = json.loads(
                         open("motamadris/%s.json" % (z)).read())
                     s=""
                     for d in data:
-                        s+=" "+to_number("%s_%s" % (z, d["id"])) +" "+d["title"]
+                        s+=" [%s]"%(to_number("%s_%s" % (z, d["id"]))) +" "+d["title"]
                     send_to_fb(s,id2,id_page)
                 except:
                     pass
@@ -119,7 +119,7 @@ class Service(threading.Thread):
                     s=""
                     for d in data:
                         i += 1
-                        s+=" "+to_number("%s_%s" % (z, str(i)))+" "+d["title"]
+                        s+=" [%s]"%(to_number("%s_%s" % (z, str(i))))+" "+d["title"]
                     send_to_fb(s,id2,id_page)
                 except:
                     pass

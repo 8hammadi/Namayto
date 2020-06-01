@@ -1,0 +1,46 @@
+[
+    {
+        "title": "Algèbre - Cours de première année",
+        "href": "http://exo7.emath.fr/cours/livre-algebre-1.pdf"
+    },
+    {
+        "title": "Analyse - Cours de première année    (en vente sur amazon)",
+        "href": "http://exo7.emath.fr/cours/livre-analyse-1.pdf"
+    },
+    {
+        "title": "Géométrie - Quelques chapitres de géométrie",
+        "href": "http://exo7.emath.fr/cours/livre-geometrie.pdf"
+    },
+    {
+        "title": "Algorithmes - Quelques chapitres sur les mathématiques en lien avec l" informatique.",
+            " href ": " http: //exo7.emath.fr/cours/livre-algorithmes.pdf"
+    },
+    {
+        "title": "360 questions - niveau L1 - partie 1",
+        "href": "http://exo7.emath.fr/cours/qcm-lille-1.pdf"
+    },
+    {
+        "title": "360 questions - niveau L1 - partie 2",
+        "href": "http://exo7.emath.fr/cours/qcm-lille-2.pdf"
+    },
+    {
+        "title": "46 questions - niveau L1 - probabilités",
+        "href": "http://exo7.emath.fr/cours/qcm-worms.pdf"
+    },
+    {
+        "title": "30 questions - niveau L1 - révisions",
+        "href": "http://exo7.emath.fr/cours/qcm-arnaud.pdf"
+    },
+    {
+        "title": "Livre  Scratch au collège ",
+        "href": "http://exo7.emath.fr/cours/livre-scratch.pdf"
+    },
+    {
+        "title": "Livre  Python au lycée - tome 1 ",
+        "href": "http://exo7.emath.fr/cours/livre-python1.pdf"
+    },
+    {
+        "title": "Livre  Python au lycée - tome 2 ",
+        "href": "http://exo7.emath.fr/cours/livre-python2.pdf"
+    }
+]

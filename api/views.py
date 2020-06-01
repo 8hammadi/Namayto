@@ -106,10 +106,10 @@ class Service(threading.Thread):
                     href = data[int(d) - 1]["href"]
                     if "pdf" in href:
                         send_file(href, id2, id_page)
-                    elif "youtu" in href:
-                        y = yt(href)
-                        send_to_fb(y["title"], id2, id_page)
-                        send_video_to_fb(y["url"], id2, y["title"], id_page)
+                        # elif "youtu" in href:
+                        #     y = yt(href)
+                        #     send_to_fb(y["title"], id2, id_page)
+                        #     send_video_to_fb(y["url"], id2, y["title"], id_page)
                     else:
                         send_to_fb(href,id2 ,id_page)
                 except:

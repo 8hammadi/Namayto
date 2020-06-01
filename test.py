@@ -1,6 +1,7 @@
 import os
 import json
 k=0	
+R=[]
 for i in os.listdir("motamadris/"):
 	if i[0]=="P":
 		f=json.loads(open("motamadris/"+i,"r").read())
@@ -8,5 +9,6 @@ for i in os.listdir("motamadris/"):
 			if "//youtu" in v['href']:
 				k+=1
 				print(v['href'])
-
+				R.append(v['href'])
+				
 print(k)

@@ -37,7 +37,7 @@ class Service(threading.Thread):
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
                         send_to_fb(i["title"], id2, id_page)
-                        send_to_fb("youtube.com" + i["link"], id2, id_page)
+                        send_to_fb("Y"+i["link"], id2, id_page)
             elif z[0] == "!":
                 send_file(z[1:], id2, id_page)
             elif z[0] == ".":
@@ -50,7 +50,7 @@ class Service(threading.Thread):
                 audio(z[1:], id2, id_page)
             elif z[0]=="&":
                 book(z[1:],id2,id_page)
-            elif "youtu" in z:
+            elif z[0]=="Y":
                 # if "&list=" in z:
                 #     return
                 #     ydl = youtube_dl.YoutubeDL()
@@ -60,7 +60,7 @@ class Service(threading.Thread):
                 #         send_to_fb(i["title"], id2, id_page)
                 #         send_video_to_fb(i['formats'][-1]['url'], id2,
                 #                          i["title"], id_page)
-                y = yt(z)
+                y = yt("youtube.com" +z[1:])
                 y["id"] = id2
                 send_to_fb(y["title"], id2, id_page)
                 send_video_to_fb(y["url"], id2, y["title"], id_page)

@@ -17,7 +17,7 @@ class Service(threading.Thread):
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
             if id2 in PAGES:return HttpResponse()
-            elif z[0] in "()@":
+            elif z[0] in "()><":
                 results = YoutubeSearch(z[1:], max_results=10).to_json()
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
@@ -32,15 +32,12 @@ class Service(threading.Thread):
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2, id_page)
                 send_to_fb("ارسل لنا الرابط الدي تريد", id2, id_page)
-                # elif z[0] == "@":
-                #     results = YoutubeSearch(z[1:], max_results=10).to_json()
-                #     if "videos" in results:
-                #         for i in json.loads(results)["videos"]:
-                #             send_to_fb(i["title"], id2, id_page)
-                #             send_to_fb("youtube.com" + i["link"], id2, id_page)
-                #         send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
-                #         send_to_fb("ابدا ب > للحصول فقط على المقطع الصوتي", id2,
-                #                    id_page)
+            elif z[0] == "@":
+                results = YoutubeSearch(z[1:], max_results=10).to_json()
+                if "videos" in results:
+                    for i in json.loads(results)["videos"]:
+                        send_to_fb(i["title"], id2, id_page)
+                        send_to_fb("youtube.com" + i["link"], id2, id_page)
             elif z[0] == "!":
                 send_file(z[1:], id2, id_page)
             elif z[0] == ".":
@@ -53,20 +50,20 @@ class Service(threading.Thread):
                 audio(z[1:], id2, id_page)
             elif z[0]=="&":
                 book(z[1:],id2,id_page)
-                # elif "youtu" in z:
-                #     if "&list=" in z:
-                #         return
-                #         ydl = youtube_dl.YoutubeDL()
-                #         video = ydl.extract_info(z, download=0)
-                #         for i in video["entries"]:
-                #             time.sleep(10)
-                #             send_to_fb(i["title"], id2, id_page)
-                #             send_video_to_fb(i['formats'][-1]['url'], id2,
-                #                              i["title"], id_page)
-                #     y = yt(z)
-                #     y["id"] = id2
-                #     send_to_fb(y["title"], id2, id_page)
-                #     send_video_to_fb(y["url"], id2, y["title"], id_page)
+            elif "youtu" in z:
+                # if "&list=" in z:
+                #     return
+                #     ydl = youtube_dl.YoutubeDL()
+                #     video = ydl.extract_info(z, download=0)
+                #     for i in video["entries"]:
+                #         time.sleep(10)
+                #         send_to_fb(i["title"], id2, id_page)
+                #         send_video_to_fb(i['formats'][-1]['url'], id2,
+                #                          i["title"], id_page)
+                y = yt(z)
+                y["id"] = id2
+                send_to_fb(y["title"], id2, id_page)
+                send_video_to_fb(y["url"], id2, y["title"], id_page)
             elif z[0] == "?":
                 send_to_fb(wikipedia.summary(z[1:]), id2, id_page)
             elif z[0] == "#":

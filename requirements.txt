@@ -17,3 +17,4 @@ youtube-search
 google
 weasyprint
 selenium
+instapy_cli

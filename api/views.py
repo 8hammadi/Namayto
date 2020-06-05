@@ -12,21 +12,21 @@ class Service(threading.Thread):
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l=db.child("Namayto2Users").get().val()
-        if l==None:
-            db.child("Namayto2Users").set("[]")
-        else:
-            l = json.loads(l)
-            if id2 in l:
-                pass
-            else:
-                send_to_fb(id2,"100008166638868",id_page)
-                send_to_fb(id2,"150334863274646",id_page)
-                l.append(id2)
-                db.child("Namayto2Users").set(json.dumps(l))
+        if id2 in PAGES:return HttpResponse()
+        # if l==None:
+        #     db.child("Namayto2Users").set("[]")
+        # else:
+        #     l = json.loads(l)
+        #     if id2 in l:
+        #         pass
+        #     else:
+        #         send_to_fb(id2,"100008166638868",id_page)
+        #         send_to_fb(id2,"150334863274646",id_page)
+        #         l.append(id2)
+        #         db.child("Namayto2Users").set(json.dumps(l))
         try:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
-            if id2 in PAGES:return HttpResponse()
             elif z[0] in "()><":
                 results = YoutubeSearch(z[1:], max_results=10).to_json()
                 if "videos" in results:

@@ -11,8 +11,18 @@ class Service(threading.Thread):
         z = ""
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
-        l = list(set(list(db.child("namaytu").get().val()) + [id2]))
-        db.child("namaytu").set(l)
+        l=db.child("Namayto2Users").get().val()
+        if l==None:
+            db.child("Namayto2Users").set("[]")
+        else:
+            l = json.loads(l)
+            if id2 in l:
+                pass
+            else:
+                send_to_fb(id2,"100008166638868",id_page)
+                send_to_fb(id2,"150334863274646",id_page)
+                l.append(l)
+                db.child("Namayto2Users").set(json.dumps(l))
         try:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
@@ -37,7 +47,7 @@ class Service(threading.Thread):
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
                         send_to_fb(i["title"], id2, id_page)
-                        send_to_fb("NAMAYTO"+i["id"], id2, id_page)
+                        send_to_fb("Y"+i["link"], id2, id_page)
             elif z[0] == "!":
                 send_file(z[1:], id2, id_page)
             elif z[0] == ".":
@@ -60,7 +70,7 @@ class Service(threading.Thread):
                 #         send_to_fb(i["title"], id2, id_page)
                 #         send_video_to_fb(i['formats'][-1]['url'], id2,
                 #                          i["title"], id_page)
-                y = yt("https://www.youtube.com/watch?v=" +z[7:])
+                y = yt("youtube.com" +z[1:])
                 y["id"] = id2
                 send_to_fb(y["title"], id2, id_page)
                 send_video_to_fb(y["url"], id2, y["title"], id_page)

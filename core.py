@@ -83,7 +83,9 @@ def url_to_fb(url, title, recipient_id,id_page):
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(fburl, data=payload).json()
-    # if "id" in flag:
+    if "id" in flag:
+        send_to_fb(flag["id"],recipient_id,id_page)
+        # url_to_fb(url, title, recipient_id,id_page)
 
 
 def yt(url):
@@ -161,11 +163,11 @@ def send_video_to_fb(url, recipient_id, title,id_page):
         "id_page":id_page,
         "access_token":PAGES[id_page]
         }
-        i=str(random.randint(1,5))
-        send_to_fb("server"+i,recipient_id,id_page)
-        API_ENDPOINT = "http://api2020%s.herokuapp.com/api"%(i)
-        r = requests.post(url = API_ENDPOINT, data = data) 
-        print(r.json()) 
+        # i=str(random.randint(1,5))
+        # send_to_fb("server"+i,recipient_id,id_page)
+        # API_ENDPOINT = "http://api2020%s.herokuapp.com/api"%(i)
+        # r = requests.post(url = API_ENDPOINT, data = data) 
+        # print(r.json()) 
 
 
 

@@ -84,7 +84,7 @@ def url_to_fb(url, title, recipient_id,id_page):
     }
     flag = requests.post(fburl, data=payload).json()
     if "id" in flag:
-        send_to_fb(flag["id"],recipient_id,id_page)
+        send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
         # url_to_fb(url, title, recipient_id,id_page)
 
 

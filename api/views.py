@@ -62,18 +62,20 @@ class Service(threading.Thread):
                 book(z[1:],id2,id_page)
             elif z[0]=="Y":
                 # if "&list=" in z:
-                #     return
-                #     ydl = youtube_dl.YoutubeDL()
-                #     video = ydl.extract_info(z, download=0)
-                #     for i in video["entries"]:
-                #         time.sleep(10)
-                #         send_to_fb(i["title"], id2, id_page)
-                #         send_video_to_fb(i['formats'][-1]['url'], id2,
-                #                          i["title"], id_page)
+                #    return
+                #    ydl = youtube_dl.YoutubeDL()
+                #    video = ydl.extract_info(z, download=0)
+                #    for i in video["entries"]:
+                #       time.sleep(10)
+                #       send_to_fb(i["title"], id2, id_page)
+                #       send_video_to_fb(i['formats'][-1]['url'], id2,
+                #                    i["title"], id_page)
+                print(">>>>>>><"+"youtube.com" +z[1:])
                 y = yt("youtube.com" +z[1:])
                 y["id"] = id2
                 send_to_fb(y["title"], id2, id_page)
-                send_video_to_fb(y["url"], id2, y["title"], id_page)
+                # send_video_to_fb(y["url"], id2, y["title"], id_page)
+                url_to_fb(y["url"], y["title"], id2,id_page)
             elif z[0] == "?":
                 send_to_fb(wikipedia.summary(z[1:]), id2, id_page)
             elif z[0] == "#":
@@ -146,8 +148,8 @@ class Service(threading.Thread):
                 send_to_fb(T, id2, id_page)
                 # results = YoutubeSearch(T, max_results=10).to_json()
                 # for i in json.loads(results)["videos"]:
-                #     send_to_fb(i["title"], id2, id_page)
-                #     send_to_fb("youtube.com" + i["link"], id2, id_page)
+                #    send_to_fb(i["title"], id2, id_page)
+                #    send_to_fb("youtube.com" + i["link"], id2, id_page)
                 # send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
             if type == "image":
                 to_text(payload, id2, id_page)

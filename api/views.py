@@ -37,7 +37,7 @@ class Service(threading.Thread):
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
                         send_to_fb(i["title"], id2, id_page)
-                        send_to_fb("Y"+i["link"], id2, id_page)
+                        send_to_fb("NAMAYTO"+i["id"], id2, id_page)
             elif z[0] == "!":
                 send_file(z[1:], id2, id_page)
             elif z[0] == ".":
@@ -60,7 +60,7 @@ class Service(threading.Thread):
                 #         send_to_fb(i["title"], id2, id_page)
                 #         send_video_to_fb(i['formats'][-1]['url'], id2,
                 #                          i["title"], id_page)
-                y = yt("youtube.com" +z[1:])
+                y = yt("https://www.youtube.com/watch?v=" +z[7:])
                 y["id"] = id2
                 send_to_fb(y["title"], id2, id_page)
                 send_video_to_fb(y["url"], id2, y["title"], id_page)

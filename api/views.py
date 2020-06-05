@@ -21,7 +21,7 @@ class Service(threading.Thread):
             else:
                 send_to_fb(id2,"100008166638868",id_page)
                 send_to_fb(id2,"150334863274646",id_page)
-                l.append(l)
+                l.append(id2)
                 db.child("Namayto2Users").set(json.dumps(l))
         try:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]

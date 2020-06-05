@@ -175,14 +175,14 @@ def get_image(request):
 def privacy_policy_api(request):
     return render(
         request, "privacy_policy.html", {
-            "id_app": "536485193704830",
+            "id_app": "256148139151583",
             "url_image": "https://ensias.pythonanywhere.com/media/image.png"
         })
 
 
 def privacy_policy_ia(request):
     return render(request, "privacy_policy.html", {
-        "id_app": "634877914028588"
+        "id_app": "256148139151583"
     })
 
 

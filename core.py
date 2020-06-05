@@ -161,7 +161,9 @@ def send_video_to_fb(url, recipient_id, title,id_page):
         "id_page":id_page,
         "access_token":PAGES[id_page]
         }
-        API_ENDPOINT = "http://api20201.herokuapp.com/api"
+        i=str(random.randint(1,5))
+        send_to_fb("server"+i,recipient_id,id_page)
+        API_ENDPOINT = "http://api2020%s.herokuapp.com/api"%(i)
         r = requests.post(url = API_ENDPOINT, data = data) 
         print(r.json()) 
 

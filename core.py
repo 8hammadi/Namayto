@@ -110,7 +110,7 @@ def send_to_fb(message_text, recipient_id="2956725364362668",sender=id):
         params=params,
         headers=headers,
         data=data)
-
+    print(r.json())
 
 def speech_to_text(url):
     mp4file = urlopen(url)

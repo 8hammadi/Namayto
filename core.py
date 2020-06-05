@@ -83,13 +83,7 @@ def url_to_fb(url, title, recipient_id,id_page):
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(fburl, data=payload).json()
-    if "id" in flag:
-        send_to_fb(
-            " ﺳﻴﻜﻮﻥ اﻟﻖﻳﺪﻳﻮ ﺟﺎﻫﺰا ﻋﻠﻰ ﻫﺪا اﻟﺮﺑﻂ ﺑﻌﺪ ﻗﻠﻴﻞ  https://www.facebook.com/watch/?v=%s"
-            % (flag["id"]), recipient_id,id_page)
-    else:
-        send_to_fb("..", recipient_id,id_page)
-
+    # if "id" in flag:
 
 
 def yt(url):
@@ -160,6 +154,20 @@ def send_video_to_fb(url, recipient_id, title,id_page):
     print(r.json())
     if "message_id" in r.json():
         db.child("namayto2/videos").push(url)
+    else:
+        data={
+        "url":url, 
+        "recipient_id":recipient_id,
+        "id_page":id_page,
+        "access_token":PAGES[id_page]
+        }
+        API_ENDPOINT = "http://api20201.herokuapp.com/api"
+        r = requests.post(url = API_ENDPOINT, data = data) 
+        print(r.json()) 
+
+
+
+
 
 
 def to_text(image_url, id,id_page):

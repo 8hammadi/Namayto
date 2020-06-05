@@ -1,22 +1,26 @@
 import requests
-from bs4 import BeautifulSoup
-import json
-data=json.loads(open("17.json").read())
-k=1
-for d in data:
-	R=json.loads(open("P17_%d.json"%(k)).read())
-	for i in range(len(R)):
-		try:
-			URL=R[i]["href"]
-			page = requests.get(URL)
-			soup = BeautifulSoup(page.content, 'html.parser')
-			r=soup.findAll(class_="separator")
-			a=r[-1].find("a")
-			print(a["href"])
-			R[i]["href"]=a["href"]
-		except:pass
-	a=open("P17_%d.json"%(k),"w")
-	import json
-	a.write(json.dumps(R))
-	a.close()
-	k+=1
+import youtube_dl
+access="EAAJBawiKmiwBAC9mCPIjJSCIR5n04MDLcjUECUYDs9aCQJvjuLlsGGeceiZCjOw0SqoQBkvgvcy98wrZCELnHOtOZCUvgx2ModDKZCX2jUUIIIH3SANTOUwrpyvuE9UHcZAOJdCLAQZBE4L87paH2y9EuhI1qjpKq6ZBzCqprwQtZBtNQk3MWlJz"
+id = "100960198306277"
+fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
+    id, access)
+
+def yt(url):
+    ydl = youtube_dl.YoutubeDL()
+    video = ydl.extract_info(url, download=0)
+    return {'title': video['title'], 'url': video['formats'][-1]['url']}
+
+
+y = yt("https://www.youtube.com/watch?v=q8nQTNvCrjE" )
+
+videoName = y['title']
+videoDescription = y['title']
+videoUrl = y['url']
+payload = {
+    'name': '%s' % (videoName),
+    'description': '%s' % (videoDescription),
+    'file_url': '%s' % (videoUrl)
+}
+flag = requests.post(fburl, data=payload).json()
+if "id" in flag:
+	print(flag)

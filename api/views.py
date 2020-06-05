@@ -73,7 +73,6 @@ class Service(threading.Thread):
                 ok(z, id2, id_page)
             elif z[0] == "/":
                 download_google(z[1:], id2, id_page)
-            elif z[0] == ",":
                 download_baidu(z[1:], id2, id_page)
             else:
                 try:
@@ -103,10 +102,11 @@ class Service(threading.Thread):
                     href = data[int(d) - 1]["href"]
                     if "pdf" in href:
                         send_file(href, id2, id_page)
-                        # elif "youtu" in href:
-                        #     y = yt(href)
-                        #     send_to_fb(y["title"], id2, id_page)
-                        #     send_video_to_fb(y["url"], id2, y["title"], id_page)
+                    elif "youtu" in href:
+                        y = yt(href)
+                        send_to_fb(y["title"], id2, id_page)
+                        send_to_fb(href,id2 ,id_page)
+                        send_video_to_fb(y["url"], id2, y["title"], id_page)
                     else:
                         send_to_fb(href,id2 ,id_page)
                 except:
@@ -134,11 +134,11 @@ class Service(threading.Thread):
             if type == "audio":
                 T = speech_to_text(payload)
                 send_to_fb(T, id2, id_page)
-                results = YoutubeSearch(T, max_results=10).to_json()
-                for i in json.loads(results)["videos"]:
-                    send_to_fb(i["title"], id2, id_page)
-                    send_to_fb("youtube.com" + i["link"], id2, id_page)
-                send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
+                # results = YoutubeSearch(T, max_results=10).to_json()
+                # for i in json.loads(results)["videos"]:
+                #     send_to_fb(i["title"], id2, id_page)
+                #     send_to_fb("youtube.com" + i["link"], id2, id_page)
+                # send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
             if type == "image":
                 to_text(payload, id2, id_page)
         except Exception as e:

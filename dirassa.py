@@ -25,13 +25,13 @@ def yt(url):
     video = ydl.extract_info(url, download=0)
     return {'title': video['title'], 'url': video['formats'][-1]['url']}
 
-data=json.loads(open("DATA.json","r").read())[435:]
+data=json.loads(open("DATA.json","r").read())[731:]
 k=0
 for d in data:
     k+=1
     try:
         R=json.loads(open("RData.json","r").read())
-        print(k);time.sleep(5)
+        print(k);time.sleep(10)
         if d not in R:
             y=yt(d)
             print(y["title"])
@@ -39,7 +39,7 @@ for d in data:
             print(r)
             if r!=0:
                 R[d]=r
-            else:break
+            else:continue
         open("RData.json","w").write(json.dumps(R))
     except:print("error")
 

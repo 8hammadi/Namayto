@@ -60,7 +60,7 @@ class Service(threading.Thread):
                 audio(z[1:], id2, id_page)
             elif z[0]=="&":
                 book(z[1:],id2,id_page)
-            elif z[0]=="Y":
+            elif z[:7]=="Namayto":
                 # if "&list=" in z:
                 #    return
                 #    ydl = youtube_dl.YoutubeDL()
@@ -87,14 +87,12 @@ class Service(threading.Thread):
                 download_google(z[1:], id2, id_page)
                 download_baidu(z[1:], id2, id_page)
             else:
-                a=0
                 try:
                     data = json.loads(
                         open("motamadris/P%s.json" % (z)).read())
                     i = 0
                     s=""
                     for d in data:
-                        a=1
                         i += 1
                         s+=" [%s]"%(to_number("%s_%s" % (z, str(i))))+" "+d["title"]
                     send_to_fb(s,id2,id_page)
@@ -110,7 +108,7 @@ class Service(threading.Thread):
                         s+=" [%s]"%(to_number(d["id"])) +" "+d["title"]
                     send_to_fb(s,id2,id_page)
                 try:
-                    if a:return
+                    
                     data = json.loads(
                         open("motamadris/%s.json" % (z)).read())
                     s=""

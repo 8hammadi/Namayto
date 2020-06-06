@@ -40,7 +40,7 @@ class Service(threading.Thread):
                     sleep(0.2)
             elif z=="myid":
                 send_to_fb(id2,id2,id_page)
-            elif z[0]=="&":
+            elif z[0]=="$":
                 z=z[1:]
                 if ">>" in z:
                     a,b=z.split(">>")

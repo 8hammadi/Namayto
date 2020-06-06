@@ -129,10 +129,14 @@ class Service(threading.Thread):
                     if "pdf" in href:
                         send_file(href, id2, id_page)
                     elif "youtu" in href:
-                        y = yt(href)
-                        send_to_fb(y["title"], id2, id_page)
-                        send_to_fb(href,id2 ,id_page)
-                        send_video_to_fb(y["url"], id2, y["title"], id_page)
+                        R=json.loads(open("RData.json","r").read())
+                        if href in R:
+                            send_to_fb(y["title"]+"  "+R[href], id2, id_page)
+                        else:
+                            y = yt(href)
+                            send_to_fb(y["title"], id2, id_page)
+                            send_to_fb(href,id2 ,id_page)
+                            # send_video_to_fb(y["url"], id2, y["title"], id_page)
                     else:
                         send_to_fb(href,id2 ,id_page)
                 except:

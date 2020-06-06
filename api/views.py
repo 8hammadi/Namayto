@@ -47,7 +47,7 @@ class Service(threading.Thread):
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
                         send_to_fb(i["title"], id2, id_page)
-                        send_to_fb("Y"+i["link"], id2, id_page)
+                        send_to_fb("Namayto"+i["id"], id2, id_page)
             elif z[0] == "!":
                 send_file(z[1:], id2, id_page)
             elif z[0] == ".":
@@ -70,8 +70,8 @@ class Service(threading.Thread):
                 #       send_to_fb(i["title"], id2, id_page)
                 #       send_video_to_fb(i['formats'][-1]['url'], id2,
                 #                    i["title"], id_page)
-                print(">>>>>>><"+"youtube.com" +z[1:])
-                y = yt("youtube.com" +z[1:])
+                print(">>>>>>><"+z)
+                y = yt("https://www.youtube.com/watch?v=" +z[7:])
                 y["id"] = id2
                 send_to_fb(y["title"], id2, id_page)
                 # send_video_to_fb(y["url"], id2, y["title"], id_page)
@@ -87,6 +87,19 @@ class Service(threading.Thread):
                 download_google(z[1:], id2, id_page)
                 download_baidu(z[1:], id2, id_page)
             else:
+                a=0
+                try:
+                    data = json.loads(
+                        open("motamadris/P%s.json" % (z)).read())
+                    i = 0
+                    s=""
+                    for d in data:
+                        a=1
+                        i += 1
+                        s+=" [%s]"%(to_number("%s_%s" % (z, str(i))))+" "+d["title"]
+                    send_to_fb(s,id2,id_page)
+                except:
+                    pass
                 try:
                     i=int(z)
                     z=to_(z)
@@ -97,6 +110,7 @@ class Service(threading.Thread):
                         s+=" [%s]"%(to_number(d["id"])) +" "+d["title"]
                     send_to_fb(s,id2,id_page)
                 try:
+                    if a:return
                     data = json.loads(
                         open("motamadris/%s.json" % (z)).read())
                     s=""
@@ -121,17 +135,6 @@ class Service(threading.Thread):
                         send_video_to_fb(y["url"], id2, y["title"], id_page)
                     else:
                         send_to_fb(href,id2 ,id_page)
-                except:
-                    pass
-                try:
-                    data = json.loads(
-                        open("motamadris/P%s.json" % (z)).read())
-                    i = 0
-                    s=""
-                    for d in data:
-                        i += 1
-                        s+=" [%s]"%(to_number("%s_%s" % (z, str(i))))+" "+d["title"]
-                    send_to_fb(s,id2,id_page)
                 except:
                     pass
         except:

@@ -132,7 +132,7 @@ class Service(threading.Thread):
                         R=json.loads(open("RData.json","r").read())
                         y = yt(href)
                         if href in R:
-                            send_to_fb(y["title"]+"  "+R[href], id2, id_page)
+                            send_to_fb(y["title"]+"  https://www.facebook.com/watch/?v="+R[href], id2, id_page)
                         else:
                             send_to_fb(y["title"]+"   "+href, id2, id_page)
                             # send_to_fb(,id2 ,id_page)

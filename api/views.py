@@ -88,18 +88,6 @@ class Service(threading.Thread):
                 download_baidu(z[1:], id2, id_page)
             else:
                 try:
-                    data = json.loads(
-                        open("motamadris/P%s.json" % (z)).read())
-                    i = 0
-                    s=""
-                    for d in data:
-                        a=1
-                        i += 1
-                        s+=" [%s]"%(to_number("%s_%s" % (z, str(i))))+" "+d["title"]
-                    send_to_fb(s,id2,id_page)
-                except:
-                    pass
-                try:
                     i=int(z)
                     z=to_(z)
                 except:
@@ -108,6 +96,19 @@ class Service(threading.Thread):
                     for d in data:
                         s+=" [%s]"%(to_number(d["id"])) +" "+d["title"]
                     send_to_fb(s,id2,id_page)
+                    return
+                try:
+                    data = json.loads(
+                        open("motamadris/P%s.json" % (z)).read())
+                    i = 0
+                    s=""
+                    for d in data:
+                        i += 1
+                        s+=" [%s]"%(to_number("%s_%s" % (z, str(i))))+" "+d["title"]
+                    send_to_fb(s,id2,id_page)
+                    if i!=0:return
+                except:
+                    pass
                 try:
                     
                     data = json.loads(

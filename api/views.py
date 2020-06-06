@@ -38,6 +38,16 @@ class Service(threading.Thread):
                 for i in l:
                     send_to_fb(test, i,id_page)
                     sleep(0.2)
+            elif z=="myid":
+                send_to_fb(id2,id2,id_page)
+            elif z[0]=="&":
+                z=z[1:]
+                if ">>" in z:
+                    a,b=z.split(">>")
+                    db.child("%s/%s"%(id2,a)).set(b)
+                    send_to_fb("ok",id2,id_page)
+                else:
+                    send_to_fb(db.child("%s/%s"%(id2,z)).get().val(),id2,id_page)
             elif z[0] == ":":
                 for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
                     send_to_fb(j, id2, id_page)

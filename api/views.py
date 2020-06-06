@@ -87,7 +87,6 @@ class Service(threading.Thread):
                 download_google(z[1:], id2, id_page)
                 download_baidu(z[1:], id2, id_page)
             else:
-                a=0
                 try:
                     data = json.loads(
                         open("motamadris/P%s.json" % (z)).read())
@@ -98,7 +97,6 @@ class Service(threading.Thread):
                         i += 1
                         s+=" [%s]"%(to_number("%s_%s" % (z, str(i))))+" "+d["title"]
                     send_to_fb(s,id2,id_page)
-                    if a:return
                 except:
                     pass
                 try:

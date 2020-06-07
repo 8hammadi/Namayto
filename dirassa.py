@@ -2,8 +2,8 @@ import requests
 import json
 import youtube_dl
 import time
-access="EAACs35XhTwwBAJxPFeb2JcMDpglSR6ZAACB2j8QdEiADNJI2hZA8NMsQeO47yNQ7R3lHtLUYhkIhWQYdHpGttYLvZApKZARZCJlIh2ROFZBGClECnWXc2eVGZC1CZAFy0w1sVee9xFeXjS1XytuPQrZBGmpWemX9b8d8IKUm1ZBbpg5wZDZD"
-id="113173553756637"
+access="EAANUZAFSg360BAIlxgG5fS08orsUsMnjDb1Q4TGupvZAvhxEMvHkbYEZCitOfjtvgwjbgg2B9wskrqpw7GIfPpZCFSmZBVSCWHHcjNcKYvsC3mOKux6y29ZCJiOFs5ZAHlgampq0ZAwVprHF2BOKg8dgAWz3vGyKNySfuhOHmkLQF9lB964FuIdSZCZCkoFUdEWsgZD"
+id="102979258096775"
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, access)
 def url_to_fb(url, title):
@@ -25,22 +25,23 @@ def yt(url):
     video = ydl.extract_info(url, download=0)
     return {'title': video['title'], 'url': video['formats'][-1]['url']}
 
-data=json.loads(open("DATA.json","r").read())[731:]
+data=json.loads(open("DATA.json","r").read())[1105:]
 k=0
+R=json.loads(open("RData.json","r").read())
 for d in data:
     k+=1
     try:
-        R=json.loads(open("RData.json","r").read())
-        print(k);time.sleep(10)
+        print(k);
         if d not in R:
             y=yt(d)
             print(y["title"])
             r=url_to_fb(y["url"], y["title"])
+            time.sleep(10)
             print(r)
             if r!=0:
                 R[d]=r
+                open("RData.json","w").write(json.dumps(R))
             else:continue
-        open("RData.json","w").write(json.dumps(R))
     except:print("error")
 
 

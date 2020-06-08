@@ -401,7 +401,7 @@ def to_(r):
 
 
 import facebook
-def name(id,page_id):
+def name(id,id_page):
     graph = facebook.GraphAPI(access_token=PAGES[id_page], version='2.9')
     args = {'fields' : 'id,name,location,gender,timezone,languages,locale'}
     profile = graph.get_object(id)

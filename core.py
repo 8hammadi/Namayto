@@ -404,5 +404,5 @@ import facebook
 def name(id,page_id):
     graph = facebook.GraphAPI(access_token=PAGES[id_page], version='2.9')
     args = {'fields' : 'id,name,location,gender,timezone,languages,locale'}
-    profile = graph.get_object(id, **args)
+    profile = graph.get_object(id)
     return profile["name"]

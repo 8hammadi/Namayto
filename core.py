@@ -65,7 +65,7 @@ fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, access)
 
 PAGES=json.loads(os.environ['PAGES'])
-
+fburls=json.loads(os.environ['fburls'])
 
 VERIFY_TOKEN = "123456789"
 firebase = pyrebase.initialize_app(config)
@@ -82,7 +82,7 @@ def url_to_fb(url, title, recipient_id,id_page):
         'description': '%s' % (videoDescription),
         'file_url': '%s' % (videoUrl)
     }
-    flag = requests.post(fburl, data=payload).json()
+    flag = requests.post(fburls[id_page], data=payload).json()
     print("++++++++++++++++++++",flag)
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)

@@ -236,6 +236,26 @@ class YoMamaBotView(generic.View):
         return HttpResponse()
 
 
+class YoMamaBotViewTest(generic.View):
+    def get(self, request, *args, **kwargs):
+        if "hub.verify_token" not in self.request.GET:
+            return HttpResponse("ok")
+        if self.request.GET['hub.verify_token'] == VERIFY_TOKEN:
+            return HttpResponse(self.request.GET['hub.challenge'])
+        else:
+            return HttpResponse('Error, invalid token')
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return generic.View.dispatch(self, request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        incoming_message = json.loads(self.request.body.decode('utf-8'))
+        print(incoming_message)
+        # thread1 = Service(incoming_message)
+        # thread1.start()
+        return HttpResponse()
+
 class Github(generic.View):
     def get(self, request, *args, **kwargs):
         if "hub.verify_token" not in self.request.GET:

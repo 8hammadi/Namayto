@@ -79,7 +79,7 @@ def url_to_fb(url, title, recipient_id,id_page):
     videoUrl = url
     payload = {
         'name': '%s' % (videoName),
-        'description': videoDescription +" https://www.instagram.com/namayto.official/",
+        'description': videoDescription +" instagram.com/namayto.official",
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(fburls[id_page], data=payload).json()

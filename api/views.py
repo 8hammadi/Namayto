@@ -11,9 +11,15 @@ class Service(threading.Thread):
         z = ""
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
-        l=db.child("Namayto2Users").get().val()
         if id2 in PAGES:return HttpResponse()
-        send_to_fb("https://www.instagram.com/p/CBN0lSznTug/?utm_source=ig_web_copy_link",id2,id_page)
+        l=db.child("Namayto2Users").get().val()
+        if l==None:
+            db.child("Namayto2Users").set("{}")
+        else:
+            pass
+        if random.randint(1,20)==1:
+            send_to_fb("https://www.instagram.com/namayto.official/",id2,id_page)
+            return
         try:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)

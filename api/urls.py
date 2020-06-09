@@ -12,7 +12,7 @@ urlpatterns = [
   path('signin-facebook',home),
   path("github",Github.as_view()),
   path("api",api),
-  path("fb/testapi",YoMamaBotViewTest.as_view()),
+  # path("fb/testapi",YoMamaBotViewTest.as_view()),
   path("namayto",YoMamaBotView.as_view()),
   path('facebook/api/privacy-policy',privacy_policy_api),
   path('facebook/ia/privacy-policy',privacy_policy_ia)

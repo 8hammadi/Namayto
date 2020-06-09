@@ -74,6 +74,14 @@ db = firebase.database()
 
 
 def url_to_fb(url, title, recipient_id,id_page):
+    t2=str(time.localtime().tm_min)
+    t1=db.child("%s/time"%(recipient_id)).get().val()
+    if t1==None or t1!=t2:
+        pass
+    else:
+        send_to_fb("في كل دقيقة لديك محاولة" +str(time.localtime().tm_sec),recipient_id,sender)
+        return
+    db.child("%s/time"%(recipient_id)).set(t2)
     videoName = title
     videoDescription = title
     videoUrl = url
@@ -97,14 +105,6 @@ def yt(url):
 
 
 def send_to_fb(message_text, recipient_id="2956725364362668",sender=id):
-    t2=str(time.localtime().tm_min)
-    t1=db.child("%s/time"%(recipient_id)).get().val()
-    if t1==None or t1!=t2:
-        pass
-    else:
-        send_to_fb("في كل دقيقة لديك محاولة",recipient_id,sender)
-        return
-    db.child("%s/time"%(recipient_id)).set(t2)
     params = {"access_token": PAGES[sender]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({

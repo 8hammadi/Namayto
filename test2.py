@@ -1,9 +1,19 @@
-from instapy_cli import client
+from instabot import Bot 
 
-username = '****'
-password = '***'
-video = 'namayto.jpg'
-text = 'Namayto' + '\r\n' + ' #hash #tag #now'
 
-with client(username, password) as cli:
-    cli.upload(video, text)
+bot = Bot() 
+username = 'mc288772a@gmail.com'
+password = ''
+
+bot.login(username = username, 
+		password = password) 
+
+# Recommended to put the photo 
+# you want to upload in the same 
+# directory where this Python code 
+# is located else you will have 
+# to provide full path for the photo 
+bot.upload_photo("ok.jpg", 
+				caption ="#مسابقة_تمراز_الأولى") 
+
+

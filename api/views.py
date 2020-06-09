@@ -13,17 +13,7 @@ class Service(threading.Thread):
         id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
         l=db.child("Namayto2Users").get().val()
         if id2 in PAGES:return HttpResponse()
-        # if l==None:
-        #     db.child("Namayto2Users").set("[]")
-        # else:
-        #     l = json.loads(l)
-        #     if id2 in l:
-        #         pass
-        #     else:
-        #         send_to_fb(id2,"100008166638868",id_page)
-        #         send_to_fb(id2,"150334863274646",id_page)
-        #         l.append(id2)
-        #         db.child("Namayto2Users").set(json.dumps(l))
+        send_to_fb("https://www.instagram.com/p/CBN0lSznTug/?utm_source=ig_web_copy_link",id2,id_page)
         try:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
@@ -39,7 +29,6 @@ class Service(threading.Thread):
                     send_to_fb(test, i,id_page)
                     sleep(0.2)
             elif z=="whoami":
-                r = requests.post("https://graph.facebook.com/v7.0/"+id2)
                 send_to_fb(name(id2,id_page),id2,id_page)
                 send_to_fb("F"+id2,id2,id_page)
             elif z[0]=="F":

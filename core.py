@@ -81,6 +81,7 @@ def url_to_fb(url, title, recipient_id,id_page):
     else:
         send_to_fb("في كل دقيقة لديك محاولة" +str(time.localtime().tm_sec),recipient_id,sender)
         return
+    send_to_fb(title, recipient_id, id_page)
     db.child("%s/time"%(recipient_id)).set(t2)
     videoName = title
     videoDescription = title
@@ -94,7 +95,8 @@ def url_to_fb(url, title, recipient_id,id_page):
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
     else:
-        send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
+        send_video_to_fb(url, recipient_id, title, id_page)
+        # send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
 
 
 

@@ -79,11 +79,10 @@ def url_to_fb(url, title, recipient_id,id_page):
     videoUrl = url
     payload = {
         'name': '%s' % (videoName),
-        'description': '%s' % (videoDescription),
+        'description': videoDescription +" https://www.instagram.com/p/CBN0lSznTug/?utm_source=ig_web_copy_link",
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(fburls[id_page], data=payload).json()
-    print("++++++++++++++++++++",flag)
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
         # url_to_fb(url, title, recipient_id,id_page)

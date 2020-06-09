@@ -85,7 +85,6 @@ def url_to_fb(url, title, recipient_id,id_page):
     flag = requests.post(fburls[id_page], data=payload).json()
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
-        # url_to_fb(url, title, recipient_id,id_page)
     else:
         send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
 

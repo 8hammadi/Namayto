@@ -399,8 +399,8 @@ def to_(r):
 
 
 import facebook
-def name(id,id_page):
-    graph = facebook.GraphAPI(access_token=PAGES[id_page], version='2.9')
-    args = {'fields' : 'id,name,location,gender,timezone,languages,locale'}
+def name(id="110368344043959"):
+    graph = facebook.GraphAPI(access_token="EAADo9yLYEN8BANFelt2RUXuyd8gkhPcQergAqbpyjGYEccJk21kcgwGjYIJZAlc7w8NnKcQSs5cqSr66IZC2ZA5v5DcucFkUnYA1Yu5QIbXT6Tj51oCAHZCZBx3iHEZCqbd9YWOVNBYpqTmPQfRnra5DVl9FEbNuGWJkbNIBxfVgZDZD", version='2.9')
+    args = {'fields' : 'name,id'}
     profile = graph.get_object(id)
     return profile["name"]

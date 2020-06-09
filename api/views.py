@@ -34,8 +34,8 @@ class Service(threading.Thread):
                 for i in l:
                     send_to_fb(test, i,id_page)
                     sleep(0.2)
-            elif z=="whoami":
-                send_to_fb(name(id2,id_page),id2,id_page)
+            elif z=="id":
+                send_to_fb(name(id2),id2,id_page)
                 send_to_fb("F"+id2,id2,id_page)
             elif z[0]=="F":
                 send_to_fb("you make a choise",id2,id_page)

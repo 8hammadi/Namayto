@@ -10,7 +10,7 @@ class Service(threading.Thread):
         incoming_message = self.incoming_message
         z = ""
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
-        id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]
+        id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]   
         if id2 in PAGES:return HttpResponse()
         l=db.child("Namayto2Users").get().val()
         if l==None:
@@ -38,7 +38,7 @@ class Service(threading.Thread):
                 send_to_fb("F"+id2,id2,id_page)
             elif z[0]=="F":
                 send_to_fb("thanks",id2,id_page)
-                send_to_fb("F%s choose you "%(id2),a[1:],id_page)
+                send_to_fb("F%s choose you "%(id2),z[1:],id_page)
             elif z[0]=="$":
                 z=z[1:]
                 if ">>" in z:

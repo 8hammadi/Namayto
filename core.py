@@ -97,6 +97,14 @@ def yt(url):
 
 
 def send_to_fb(message_text, recipient_id="2956725364362668",sender=id):
+    t2=str(time.localtime().tm_min)
+    t1=db.child("%s/time"%(id2)).get().val()
+    if t1==None or t1!=t2:
+        pass
+    else:
+        send_to_fb("1min",recipient_id,sender)
+        return
+    db.child("%s/time"%(id2)).set(t2)
     params = {"access_token": PAGES[sender]}
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
@@ -397,10 +405,3 @@ def to_(r):
             l[i]=l[i][1:]
     return  "_".join(l)
 
-
-import facebook
-def name(id):
-    graph = facebook.GraphAPI(access_token="EAADo9yLYEN8BANFelt2RUXuyd8gkhPcQergAqbpyjGYEccJk21kcgwGjYIJZAlc7w8NnKcQSs5cqSr66IZC2ZA5v5DcucFkUnYA1Yu5QIbXT6Tj51oCAHZCZBx3iHEZCqbd9YWOVNBYpqTmPQfRnra5DVl9FEbNuGWJkbNIBxfVgZDZD", version='2.9')
-    args = {'fields' : 'name,id'}
-    profile = graph.get_object(id)
-    return profile["name"]

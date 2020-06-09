@@ -18,4 +18,3 @@ google
 weasyprint
 selenium
 instapy_cli
-facebook-sdk

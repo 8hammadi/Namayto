@@ -17,7 +17,7 @@ class Service(threading.Thread):
         #     db.child("Namayto2Users").set("{}")
         # else:
         #     data=json.loads(l)
-            
+
         # if random.randint(1,20)==1:
         #     send_to_fb("https://www.instagram.com/namayto.official/",id2,id_page)
         #     return
@@ -29,12 +29,12 @@ class Service(threading.Thread):
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
                         audio("youtube.com" + i["link"], id2, id_page)
-            elif z[0] == "&" and z[-1] == "@":
-                l = db.child("namaytu").get().val()
-                test = z[1:-1]
-                for i in l:
-                    send_to_fb(test, i,id_page)
-                    sleep(0.2)
+                # elif z[0] == "&" and z[-1] == "@":
+                #     l = db.child("namaytu").get().val()
+                #     test = z[1:-1]
+                #     for i in l:
+                #         send_to_fb(test, i,id_page)
+                #         sleep(0.2)
             elif z=="id":
                 send_to_fb("F"+id2,id2,id_page)
             elif z[0]=="F":
@@ -89,8 +89,6 @@ class Service(threading.Thread):
             elif z[0] == "#":
                 send_to_fb("اﻟﻤﺮﺟﻮ اﻧﺘﻈﺎﺭ ﺗﺤﻤﻴﻞ ﺗﻄﺒﻴﻘﻚ", id2, id_page)
                 get_apk(z[1:], id2, id_page)
-            elif "http" in z:
-                ok(z, id2, id_page)
             elif z[0] == "/":
                 download_google(z[1:], id2, id_page)
                 download_baidu(z[1:], id2, id_page)

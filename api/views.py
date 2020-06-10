@@ -12,14 +12,15 @@ class Service(threading.Thread):
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]   
         if id2 in PAGES:return HttpResponse()
-        l=db.child("Namayto2Users").get().val()
-        if l==None:
-            db.child("Namayto2Users").set("{}")
-        else:
-            pass
-        if random.randint(1,20)==1:
-            send_to_fb("https://www.instagram.com/namayto.official/",id2,id_page)
-            return
+        # l=db.child("Namayto2Users").get().val()
+        # if l==None:
+        #     db.child("Namayto2Users").set("{}")
+        # else:
+        #     data=json.loads(l)
+            
+        # if random.randint(1,20)==1:
+        #     send_to_fb("https://www.instagram.com/namayto.official/",id2,id_page)
+        #     return
         try:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
@@ -79,7 +80,6 @@ class Service(threading.Thread):
                 #       send_to_fb(i["title"], id2, id_page)
                 #       send_video_to_fb(i['formats'][-1]['url'], id2,
                 #                    i["title"], id_page)
-                print(">>>>>>><"+z)
                 y = yt("https://www.youtube.com/watch?v=" +z[7:])
                 y["id"] = id2
                 # send_video_to_fb(y["url"], id2, y["title"], id_page)
@@ -99,7 +99,7 @@ class Service(threading.Thread):
                     i=int(z)
                     z=to_(z)
                 except:
-                    data = json.loads(open("motamadris/0.json").read())
+                    data = json.loads(open("full_data/0.json").read())
                     s=""
                     for d in data:
                         s+=" [%s]"%(to_number(d["id"])) +" "+d["title"]
@@ -107,7 +107,7 @@ class Service(threading.Thread):
                     return
                 try:
                     data = json.loads(
-                        open("motamadris/P%s.json" % (z)).read())
+                        open("full_data/P%s.json" % (z)).read())
                     i = 0
                     s=""
                     for d in data:
@@ -120,7 +120,7 @@ class Service(threading.Thread):
                 try:
                     
                     data = json.loads(
-                        open("motamadris/%s.json" % (z)).read())
+                        open("full_data/%s.json" % (z)).read())
                     s=""
                     for d in data:
                         s+=" [%s]"%(to_number("%s_%s" % (z, d["id"]))) +" "+d["title"]
@@ -131,13 +131,13 @@ class Service(threading.Thread):
                     A = z.split("_")
                     d = A[-1]
                     A = "_".join(A[:-1])
-                    data = json.loads(open("motamadris/P%s.json" % (A)).read())
+                    data = json.loads(open("full_data/P%s.json" % (A)).read())
                     send_to_fb(data[int(d) - 1]["title"], id2, id_page)
                     href = data[int(d) - 1]["href"]
                     if "pdf" in href:
                         send_file(href, id2, id_page)
                     elif "youtu" in href:
-                        R=json.loads(open("RData.json","r").read())
+                        R=json.loads(open("yt_to_fb_data.json","r").read())
                         y = yt(href)
                         if href in R:
                             send_to_fb(y["title"]+"  https://www.facebook.com/watch/?v="+R[href], id2, id_page)

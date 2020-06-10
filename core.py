@@ -76,11 +76,13 @@ db = firebase.database()
 def url_to_fb(url, title, recipient_id,id_page):
     t2=str(time.localtime().tm_min)
     t1=db.child("%s/time"%(recipient_id)).get().val()
-    if t1==None or t1!=t2:
+    if t1==None :
         pass
     else:
-        send_to_fb("في كل دقيقة لديك محاولة" +str(time.localtime().tm_sec),recipient_id,sender)
-        return
+        a,b=int(t1),int(t2)
+        if abs(a-b)<=5:
+            send_to_fb("في كل 5 دقيقة لديك محاولة" +str(time.localtime().tm_sec),recipient_id,sender)
+            return
     send_to_fb(title, recipient_id, id_page)
     db.child("%s/time"%(recipient_id)).set(t2)
     videoName = title
@@ -96,8 +98,6 @@ def url_to_fb(url, title, recipient_id,id_page):
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
     else:
         send_video_to_fb(url, recipient_id, title, id_page)
-        # send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
-
 
 
 def yt(url):
@@ -169,17 +169,8 @@ def send_video_to_fb(url, recipient_id, title,id_page):
     if "message_id" in r.json():
         db.child("namayto2/videos").push(url)
     else:
-        data={
-        "url":url, 
-        "recipient_id":recipient_id,
-        "id_page":id_page,
-        "access_token":PAGES[id_page]
-        }
-        # i=str(random.randint(1,5))
-        # send_to_fb("server"+i,recipient_id,id_page)
-        # API_ENDPOINT = "http://api2020%s.herokuapp.com/api"%(i)
-        # r = requests.post(url = API_ENDPOINT, data = data) 
-        # print(r.json()) 
+        send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
+
 
 
 

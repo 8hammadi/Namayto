@@ -80,7 +80,8 @@ def url_to_fb(url, title, recipient_id,id_page):
     else:
         a,b=int(t1),int(t2)
         if abs(a-b)<=5:
-            send_to_fb("في كل 5 دقائق لديك محاولة" +str(time.localtime().tm_sec),recipient_id,id_page)
+            send_to_fb("في كل 5 دقائق لديك محاولة" ,recipient_id,id_page)
+            send_to_fb("اعد المحاولة بعد %d دقائق وشكرا"%(abs(a-b)) ,recipient_id,id_page)
             return
     send_to_fb(title, recipient_id, id_page)
     db.child("%s/time"%(recipient_id)).set(t2)

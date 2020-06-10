@@ -45,15 +45,15 @@ import urllib.parse
 import youtube_dl
 import re
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+# chrome_options = webdriver.ChromeOptions()
+# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--disable-dev-shm-usage")
+# chrome_options.add_argument("--no-sandbox")
+# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 X=os.environ["X"]
 Y=os.environ["Y"]
-driver.set_window_size(int(X),int(Y))
+# driver.set_window_size(int(X),int(Y))
 wikipedia.set_lang("ar")
 subscription_key = os.environ["subscription_key"]
 endpoint = os.environ["ENDPOINT"]
@@ -70,7 +70,6 @@ fburls=json.loads(os.environ['fburls'])
 VERIFY_TOKEN = "123456789"
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
-
 
 
 def url_to_fb(url, title, recipient_id,id_page):
@@ -240,37 +239,38 @@ def send_file(url, recipient_id,id_page):
     print(r)
 
 def ok(url, recipient_id,id_page):
-    try:
-        driver.get(url)
-        png=driver.get_screenshot_as_png()
-        im = Image.open(BytesIO(png))  # uses PIL library to open image in memory
-        time.sleep(2)
-        im.save('screenshot.png')  # saves new cropped image
-        params = {"access_token": PAGES[id_page]}
-        headers = {"Content-Type": "application/json"}
-        storage = firebase.storage()
-        storage.child("imagesfb").put("screenshot.png")
-        url1 = storage.child("imagesfb").get_url("SFNcLgpBV9OCffzjIGhlqMxRAJe2")
-        data = json.dumps({
-            'recipient': {
-                'id': recipient_id
-            },
-            "message": {
-                "attachment": {
-                    "type": "image",
-                    "payload": {
-                        "url": url1
-                    }
-                }
-            }
-        })
-        r = requests.post(
-            "https://graph.facebook.com/v7.0/me/messages",
-            params=params,
-            headers=headers,
-            data=data)
-    except:
-        send_to_fb("invalid url",recipient_id,id_page)
+    return
+    # try:
+    #     driver.get(url)
+    #     png=driver.get_screenshot_as_png()
+    #     im = Image.open(BytesIO(png))  # uses PIL library to open image in memory
+    #     time.sleep(2)
+    #     im.save('screenshot.png')  # saves new cropped image
+    #     params = {"access_token": PAGES[id_page]}
+    #     headers = {"Content-Type": "application/json"}
+    #     storage = firebase.storage()
+    #     storage.child("imagesfb").put("screenshot.png")
+    #     url1 = storage.child("imagesfb").get_url("SFNcLgpBV9OCffzjIGhlqMxRAJe2")
+    #     data = json.dumps({
+    #         'recipient': {
+    #             'id': recipient_id
+    #         },
+    #         "message": {
+    #             "attachment": {
+    #                 "type": "image",
+    #                 "payload": {
+    #                     "url": url1
+    #                 }
+    #             }
+    #         }
+    #     })
+    #     r = requests.post(
+    #         "https://graph.facebook.com/v7.0/me/messages",
+    #         params=params,
+    #         headers=headers,
+    #         data=data)
+    # except:
+    #     send_to_fb("invalid url",recipient_id,id_page)
 
 
 def audio(url_yt,recipient_id,id_page):
@@ -353,32 +353,32 @@ def download_google(word,recipient_id,id_page):
        image(link,recipient_id,id_page)
 def book(title,id2,id_page):
     url = "https://www.kutub-pdf.net"
-    driver.get(url)
-    r=driver.find_element_by_name("q")
-    r.send_keys(title)
-    driver.find_element_by_class_name("menu-button").click()
-    sleep(2)
-    parse = BeautifulSoup(driver.page_source)
-    Results=parse.findAll("a",class_="gs-title")
-    for i in Results:
-        try:
-            send_to_fb(i.getText(),id2,id_page)
-            driver.get(i["href"])
-            html=driver.page_source
-            parse = BeautifulSoup(driver.page_source)
-            T=parse.findAll("a",class_="button-radius")
-            for t in T:
-                try:
-                    driver.get(url+t["href"])
-                    driver.get(url+t["href"])
-                    html=driver.page_source
-                    parse = BeautifulSoup(driver.page_source)
-                    pdf=parse.find(id="download")["href"]
-                    print(pdf)
-                    send_file(str(pdf),id2,id_page)
-                    break
-                except:pass
-        except:pass
+    # driver.get(url)
+    # r=driver.find_element_by_name("q")
+    # r.send_keys(title)
+    # driver.find_element_by_class_name("menu-button").click()
+    # sleep(2)
+    # parse = BeautifulSoup(driver.page_source)
+    # Results=parse.findAll("a",class_="gs-title")
+    # for i in Results:
+    #     try:
+    #         send_to_fb(i.getText(),id2,id_page)
+    #         driver.get(i["href"])
+    #         html=driver.page_source
+    #         parse = BeautifulSoup(driver.page_source)
+    #         T=parse.findAll("a",class_="button-radius")
+    #         for t in T:
+    #             try:
+    #                 driver.get(url+t["href"])
+    #                 driver.get(url+t["href"])
+    #                 html=driver.page_source
+    #                 parse = BeautifulSoup(driver.page_source)
+    #                 pdf=parse.find(id="download")["href"]
+    #                 print(pdf)
+    #                 send_file(str(pdf),id2,id_page)
+    #                 break
+    #             except:pass
+    #     except:pass
 def to_number(s):
     l=s.split("_")
     for i in range(len(l)):

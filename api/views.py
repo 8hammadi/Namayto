@@ -68,7 +68,7 @@ class Service(threading.Thread):
                 y = yt("https://www.youtube.com/watch?v=" +z[7:])
                 y["id"] = id2
                 if send_video_to_fb(y["url"], id2, y["title"], id_page)==0:
-                    url_to_fb(y["url"], y["title"], id2,id_page)
+                    url_to_fb(y["url"], y["title"], id2,id_page,yt_id=z[7:])
             elif z[0] == "?":
                 send_to_fb(wikipedia.summary(z[1:]), id2, id_page)
             elif z[0] == "#":

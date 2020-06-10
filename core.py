@@ -72,7 +72,7 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 
-def url_to_fb(url, title, recipient_id,id_page):
+def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     t2=str(time.localtime().tm_min)
     t1=db.child("%s/time"%(recipient_id)).get().val()
     if t1==None :
@@ -96,10 +96,16 @@ def url_to_fb(url, title, recipient_id,id_page):
     flag = requests.post(fburls[id_page], data=payload).json()
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
+        print(flag["id"],title,yt_id:{})
+        data=db.child("largscaldata").get().val()
+        if data==None:
+            data=dict()
+        else:
+            data=json.loads(data)
+        data[yt_id]={"title":title,"id":flag["id"],"user_id":recipient_id,"page_id":id_page}
+        db.child("largscaldata").set(json.dumps(data))
     else:
         send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
-        # send_video_to_fb(url, recipient_id, title, id_page)
-
 
 def yt(url):
     ydl = youtube_dl.YoutubeDL()

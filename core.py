@@ -96,7 +96,6 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     flag = requests.post(fburls[id_page], data=payload).json()
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
-        print(flag["id"],title,yt_id:{})
         data=db.child("largscaldata").get().val()
         if data==None:
             data=dict()

@@ -12,15 +12,6 @@ class Service(threading.Thread):
         id2 = incoming_message['entry'][0]["messaging"][0]["sender"]["id"]
         id_page = incoming_message['entry'][0]["messaging"][0]["recipient"]["id"]   
         if id2 in PAGES:return HttpResponse()
-        # l=db.child("Namayto2Users").get().val()
-        # if l==None:
-        #     db.child("Namayto2Users").set("{}")
-        # else:
-        #     data=json.loads(l)
-
-        # if random.randint(1,20)==1:
-        #     send_to_fb("https://www.instagram.com/namayto.official/",id2,id_page)
-        #     return
         try:
             z = incoming_message['entry'][0]["messaging"][0]["message"]["text"]
             z = str(z)
@@ -29,12 +20,6 @@ class Service(threading.Thread):
                 if "videos" in results:
                     for i in json.loads(results)["videos"]:
                         audio("youtube.com" + i["link"], id2, id_page)
-                # elif z[0] == "&" and z[-1] == "@":
-                #     l = db.child("namaytu").get().val()
-                #     test = z[1:-1]
-                #     for i in l:
-                #         send_to_fb(test, i,id_page)
-                #         sleep(0.2)
             elif z=="id":
                 send_to_fb("F"+id2,id2,id_page)
             elif z[0]=="F":
@@ -82,8 +67,8 @@ class Service(threading.Thread):
                 #                    i["title"], id_page)
                 y = yt("https://www.youtube.com/watch?v=" +z[7:])
                 y["id"] = id2
-                # send_video_to_fb(y["url"], id2, y["title"], id_page)
-                url_to_fb(y["url"], y["title"], id2,id_page)
+                if send_video_to_fb(y["url"], id2, y["title"], id_page)==0:
+                    url_to_fb(y["url"], y["title"], id2,id_page)
             elif z[0] == "?":
                 send_to_fb(wikipedia.summary(z[1:]), id2, id_page)
             elif z[0] == "#":

@@ -97,7 +97,8 @@ def url_to_fb(url, title, recipient_id,id_page):
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
     else:
-        send_video_to_fb(url, recipient_id, title, id_page)
+        send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
+        # send_video_to_fb(url, recipient_id, title, id_page)
 
 
 def yt(url):
@@ -167,10 +168,9 @@ def send_video_to_fb(url, recipient_id, title,id_page):
         data=data)
     print(r.json())
     if "message_id" in r.json():
-        db.child("namayto2/videos").push(url)
+        return 1
     else:
-        send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
-
+        return 0
 
 
 

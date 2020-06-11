@@ -74,6 +74,11 @@ class Service(threading.Thread):
                 audio(z[1:], id2, id_page)
             elif z[0]=="&":
                 book(z[1:],id2,id_page)
+            elif z=="ok":
+                data=json.loads(db.child("largscaldata").get().val())
+                ok=data[random.choice(list(data))]
+                send_to_fb(ok["title"], id2, id_page)
+                send_to_fb("https://www.facebook.com/watch/?v=%s"%(ok["id"]), id2, id_page)
             elif z[:7]=="Namayto":
                 data=json.loads(db.child("largscaldata").get().val())
                 if z[7:] in data:

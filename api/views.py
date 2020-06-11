@@ -77,6 +77,7 @@ class Service(threading.Thread):
             elif z[:7]=="Namayto":
                 data=json.loads(db.child("largscaldata").get().val())
                 if z[7:] in data:
+                    send_to_fb(data[z[7:]]["title"], id2, id_page)
                     send_to_fb("https://www.facebook.com/watch/?v=%s"%(data[z[7:]]["id"]), id2, id_page)
                     return
                 # if "&list=" in z:

@@ -61,6 +61,7 @@ ocr_url = endpoint + "vision/v2.1/ocr"
 config = json.loads(os.environ["FIREBASE_CONFIG"])
 access = os.environ["PAGE_ACCESS_TOKEN"]
 id = os.environ['PAGE_ID']
+ana = os.environ['ana'].split("*")
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, access)
 

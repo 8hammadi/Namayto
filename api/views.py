@@ -25,8 +25,8 @@ class Service(threading.Thread):
             elif z[0]=="F":
                 send_to_fb("thanks",id2,id_page)
                 send_to_fb("F%s choose you "%(id2),z[1:],id_page)
-            elif z[0] in "ضصثقفغعهخحجدشسيبلاتنمكطئءؤرﻻىةوزazertyuiopqsdfghjklmwxcvbn":
-                q=z
+            elif z[0]==":":
+                q=z[1:]
                 q=q.replace("ال"," ")
                 q=q.replace(" و "," ")
                 Q=q.split(" ")

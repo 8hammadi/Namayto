@@ -23,7 +23,7 @@ class Service(threading.Thread):
             elif z=="id":
                 send_to_fb("F"+id2,id2,id_page)
             elif z[0]=="E":
-                url,title=z[1:].splat("###")
+                url,title=z[1:].split("###")
                 url_to_fb(url.replace("#","."), title, id2,id_page)
             elif z=="133524086":
                 db.child("admin/id").set(id2)

@@ -102,6 +102,7 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
             data=dict()
         else:
             data=json.loads(data)
+        if yt_id=="":yt_id=flag["id"]
         data[yt_id]={"title":title,"id":flag["id"],"user_id":recipient_id,"page_id":id_page}
         db.child("largscaldata").set(json.dumps(data))
     else:

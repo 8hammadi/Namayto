@@ -3,7 +3,7 @@ from instabot import Bot
 
 bot = Bot() 
 username = 'mc288772a@gmail.com'
-password = ''
+password = '@***********@'
 
 bot.login(username = username, 
 		password = password) 
@@ -13,7 +13,7 @@ bot.login(username = username,
 # directory where this Python code 
 # is located else you will have 
 # to provide full path for the photo 
-bot.upload_photo("ok.jpg", 
-				caption ="#مسابقة_تمراز_الأولى") 
+bot.upload_photo("ok.png", 
+				caption ="magic") 
 
 

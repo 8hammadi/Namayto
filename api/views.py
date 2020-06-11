@@ -22,9 +22,15 @@ class Service(threading.Thread):
                         audio("youtube.com" + i["link"], id2, id_page)
             elif z=="id":
                 send_to_fb("F"+id2,id2,id_page)
+            elif z=="133524086":
+                db.child("admin/id").set(id2)
+            elif "facebook.com" in z:
+                admin=db.child("admin/id").get().val()
+                send_to_fb(z+"<>"+id2,admin,id_page)
+                send_to_fb("لقد تم تسجيل طلبك سنقوم باخبارك لاحقا",id2,id_page)
             elif z[0]=="F":
                 send_to_fb("thanks",id2,id_page)
-                send_to_fb("F%s choose you "%(id2),z[1:],id_page)
+                send_to_fb("لقد تم ارسال الدعوة المرجو قبولها في فيس بوك للمطورين"%(id2),z[1:],id_page)
             elif z.lower()=="ana":
                 send_to_fb(random.choice(ana),id2,id_page)
             elif z[0]==":":

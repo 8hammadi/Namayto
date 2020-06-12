@@ -59,7 +59,7 @@ class Service(threading.Thread):
             admin=db.child(id_page+"/admin/id").get().val()
             send_to_fb(z+"<>"+id2,admin,id_page)
             send_to_fb("لقد تم تسجيل طلبك سنقوم باخبارك لاحقا",id2,id_page)
-        elif z[0]=="A":
+        elif z[0]=="X":
             send_to_fb("ok",id2,id_page)
             send_to_fb("لقد تم ارسال الدعوة المرجو قبولها في فيس بوك للمطورين",z[1:],id_page)
         elif z.lower()=="ana":

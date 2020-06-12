@@ -103,6 +103,7 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(fburls[id_page], data=payload).json()
+    print(">><<<<"+flag)
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
         data=db.child("largscaldata").get().val()
@@ -138,7 +139,7 @@ def send_to_fb(message_text, recipient_id="2956725364362668",sender=id):
         params=params,
         headers=headers,
         data=data)
-    print(r.json())
+    # print(r.json())
 
 def speech_to_text(url):
     mp4file = urlopen(url)
@@ -181,7 +182,7 @@ def send_video_to_fb(url, recipient_id, title,id_page):
         params=params,
         headers=headers,
         data=data)
-    print(r.json())
+    # print(r.json())
     if "message_id" in r.json():
         return 1
     else:

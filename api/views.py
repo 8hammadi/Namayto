@@ -47,7 +47,7 @@ class Service(threading.Thread):
         elif "###" in z:
             url,title=z.split("###")
             url=url.replace("#",".")
-            print(url)
+            print("[%s]"%(url))
             url_to_fb(url, title, id2,id_page)
         elif z[0].lower()=="f":
             i=int(z[1:])%(leng)
@@ -257,7 +257,7 @@ class YoMamaBotView(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        print(incoming_message)
+        # print(incoming_message)
         thread1 = Service(incoming_message)
         thread1.start()
         return HttpResponse()
@@ -278,7 +278,7 @@ class YoMamaBotViewTest(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        print(incoming_message)
+        # print(incoming_message)
         # thread1 = Service(incoming_message)
         # thread1.start()
         return HttpResponse()
@@ -298,7 +298,7 @@ class Github(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
-        print(incoming_message)
+        # print(incoming_message)
         return HttpResponse()
 
 def home(request):

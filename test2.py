@@ -1,29 +1,27 @@
-import os
-import requests	
-import re
-q="life"
+import pandas as pd 
+import random
 
-word=q
-url = 'https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word='+word+'&ct=201326592&v=flip'
-result = requests.get(url)
-html = result.text
-pic_url = re.findall('"objURL":"(.*?)",',html,re.S)
-for each in pic_url:
-    print(each)
-    os.system("wget "+each)
+data = pd.read_csv("en_fr.csv") 
+r=data.to_dict()
+leng=len(r["English words/sentences"])
 
-from instabot import Bot 
-bot = Bot() 
-username = 'abdellatif.aithammadi@gmail.com'
-password = '@15656*****9'
-bot.login(username = username, 
-		password = password) 
-import os
-i=0
-for im in os.listdir():
-	if im==
-	try:
-		bot.upload_photo(im, 
-					caption ="#مسابقة_تمراز_الأولى")
-	except:pass
+#mode random
+i=random.randint(0,leng-1)
+print(r["English words/sentences"][i])
+print(r["French words/sentences"][i])
 
+# 
+z="E500"
+i=int(z[1:])%(leng)
+print(r["English words/sentences"][i])
+
+#
+z="F500"
+i=int(z[1:])%(leng)
+print(r["French words/sentences"][i])
+
+
+# F545
+# E5455
+# F* -> sentences +id
+# E* -> sentences +id

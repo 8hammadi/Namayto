@@ -22,16 +22,28 @@ class Service(threading.Thread):
                         audio("youtube.com" + i["link"], id2, id_page)
             elif z=="id":
                 send_to_fb("F"+id2,id2,id_page)
-            elif z[0]=="E":
-                url,title=z[1:].split("###")
-                url=url.replace("#",".")
-                print(url)
-                url_to_fb(url, title, id2,id_page)
+            elif z[0]=="e":
+                # if z[1]=="*":
+                #     pass
+                #     return
+                i=int(z[1:])%(leng)
+                send_to_fb(r["English words/sentences"][i],id2,id_page)
+                # url,title=z[1:].split("###")
+                # url=url.replace("#",".")
+                # print(url)
+                # url_to_fb(url, title, id2,id_page)
+            elif z[0].lower()=="f":
+                # if z[1]=="*":
+                #     i=random.randint(0,leng-1)
+
+                #     return
+                i=int(z[1:])%(leng)
+                send_to_fb(r["French words/sentences"][i],id2,id_page)
             elif z=="133524086":
-                db.child("admin/id").set(id2)
+                db.child(id_page+"/admin/id").set(id2)
                 send_to_fb("ok",id2,id_page)
-            elif "facebook.com" in z:
-                admin=db.child("admin/id").get().val()
+            elif ("facebook.com" in z) and ("watch" not in z):
+                admin=db.child(id_page+"/admin/id").get().val()
                 send_to_fb(z+"<>"+id2,admin,id_page)
                 send_to_fb("لقد تم تسجيل طلبك سنقوم باخبارك لاحقا",id2,id_page)
             elif z[0]=="F":

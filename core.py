@@ -44,6 +44,14 @@ import urllib.request
 import urllib.parse
 import youtube_dl
 import re
+import pandas as pd 
+
+
+data = pd.read_csv("en_fr.csv") 
+r=data.to_dict()
+leng=len(r["English words/sentences"])
+
+
 
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")

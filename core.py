@@ -48,7 +48,7 @@ import pandas as pd
 
 
 data = pd.read_csv("en_fr.csv") 
-r=data.to_dict()
+ERDATA=data.to_dict()
 leng=len(r["English words/sentences"])
 
 

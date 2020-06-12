@@ -41,7 +41,7 @@ class Service(threading.Thread):
                     audio("youtube.com" + i["link"], id2, id_page)
         elif z=="id":
             send_to_fb("F"+id2,id2,id_page)
-        elif z[0]=="e":
+        elif z[0].lower()=="e":
             i=int(z[1:])%(leng)
             send_to_fb(ERDATA["English words/sentences"][i],id2,id_page)
             # url,title=z[1:].split("###")

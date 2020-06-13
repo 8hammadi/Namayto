@@ -103,7 +103,6 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(fburls[id_page], data=payload).json()
-    print(">><<<<"+flag)
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
         data=db.child("largscaldata").get().val()

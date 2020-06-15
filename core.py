@@ -121,7 +121,9 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
         data[yt_id]={"title":title,"id":flag["id"],"user_id":recipient_id,"page_id":id_page}
         db.child("largscaldata").set(json.dumps(data))
     else:
-        send_to_fb("لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل",recipient_id,id_page)
+        #لم يتم تلبية طلبك بسبب القيام ببعض التحديتات حاليا
+        #لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل
+        send_to_fb("لم يتم تلبية طلبك بسبب القيام ببعض التحديتات حاليا",recipient_id,id_page)
 
 def yt(url):
     ydl = youtube_dl.YoutubeDL()

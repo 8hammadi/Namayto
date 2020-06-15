@@ -51,6 +51,10 @@ data = pd.read_csv("data/csv/en_fr.csv")
 ERDATA=data.to_dict()
 leng=len(ERDATA["English words/sentences"])
 
+
+data = pd.read_csv("data/csv/True.csv") 
+rtrue=data.to_dict()
+lengtrue=len(rtrue["title"])
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 # chrome_options.add_argument("--headless")
@@ -80,26 +84,6 @@ db = firebase.database()
 
 
 def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
-    t2=str(time.localtime().tm_min)
-    t1=db.child("%s/time"%(recipient_id)).get().val()
-    if t1==None :
-        pass
-    else:
-        a,b=int(t1),int(t2)
-        if abs(a-b)<=5:
-            send_to_fb("في كل 5 دقائق لديك محاولة" ,recipient_id,id_page)
-            send_to_fb("اعد المحاولة بعد %d دقائق وشكرا"%(5-abs(a-b)) ,recipient_id,id_page)
-            return
-    send_to_fb(title, recipient_id, id_page)
-    db.child("%s/time"%(recipient_id)).set(t2)
-    videoName = title
-    videoDescription = title
-    videoUrl = url
-    payload = {
-        'name': '%s' % (videoName),
-        'description': videoDescription +" instagram.com/ait.hammadi",
-        'file_url': '%s' % (videoUrl)
-    }
     _access=db.child("%s/%s/AccessToken"%(id_page,recipient_id)).get().val()
     _id=db.child("%s/%s/PageID"%(id_page,recipient_id)).get().val()
     F=fburls[id_page]
@@ -108,6 +92,27 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     _id, _access)
          send_to_fb("Your page",recipient_id,id_page)
          print(">>>"+_id)
+    else:
+        t2=str(time.localtime().tm_min)
+        t1=db.child("%s/time"%(recipient_id)).get().val()
+        if t1==None :
+            pass
+        else:
+            a,b=int(t1),int(t2)
+            if abs(a-b)<=5:
+                send_to_fb("في كل 5 دقائق لديك محاولة" ,recipient_id,id_page)
+                send_to_fb("اعد المحاولة بعد %d دقائق وشكرا"%(5-abs(a-b)) ,recipient_id,id_page)
+                return
+        db.child("%s/time"%(recipient_id)).set(t2)
+    send_to_fb(title, recipient_id, id_page)
+    videoName = title
+    videoDescription = title
+    videoUrl = url
+    payload = {
+        'name': '%s' % (videoName),
+        'description': videoDescription +" instagram.com/ait.hammadi",
+        'file_url': '%s' % (videoUrl)
+    }
     flag = requests.post(F, data=payload).json()
     print(flag)
     if "id" in flag:

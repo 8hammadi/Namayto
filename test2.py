@@ -1,12 +1,14 @@
 import pandas as pd 
 import random
 
-data = pd.read_csv("csv/en_fr.csv") 
+data = pd.read_csv("data/csv/True.csv") 
 r=data.to_dict()
-leng=len(r["English words/sentences"])
+# dict_keys(['title', 'text', 'subject', 'date'])
 
-#mode random
+leng=len(r["title"])
+
 i=random.randint(0,leng-1)
-print(r["English words/sentences"][i])
-print(r["French words/sentences"][i])
-
+print(r["title"][i])
+print(r["text"][i])
+print(r["subject"][i])
+print(r["data"][i])

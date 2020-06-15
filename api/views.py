@@ -86,8 +86,12 @@ class Service(threading.Thread):
         #     send_to_fb("ارسل لنا الرابط الدي تريد", id2, id_page)
             if ">>" in z:
                 a,b=z.split(">>")
-                db.child("%s/%s"%(id2,a)).set(b)
+                db.child("%s/%s/%s"%(id_page,id2,a)).set(b)
                 send_to_fb("ok",id2,id_page)
+                if a=="AccessToken":
+                    send_to_fb("AccessTokenOk",id2,id_page)
+                if a=="PageID":
+                    send_to_fb("PageIDOK",id2,id_page)
             else:
                 send_to_fb(db.child("%s/%s"%(id2,z)).get().val(),id2,id_page)
         elif z[0] == "@":

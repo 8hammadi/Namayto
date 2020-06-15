@@ -113,13 +113,13 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
         data=db.child("largscaldata").get().val()
-        if data==None:
-            data=dict()
-        else:
-            data=json.loads(data)
-        if yt_id=="":yt_id=flag["id"]
-        data[yt_id]={"title":title,"id":flag["id"],"user_id":recipient_id,"page_id":id_page}
-        db.child("largscaldata").set(json.dumps(data))
+        # if data==None:
+        #     data=dict()
+        # else:
+        #     data=json.loads(data)
+        # if yt_id=="":yt_id=flag["id"]
+        # data[yt_id]={"title":title,"id":flag["id"],"user_id":recipient_id,"page_id":id_page}
+        # db.child("largscaldata").set(json.dumps(data))
     else:
         #لم يتم تلبية طلبك بسبب القيام ببعض التحديتات حاليا
         #لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل

@@ -103,11 +103,13 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     _access=db.child("%s/%s/AccessToken"%(id_page,recipient_id))
     _id=db.child("%s/%s/PageID"%(id_page,recipient_id))
     F=fburls[id_page]
-    if _access!=None and _id!=None:
+    if _access!=None or _id!=None:
          F='https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     _id, _access)
          send_to_fb("Your page",recipient_id,id_page)
+         print(">>>"+_id)
     flag = requests.post(F, data=payload).json()
+    print(flag)
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
         data=db.child("largscaldata").get().val()

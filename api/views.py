@@ -102,6 +102,10 @@ class Service(threading.Thread):
                     send_to_fb("Namayto"+i["id"], id2, id_page)
         elif z[0] == "!":
             send_file(z[1:], id2, id_page)
+        elif z==".":
+            i=random.randint(0,lengtrue-1)
+            send_to_fb(rtrue["title"][i],id2, id_page)
+            send_to_fb(rtrue["text"][i] ,id2, id_page)
         elif z[0] == ".":
             send_to_fb(trad(z[1:], "ar"), id2, id_page)
         elif z[0] == "*":
@@ -112,10 +116,6 @@ class Service(threading.Thread):
             audio(z[1:], id2, id_page)
         elif z[0]=="&":
             book(z[1:],id2,id_page)
-        elif z==".":
-            i=random.randint(0,lengtrue-1)
-            send_to_fb(rtrue["title"][i],id2, id_page)
-            send_to_fb(rtrue["text"][i] ,id2, id_page)
         elif z.lower()=="ok":
             data=json.loads(db.child("largscaldata").get().val())
             ok=data[random.choice(list(data))]

@@ -47,11 +47,9 @@ import re
 import pandas as pd 
 
 
-data = pd.read_csv("en_fr.csv") 
+data = pd.read_csv("data/csv/en_fr.csv") 
 ERDATA=data.to_dict()
 leng=len(ERDATA["English words/sentences"])
-
-
 
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -99,7 +97,7 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     videoUrl = url
     payload = {
         'name': '%s' % (videoName),
-        'description': videoDescription +" instagram.com/namayto.official",
+        'description': videoDescription +" instagram.com/ait.hammadi",
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(fburls[id_page], data=payload).json()

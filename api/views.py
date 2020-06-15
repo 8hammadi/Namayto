@@ -22,11 +22,6 @@ class Service(threading.Thread):
             if type == "audio":
                 T = speech_to_text(payload)
                 send_to_fb(T, id2, id_page)
-                # results = YoutubeSearch(T, max_results=10).to_json()
-                # for i in json.loads(results)["videos"]:
-                #    send_to_fb(i["title"], id2, id_page)
-                #    send_to_fb("youtube.com" + i["link"], id2, id_page)
-                # send_to_fb("اﺭﺳﻞ ﺭاﺑﻂ اﻟﻘﻴﺪﻳﻮ اﻟﺪﻱ ﺗﺮﻳﺪ", id2, id_page)
             if type == "image":
                 to_text(payload, id2, id_page)
         except Exception as e:
@@ -44,11 +39,11 @@ class Service(threading.Thread):
         elif z[0].lower()=="e":
             i=int(z[1:])%(leng)
             send_to_fb(ERDATA["English words/sentences"][i],id2,id_page)
-        elif "###" in z:
-            url,title=z.split("###")
-            url=url.replace("#",".")
-            print("[%s]"%(url))
-            url_to_fb(url, title, id2,id_page)
+        # elif "###" in z:
+        #     url,title=z.split("###")
+        #     url=url.replace("#",".")
+        #     print("[%s]"%(url))
+        #     url_to_fb(url, title, id2,id_page)
         elif z[0].lower()=="f":
             i=int(z[1:])%(leng)
             send_to_fb(ERDATA["French words/sentences"][i],id2,id_page)
@@ -85,16 +80,16 @@ class Service(threading.Thread):
                 send_to_fb("https://www.facebook.com/watch/?v=%s"%(r[1]),id2,id_page)
         elif z[0]=="$":
             z=z[1:]
+        # elif z[0] == ":":
+        #     for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
+        #         send_to_fb(j, id2, id_page)
+        #     send_to_fb("ارسل لنا الرابط الدي تريد", id2, id_page)
             if ">>" in z:
                 a,b=z.split(">>")
                 db.child("%s/%s"%(id2,a)).set(b)
                 send_to_fb("ok",id2,id_page)
             else:
                 send_to_fb(db.child("%s/%s"%(id2,z)).get().val(),id2,id_page)
-            # elif z[0] == ":":
-            #     for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
-            #         send_to_fb(j, id2, id_page)
-            #     send_to_fb("ارسل لنا الرابط الدي تريد", id2, id_page)
         elif z[0] == "@":
             results = YoutubeSearch(z[1:], max_results=10).to_json()
             if "videos" in results:
@@ -150,7 +145,7 @@ class Service(threading.Thread):
                 i=int(z)
                 z=to_(z)
             except:
-                data = json.loads(open("full_data/0.json").read())
+                data = json.loads(open("data/full_data/0.json").read())
                 s=""
                 for d in data:
                     s+=" [%s]"%(to_number(d["id"])) +" "+d["title"]
@@ -158,7 +153,7 @@ class Service(threading.Thread):
                 return
             try:
                 data = json.loads(
-                    open("full_data/P%s.json" % (z)).read())
+                    open("data/full_data/P%s.json" % (z)).read())
                 i = 0
                 s=""
                 for d in data:
@@ -171,7 +166,7 @@ class Service(threading.Thread):
             try:
                 
                 data = json.loads(
-                    open("full_data/%s.json" % (z)).read())
+                    open("data/full_data/%s.json" % (z)).read())
                 s=""
                 for d in data:
                     s+=" [%s]"%(to_number("%s_%s" % (z, d["id"]))) +" "+d["title"]
@@ -182,13 +177,13 @@ class Service(threading.Thread):
                 A = z.split("_")
                 d = A[-1]
                 A = "_".join(A[:-1])
-                data = json.loads(open("full_data/P%s.json" % (A)).read())
+                data = json.loads(open("data/full_data/P%s.json" % (A)).read())
                 send_to_fb(data[int(d) - 1]["title"], id2, id_page)
                 href = data[int(d) - 1]["href"]
                 if "pdf" in href:
                     send_file(href, id2, id_page)
                 elif "youtu" in href:
-                    R=json.loads(open("yt_to_fb_data.json","r").read())
+                    R=json.loads(open("data/yt_to_fb_data.json","r").read())
                     y = yt(href)
                     if href in R:
                         send_to_fb(y["title"]+"  https://www.facebook.com/watch/?v="+R[href], id2, id_page)

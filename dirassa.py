@@ -2,8 +2,8 @@ import requests
 import json
 import youtube_dl
 import time
-access="EAANUZAFSg360BAIlxgG5fS08orsUsMnjDb1Q4TGupvZAvhxEMvHkbYEZCitOfjtvgwjbgg2B9wskrqpw7GIfPpZCFSmZBVSCWHHcjNcKYvsC3mOKux6y29ZCJiOFs5ZAHlgampq0ZAwVprHF2BOKg8dgAWz3vGyKNySfuhOHmkLQF9lB964FuIdSZCZCkoFUdEWsgZD"
-id="102979258096775"
+access="todo"
+id="todo"
 fburl = 'https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     id, access)
 def url_to_fb(url, title):

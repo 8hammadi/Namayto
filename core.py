@@ -93,6 +93,9 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
          send_to_fb("Your page",recipient_id,id_page)
          print(">>>"+_id)
     else:
+        send_to_fb("يمكنك الان بأن تربط صفحتك الخاصة ليتم نشر القيديوهات عليها.هدا التحديت ضروري تابع اخر الاخبار على ناميتو 3",recipient_id,id_page)
+        send_to_fb("www.facebook.com/Namayto3",recipient_id,id_page)
+        return
         t2=str(time.localtime().tm_min)
         t1=db.child("%s/time"%(recipient_id)).get().val()
         if t1==None :
@@ -117,18 +120,9 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     print(flag)
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
-        data=db.child("largscaldata").get().val()
-        # if data==None:
-        #     data=dict()
-        # else:
-        #     data=json.loads(data)
-        # if yt_id=="":yt_id=flag["id"]
-        # data[yt_id]={"title":title,"id":flag["id"],"user_id":recipient_id,"page_id":id_page}
-        # db.child("largscaldata").set(json.dumps(data))
+        # data=db.child("largscaldata").get().val()
     else:
-        #لم يتم تلبية طلبك بسبب القيام ببعض التحديتات حاليا
-        #لم يتم تلبية طلبك بسبب مشكل مؤقت  حاول بعد قليل
-        send_to_fb("لم يتم تلبية طلبك بسبب القيام ببعض التحديتات حاليا",recipient_id,id_page)
+        send_to_fb(flag['error']['message'],recipient_id,id_page)
 
 def yt(url):
     ydl = youtube_dl.YoutubeDL()

@@ -47,13 +47,6 @@ class Service(threading.Thread):
         elif z[0].lower()=="f":
             i=int(z[1:])%(leng)
             send_to_fb(ERDATA["French words/sentences"][i],id2,id_page)
-        elif z=="133524086":
-            db.child(id_page+"/admin/id").set(id2)
-            send_to_fb("ok",id2,id_page)
-        elif ("facebook.com" in z) and ("watch" not in z):
-            admin=db.child(id_page+"/admin/id").get().val()
-            send_to_fb(z+"<>"+id2,admin,id_page)
-            send_to_fb("لقد تم تسجيل طلبك سنقوم باخبارك لاحقا",id2,id_page)
         elif z[0]=="X":
             send_to_fb("ok",id2,id_page)
             send_to_fb("لقد تم ارسال الدعوة المرجو قبولها في فيس بوك للمطورين",z[1:],id_page)
@@ -102,10 +95,6 @@ class Service(threading.Thread):
                     send_to_fb("Namayto"+i["id"], id2, id_page)
         elif z[0] == "!":
             send_file(z[1:], id2, id_page)
-        elif z==".":
-            i=random.randint(0,lengtrue-1)
-            send_to_fb(rtrue["title"][i],id2, id_page)
-            send_to_fb(rtrue["text"][i] ,id2, id_page)
         elif z[0] == ".":
             send_to_fb(trad(z[1:], "ar"), id2, id_page)
         elif z[0] == "*":

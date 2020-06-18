@@ -90,39 +90,26 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     if _access!=None and _id!=None:
          F='https://graph-video.facebook.com/v6.0/%s/videos?access_token=%s' % (
     _id, _access)
-         send_to_fb("Your page",recipient_id,id_page)
          print(">>>"+_id)
     else:
-        send_to_fb("يمكنك الان بأن تربط صفحتك الخاصة ليتم نشر القيديوهات عليها.هدا التحديت ضروري تابع اخر الاخبار على ناميتو 3",recipient_id,id_page)
-        send_to_fb("www.facebook.com/Namayto3",recipient_id,id_page)
-        return
-        t2=str(time.localtime().tm_min)
-        t1=db.child("%s/time"%(recipient_id)).get().val()
-        if t1==None :
-            pass
-        else:
-            a,b=int(t1),int(t2)
-            if abs(a-b)<=5:
-                send_to_fb("في كل 5 دقائق لديك محاولة" ,recipient_id,id_page)
-                send_to_fb("اعد المحاولة بعد %d دقائق وشكرا"%(5-abs(a-b)) ,recipient_id,id_page)
-                return
-        db.child("%s/time"%(recipient_id)).set(t2)
+        send_to_fb("يجب ان تقوم بربط صفحتك بنا لكي نتمكن من نشر القيديو على صفحتك الطريقة في القيديو التالي",recipient_id,id_page)
+        send_to_fb("https://web.facebook.com/watch/?v=266578104455834",recipient_id,id_page)
     send_to_fb(title, recipient_id, id_page)
     videoName = title
     videoDescription = title
     videoUrl = url
     payload = {
         'name': '%s' % (videoName),
-        'description': videoDescription +" instagram.com/ait.hammadi",
+        'description': videoDescription ,
         'file_url': '%s' % (videoUrl)
     }
     flag = requests.post(F, data=payload).json()
     print(flag)
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
-        # data=db.child("largscaldata").get().val()
     else:
         send_to_fb(flag['error']['message'],recipient_id,id_page)
+        send_to_fb("يبدو ان الرموز الخاصة بصفحتك لا تتوفر على شيء ما المرجو اعادة انشاء الرموز لكي نتمكن من النشر على صفحتك",recipient_id,id_page)
 
 def yt(url):
     ydl = youtube_dl.YoutubeDL()

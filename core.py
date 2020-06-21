@@ -108,8 +108,7 @@ def url_to_fb(url, title, recipient_id,id_page,yt_id=""):
     if "id" in flag:
         send_to_fb("https://www.facebook.com/watch/?v="+flag["id"],recipient_id,id_page)
     else:
-        send_to_fb(flag['error']['message'],recipient_id,id_page)
-        #send_to_fb("يبدو ان الرموز الخاصة بصفحتك لا تتوفر على شيء ما المرجو اعادة انشاء الرموز لكي نتمكن من النشر على صفحتك",recipient_id,id_page)
+        send_to_fb(trad(flag['error']['message'], "ar"),recipient_id,id_page)
 
 def yt(url):
     ydl = youtube_dl.YoutubeDL()

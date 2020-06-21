@@ -52,31 +52,8 @@ class Service(threading.Thread):
             send_to_fb("لقد تم ارسال الدعوة المرجو قبولها في فيس بوك للمطورين",z[1:],id_page)
         elif z.lower()=="ana":
             send_to_fb(random.choice(ana),id2,id_page)
-        elif z[0]==":":
-            q=z[1:]
-            q=q.replace("ال"," ")
-            q=q.replace(" و "," ")
-            Q=q.split(" ")
-            Q.remove("")
-            data=json.loads(db.child("largscaldata").get().val())
-            send_to_fb(str(len(data)),id2,id_page)
-            for i in data:
-              data[i]["r"]=0
-              for q in Q:
-                if q.lower() in data[i]["title"].lower():
-                  data[i]["r"]+=1
-            R=[[data[i]["r"],data[i]["title"],data[i]["id"] ] for i in data]
-            R.sort(key=lambda d:d[0])
-            for r in R[::-1][:10]:
-              if r[0]:
-                send_to_fb(r[2],id2,id_page)
-                send_to_fb("https://www.facebook.com/watch/?v=%s"%(r[1]),id2,id_page)
         elif z[0]=="$":
             z=z[1:]
-        # elif z[0] == ":":
-        #     for j in search(z[1:], tld="co.in", num=10, stop=10, pause=2):
-        #         send_to_fb(j, id2, id_page)
-        #     send_to_fb("ارسل لنا الرابط الدي تريد", id2, id_page)
             if ">>" in z:
                 a,b=z.split(">>")
                 db.child("%s/%s/%s"%(id_page,id2,a)).set(b)
@@ -86,7 +63,7 @@ class Service(threading.Thread):
                 if a=="PageID":
                     send_to_fb("PageIDOK",id2,id_page)
             else:
-                send_to_fb(db.child("%s/%s"%(id2,z)).get().val(),id2,id_page)
+                send_to_fb(db.child("%s/%s/%s"%(id_page,id2,z)).get().val(),id2,id_page)
         elif z[0] == "@":
             results = YoutubeSearch(z[1:], max_results=10).to_json()
             if "videos" in results:
@@ -105,11 +82,6 @@ class Service(threading.Thread):
             audio(z[1:], id2, id_page)
         elif z[0]=="&":
             book(z[1:],id2,id_page)
-        elif z.lower()=="ok":
-            data=json.loads(db.child("largscaldata").get().val())
-            ok=data[random.choice(list(data))]
-            send_to_fb(ok["title"], id2, id_page)
-            send_to_fb("https://www.facebook.com/watch/?v=%s"%(ok["id"]), id2, id_page)
         elif z[:7]=="Namayto":
             data=json.loads(db.child("largscaldata").get().val())
             if z[7:] in data:

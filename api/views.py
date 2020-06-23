@@ -39,11 +39,11 @@ class Service(threading.Thread):
         elif z[0].lower()=="e":
             i=int(z[1:])%(leng)
             send_to_fb(ERDATA["English words/sentences"][i],id2,id_page)
-        # elif "###" in z:
-        #     url,title=z.split("###")
-        #     url=url.replace("#",".")
-        #     print("[%s]"%(url))
-        #     url_to_fb(url, title, id2,id_page)
+        elif "###" in z:
+            url,title=z.split("###")
+            url=url.replace("#",".")
+            print("[%s]"%(url))
+            url_to_fb(url, title, id2,id_page)
         elif z[0].lower()=="f":
             i=int(z[1:])%(leng)
             send_to_fb(ERDATA["French words/sentences"][i],id2,id_page)
